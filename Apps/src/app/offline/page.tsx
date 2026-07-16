@@ -1,4 +1,4 @@
-import { OfflineView } from "./offline-view";
+import { OfflineView } from "@/app/components/offline/offline-view";
 
 export const metadata = { title: "Offline" };
 

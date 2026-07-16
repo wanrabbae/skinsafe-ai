@@ -32,7 +32,9 @@ export default function RootLayout({
     <html lang="id">
       <body>
         <QueryProvider>
-          <div className="app-frame">{children}</div>
+          <div className="relative mx-auto min-h-[100svh] max-w-[440px] overflow-hidden bg-surface min-[700px]:shadow-[0_0_0_1px_rgb(109_40_217/6%),0_24px_70px_rgb(37_0_89/12%)]">
+            {children}
+          </div>
           <MobileNavigation />
           <ServiceWorkerRegister />
         </QueryProvider>

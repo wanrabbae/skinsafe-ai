@@ -1,5 +1,5 @@
-import { HomeView } from "./home-view";
+import { HomeModeSwitcher } from "@/app/components/home/home-mode-switcher";
 
 export default function HomePage() {
-  return <HomeView />;
+  return <HomeModeSwitcher initialVariant="with-profile" />;
 }
