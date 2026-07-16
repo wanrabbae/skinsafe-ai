@@ -8,16 +8,15 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
 import { CardIcon, MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
 
-import { HomeHeader } from "./home-header";
-
 export function HomeOnboardingView() {
   return (
     <PageMain>
-      <HomeHeader />
+      <AppHeader />
 
       <section
         className="rounded-3xl bg-[linear-gradient(150deg,var(--primary)_0%,var(--primary-strong)_100%)] px-5 py-[22px] text-white shadow-card"

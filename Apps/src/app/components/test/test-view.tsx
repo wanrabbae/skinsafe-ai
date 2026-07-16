@@ -1,24 +1,12 @@
-import { Bell, UserRound } from "lucide-react";
-
 import { SkinProfileIntake } from "@/modules/profile";
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
-import { BrandLockup, IconButton, MicroLabel } from "@/shared/components/primitives";
+import { MicroLabel } from "@/shared/components/primitives";
 
 export function TestView() {
   return (
     <PageMain>
-      <header className="mb-5 grid grid-cols-[auto_1fr_auto] items-center gap-3">
-        <div
-          className="inline-flex h-[38px] w-[38px] items-center justify-center rounded-full border-2 border-surface-lowest bg-primary-soft text-primary-strong shadow-[0_4px_12px_rgb(83_0_183/12%)] [&_svg]:size-[19px]"
-          aria-hidden="true"
-        >
-          <UserRound />
-        </div>
-        <BrandLockup className="justify-self-center" />
-        <IconButton aria-label="Buka notifikasi">
-          <Bell aria-hidden="true" />
-        </IconButton>
-      </header>
+      <AppHeader />
 
       <header className="flex items-end justify-between gap-4">
         <div>

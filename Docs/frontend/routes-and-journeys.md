@@ -1,5 +1,9 @@
 # Routes and User Journeys
 
+## Status implementasi
+
+Route map & journey di bawah adalah **desain target**. Rute yang sudah ada di kode saat ini: `/` (Beranda: varian onboarding vs sudah-ada-profil), `/test` & `/test/hasil` (kuis profil + hasil, menggantikan `/profile`), `/scan` (UI, belum ter-wire ke API), `/recommendation` (placeholder), `/offline`, plus halaman 404. Alur scan berbasis queue (`/scan/[scanId]/loading|report`), `/compare`, `/history`, `/ingredients/[name]`, serta auth/session belum diimplementasi. Navigasi bawah memakai 3 tab: Beranda, Scan, Recommendation.
+
 ## Route map
 
 | Route | Tujuan | Auth | Data utama |

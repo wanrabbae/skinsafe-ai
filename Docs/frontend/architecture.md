@@ -6,27 +6,30 @@ Frontend bertanggung jawab atas presentasi, interaksi, validasi cepat, dan cache
 
 ## Struktur aplikasi
 
+Struktur saat ini (`ingredient`/`compare`/`health` module belum dibuat; termasuk desain target):
+
 ```text
 Apps/src/
   app/
     page.tsx
-    profile/page.tsx
+    test/page.tsx
+    test/hasil/page.tsx
     scan/page.tsx
-    history/page.tsx
+    recommendation/page.tsx
     offline/page.tsx
-    api/v1/health/route.ts
+    not-found.tsx
     layout.tsx
     manifest.ts
+    components/{home,scan,test,recommendation,offline}/   # view/switcher per halaman (bukan di folder route)
+    api/v1/profile-intake/{questions,recommendations}/route.ts
+    api/v1/scans/analyze/route.ts
   modules/
-    health/{route,service,index.ts}
-    profile/{route,service,aggregator,actions,index.ts}
-    scan/{route,service,aggregator,actions,index.ts}
-    ingredient/{route,service,aggregator,actions,index.ts}
-    compare/{route,service,aggregator,actions,index.ts}
+    profile/{components,route,index.ts}                   # + profile-storage.ts (localStorage), profile-display.ts
+    scan/{route,service,index.ts}
   shared/
     components/ui/
-    components/service-worker-register.tsx
-    lib/{env.ts,utils.ts}
+    components/{query-provider,mobile-navigation,service-worker-register}.tsx
+    lib/{env.ts,utils.ts,query-client.ts}
     prisma/client.ts
 ```
 

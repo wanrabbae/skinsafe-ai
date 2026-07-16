@@ -19,7 +19,11 @@ export function HomeModeSwitcher() {
 
   return (
     <>
-      {variant === "with-profile" ? <HomeWithProfileView /> : <HomeOnboardingView />}
+      {variant === "with-profile" ? (
+        <HomeWithProfileView result={result} />
+      ) : (
+        <HomeOnboardingView />
+      )}
       {process.env.NODE_ENV !== "production" && (
         <button
           type="button"

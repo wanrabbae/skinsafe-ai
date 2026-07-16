@@ -33,9 +33,10 @@ export function BrandLockup({ className, ...props }: ComponentProps<"div">) {
   );
 }
 
-export function IconButton({ className, type = "button", ...props }: ComponentProps<"button">) {
+export function IconButton({ className, type = "button", ref, ...props }: ComponentProps<"button">) {
   return (
     <button
+      ref={ref}
       type={type}
       className={cn(
         "relative inline-flex h-10 w-10 items-center justify-center rounded-full border-0 bg-transparent cursor-pointer hover:bg-surface-container [&_svg]:size-5",

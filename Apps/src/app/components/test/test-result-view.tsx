@@ -5,18 +5,17 @@ import Link from "next/link";
 
 import { ProfileResult, useProfileResult } from "@/modules/profile";
 import { clearProfileResult } from "@/modules/profile/profile-storage";
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
 import { MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
-
-import { HomeHeader } from "../home/home-header";
 
 export function TestResultView() {
   const { result, loaded } = useProfileResult();
 
   return (
     <PageMain>
-      <HomeHeader />
+      <AppHeader backHref="/test" />
 
       <div>
         <MicroLabel>HASIL KAMU</MicroLabel>

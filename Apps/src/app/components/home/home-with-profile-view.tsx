@@ -13,16 +13,17 @@ import {
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { formatProfileLabel } from "@/modules/profile";
+import type { ProfileRecommendationResult } from "@/modules/profile";
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 
-import { HomeHeader } from "./home-header";
-
 const cardShell =
   "rounded-3xl border border-[rgb(109_40_217/8%)] bg-surface-lowest p-[18px] shadow-card";
 
-const problems = [
+const fallbackProblems = [
   {
     icon: Target,
     title: "Jerawat Aktif",
@@ -34,6 +35,18 @@ const problems = [
     desc: "Reaksi sensitif akibat skin barrier yang terganggu.",
   },
 ];
+
+const problemIcons: Record<string, LucideIcon> = {
+  acne: Target,
+  redness: Droplet,
+  oiliness: Droplets,
+  dryness: Droplet,
+  dullness: Droplet,
+  aging: Target,
+  discomfort: AlertTriangle,
+  hydrating: Droplet,
+  "uneven skintone": Droplet,
+};
 
 const recommended = [
   { name: "Niacinamide", desc: "Mencerahkan & memperkuat barrier kulit." },
@@ -69,10 +82,39 @@ function CardHeading({
   );
 }
 
-export function HomeWithProfileView() {
+export function HomeWithProfileView({
+  result,
+}: {
+  result: ProfileRecommendationResult | null;
+}) {
+  const profile = result?.resolution.profile;
+
+  const skinTypeTitle = profile?.skinType
+    ? `${formatProfileLabel(profile.skinType)}${
+        profile.sensitivityLevel !== "low" ? " & Sensitif" : ""
+      }`
+    : "Berminyak & Sensitif";
+
+  const skinTypeDesc = profile?.skinType
+    ? `Sensitivitas kulit Anda tergolong ${formatProfileLabel(
+        profile.sensitivityLevel,
+      ).toLowerCase()}. Rawat sesuai kebutuhan tipe kulit Anda.`
+    : "Kulit Anda cenderung memproduksi sebum berlebih namun memiliki skin barrier yang rentan terhadap iritasi.";
+
+  const problemCodes = profile
+    ? [...new Set([...profile.concerns, ...profile.conditions])]
+    : [];
+  const problems = problemCodes.length
+    ? problemCodes.map((code) => ({
+        icon: problemIcons[code] ?? Target,
+        title: formatProfileLabel(code),
+        desc: undefined as string | undefined,
+      }))
+    : fallbackProblems;
+
   return (
     <PageMain>
-      <HomeHeader />
+      <AppHeader />
 
       <div>
         <h1 className="text-[1.72rem] font-bold leading-[1.22] tracking-[-0.03em]">
@@ -106,11 +148,10 @@ export function HomeWithProfileView() {
           id="skin-type-title"
           className="relative mt-2 text-[1.6rem] font-bold leading-[1.2] text-primary-strong"
         >
-          Berminyak &amp; Sensitif
+          {skinTypeTitle}
         </h2>
         <p className="relative mt-2 text-[0.82rem] leading-relaxed text-on-surface-variant">
-          Kulit Anda cenderung memproduksi sebum berlebih namun memiliki skin
-          barrier yang rentan terhadap iritasi.
+          {skinTypeDesc}
         </p>
       </section>
 
@@ -126,7 +167,11 @@ export function HomeWithProfileView() {
               </span>
               <div>
                 <h3 className="text-[0.85rem] font-bold">{title}</h3>
-                <p className="mt-0.5 text-[0.75rem] leading-normal text-on-surface-variant">{desc}</p>
+                {desc ? (
+                  <p className="mt-0.5 text-[0.75rem] leading-normal text-on-surface-variant">
+                    {desc}
+                  </p>
+                ) : null}
               </div>
             </div>
           ))}
