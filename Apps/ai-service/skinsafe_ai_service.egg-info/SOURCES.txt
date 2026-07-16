@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+app/__init__.py
+app/main.py
+app/schemas.py
+app/scoring.py
+skinsafe_ai_service.egg-info/PKG-INFO
+skinsafe_ai_service.egg-info/SOURCES.txt
+skinsafe_ai_service.egg-info/dependency_links.txt
+skinsafe_ai_service.egg-info/requires.txt
+skinsafe_ai_service.egg-info/top_level.txt
+tests/test_api.py
+tests/test_scoring.py

@@ -1,0 +1,12 @@
+[project]
+name = "skinsafe-ai-service"
+version = "0.1.0"
+description = "Evidence-backed analysis service for SkinSafe AI"
+requires-python = ">=3.12,<3.15"
+dependencies = ["fastapi[standard-no-fastapi-cloud-cli]==0.139.0"]
+
+[project.optional-dependencies]
+dev = []
+
+[tool.fastapi]
+entrypoint = "app.main:app"
