@@ -143,6 +143,13 @@ PRODUCT_NAME_TO_CONCERNS: tuple[tuple[str, tuple[str, ...]], ...] = (
 
 _NON_WORD_RE = re.compile(r"[^a-z0-9%+]+")
 _PAREN_RE = re.compile(r"\s*\([^)]*\)\s*")
+INGREDIENT_ALIASES = {
+    "alpha hydroxy acid": "alpha hydroxy acids",
+    "aha": "alpha hydroxy acids",
+    "ascorbic acid": "vitamin c",
+    "hyaluronan": "hyaluronic acid",
+    "vitamin b3": "niacinamide",
+}
 
 
 def normalize_text(value: str) -> str:
@@ -154,8 +161,9 @@ def normalize_text(value: str) -> str:
 
 
 def normalize_ingredient_name(value: str) -> str:
-    """Normalize an ingredient name without inventing an alias."""
-    return normalize_text(_PAREN_RE.sub(" ", value or ""))
+    """Normalize an ingredient name and resolve conservative INCI aliases."""
+    normalized = normalize_text(_PAREN_RE.sub(" ", value or ""))
+    return INGREDIENT_ALIASES.get(normalized, normalized)
 
 
 def canonicalize_concern(value: str) -> str | None:

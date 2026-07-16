@@ -42,6 +42,10 @@ Trainer membaca data/chem_full.csv, data/symp_to_chem_names.csv, dan
 Output:
 
 - models/recommender-v1.json: weights, threshold, metrik, checksum, dan versi;
+- models/data-quality-report.json: coverage ingredient, unresolved ingredient,
+  dan distribusi brand;
+- models/profile-intake-evaluation.json: hasil engineering golden-set untuk
+  parser narasi/questionnaire;
 - data/local_product_catalog.json: katalog runtime yang sudah dibersihkan.
 - images/local-recommender-2026.07.1/training-metrics.jpg: train loss,
   validation loss, validation F1, dan final F1 per concern;

@@ -131,6 +131,8 @@ class LocalProductRanker:
             raise ValueError("Local recommendation artifacts are empty")
         if self._model.get("trainedAt") != self._catalog.get("generatedAt"):
             raise ValueError("Model and catalog artifacts were not generated together")
+        if self._model.get("expectedCatalogFingerprint") != self._catalog.get("catalogFingerprint"):
+            raise ValueError("Model and catalog fingerprints do not match")
 
         self.model_version = str(self._model["modelVersion"])
         self.catalog_version = str(self._catalog["catalogVersion"])

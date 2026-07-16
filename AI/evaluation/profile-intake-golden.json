@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "engineering-reviewed-synthetic-not-clinical",
+  "cases": [
+    {
+      "id": "narrative-oily-acne-negation",
+      "input": {
+        "narrative": "Kulitku cepat berminyak dan jerawatan. Aku tidak sensitif dan tidak sedang hamil."
+      },
+      "expected": {
+        "skinType": "oily",
+        "sensitivityLevel": "low",
+        "pregnancyStatus": "none",
+        "concerns": ["acne", "oiliness"],
+        "canRecommend": true,
+        "redFlagCodes": []
+      }
+    },
+    {
+      "id": "narrative-dry-sensitive-pregnant",
+      "input": {
+        "narrative": "Kulitku kering, mudah perih dan kusam. Saat ini aku sedang hamil."
+      },
+      "expected": {
+        "skinType": "dry",
+        "sensitivityLevel": "high",
+        "pregnancyStatus": "pregnant",
+        "concerns": ["dryness", "dullness", "discomfort"],
+        "canRecommend": true,
+        "redFlagCodes": []
+      }
+    },
+    {
+      "id": "questionnaire-combination-barrier",
+      "input": {
+        "answers": {
+          "skin_feel": "D",
+          "reactivity": "D",
+          "primary_concern": "C",
+          "safety_status": "A"
+        }
+      },
+      "expected": {
+        "skinType": "combination",
+        "sensitivityLevel": "high",
+        "pregnancyStatus": "none",
+        "concerns": ["redness", "discomfort"],
+        "conditions": ["damaged_barrier"],
+        "canRecommend": true,
+        "redFlagCodes": []
+      }
+    },
+    {
+      "id": "questionnaire-unknown-safety",
+      "input": {
+        "answers": {
+          "skin_feel": "B",
+          "reactivity": "A",
+          "primary_concern": "A",
+          "safety_status": "D"
+        }
+      },
+      "expected": {
+        "skinType": "normal",
+        "sensitivityLevel": "low",
+        "pregnancyStatus": null,
+        "concerns": ["acne"],
+        "canRecommend": false,
+        "redFlagCodes": []
+      }
+    },
+    {
+      "id": "urgent-swelling",
+      "input": {
+        "narrative": "Kulitku berminyak dan jerawatan, sekarang bibir bengkak dan sulit bernapas.",
+        "pregnancyStatus": "none"
+      },
+      "expected": {
+        "skinType": "oily",
+        "pregnancyStatus": "none",
+        "concerns": ["acne", "oiliness"],
+        "canRecommend": false,
+        "redFlagCodes": ["BREATHING_OR_FACIAL_SWELLING"]
+      }
+    },
+    {
+      "id": "negated-urgent-symptom",
+      "input": {
+        "narrative": "Kulitku kering dan kusam, tidak sesak napas dan tidak ada wajah bengkak.",
+        "pregnancyStatus": "none"
+      },
+      "expected": {
+        "skinType": "dry",
+        "pregnancyStatus": "none",
+        "concerns": ["dryness", "dullness"],
+        "canRecommend": true,
+        "redFlagCodes": []
+      }
+    }
+  ]
+}

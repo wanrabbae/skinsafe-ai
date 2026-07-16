@@ -1,9 +1,12 @@
+import json
 import unittest
+from pathlib import Path
 
 from pydantic import ValidationError
 
 from app.profile_intake import resolve_profile
 from app.schemas import ProfileIntakeRequest
+from evaluation.evaluate_profile_intake import evaluate
 
 
 class ProfileIntakeTests(unittest.TestCase):
@@ -88,6 +91,13 @@ class ProfileIntakeTests(unittest.TestCase):
     def test_unknown_question_is_rejected(self) -> None:
         with self.assertRaises(ValidationError):
             ProfileIntakeRequest(answers={"made_up": "A"})
+
+    def test_engineering_golden_set_has_no_regressions(self) -> None:
+        path = Path(__file__).resolve().parents[1] / "evaluation" / "profile-intake-golden.json"
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        report = evaluate(payload["cases"])
+        self.assertEqual(report["failures"], [])
+        self.assertEqual(report["safetyGateAccuracy"], 1.0)
 
 
 if __name__ == "__main__":

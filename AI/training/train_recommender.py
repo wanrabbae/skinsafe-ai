@@ -38,6 +38,7 @@ from app.ml_features import (  # noqa: E402
     predict_probability,
     product_features,
 )
+from training.data_quality import build_data_quality_report  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -47,6 +48,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", type=Path, default=AI_ROOT / "models" / "recommender-v1.json")
     parser.add_argument("--catalog-output", type=Path, default=AI_ROOT / "data" / "local_product_catalog.json")
     parser.add_argument("--images-dir", type=Path, default=AI_ROOT / "images")
+    parser.add_argument("--quality-output", type=Path, default=AI_ROOT / "models" / "data-quality-report.json")
     parser.add_argument("--epochs", type=int, default=55)
     parser.add_argument("--dimension", type=int, default=768)
     parser.add_argument("--seed", type=int, default=20260716)
@@ -186,7 +188,8 @@ def train_binary_model(
             probability = predict_probability(weights, bias, features)
             sample_weight = positive_weight if label else 1.0
             error = (probability - label) * sample_weight
-            for index, value in features.items():
+            for index in sorted(features):
+                value = features[index]
                 weights[index] -= learning_rate * (error * value + l2 * weights[index])
             bias -= learning_rate * error
 
@@ -246,6 +249,28 @@ def roc_auc(pairs: list[tuple[float, int]]) -> float:
         for negative in negatives:
             wins += 1.0 if positive > negative else 0.5 if positive == negative else 0.0
     return wins / (len(positives) * len(negatives))
+
+
+def ranking_metrics(pairs: list[tuple[float, int]], k: int = 10) -> dict[str, float]:
+    ranked = sorted(pairs, key=lambda pair: pair[0], reverse=True)
+    top = ranked[:k]
+    relevant_total = sum(label for _, label in ranked)
+    hits = 0
+    precision_sum = 0.0
+    dcg = 0.0
+    for rank, (_, label) in enumerate(top, start=1):
+        if not label:
+            continue
+        hits += 1
+        precision_sum += hits / rank
+        dcg += 1.0 / math.log2(rank + 1)
+    ideal_hits = min(relevant_total, k)
+    ideal_dcg = sum(1.0 / math.log2(rank + 1) for rank in range(1, ideal_hits + 1))
+    return {
+        f"ndcgAt{k}": round(dcg / ideal_dcg if ideal_dcg else 0.0, 4),
+        f"recallAt{k}": round(hits / relevant_total if relevant_total else 0.0, 4),
+        f"averagePrecisionAt{k}": round(precision_sum / ideal_hits if ideal_hits else 0.0, 4),
+    }
 
 
 def choose_threshold(pairs: list[tuple[float, int]]) -> tuple[float, dict[str, float | int]]:
@@ -370,6 +395,15 @@ def write_training_jpeg(model_payload: dict[str, Any], images_dir: Path) -> Path
         fill=ink,
         font=font(13),
     )
+    draw.text(
+        (660, 140),
+        (
+            f"NDCG@10: {model_payload['aggregateMetrics']['macroNdcgAt10']} | "
+            f"MAP@10: {model_payload['aggregateMetrics']['macroAveragePrecisionAt10']}"
+        ),
+        fill=ink,
+        font=font(13),
+    )
     draw.line((660, 520, 1260, 520), fill=axis, width=2)
     draw.line((660, 170, 660, 520), fill=axis, width=2)
     for index, (name, score) in enumerate(zip(concerns, concern_f1, strict=True)):
@@ -442,6 +476,7 @@ def main() -> int:
         ]
         threshold, metrics = choose_threshold(validation_pairs)
         metrics["rocAuc"] = round(roc_auc(validation_pairs), 4)
+        metrics.update(ranking_metrics(validation_pairs))
         metrics["trainPositive"] = train_positive
         metrics["validationPositive"] = validation_positive
         metrics["validationTotal"] = len(validation_samples)
@@ -458,11 +493,20 @@ def main() -> int:
 
     macro_f1 = sum(model["metrics"]["f1"] for model in concern_models.values()) / len(concern_models)
     macro_auc = sum(model["metrics"]["rocAuc"] for model in concern_models.values()) / len(concern_models)
+    macro_ndcg = sum(model["metrics"]["ndcgAt10"] for model in concern_models.values()) / len(concern_models)
+    macro_recall = sum(model["metrics"]["recallAt10"] for model in concern_models.values()) / len(concern_models)
+    macro_map = sum(model["metrics"]["averagePrecisionAt10"] for model in concern_models.values()) / len(concern_models)
     source_checksums = {path.name: file_sha256(path) for path in source_files}
     source_checksums["chem_full.csv"] = file_sha256(args.chem_data_dir / "chem_full.csv")
     source_checksums["symp_to_chem_names.csv"] = file_sha256(args.chem_data_dir / "symp_to_chem_names.csv")
 
     trained_at = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    catalog_fingerprint = hashlib.sha256(
+        json.dumps(products, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    model_fingerprint = hashlib.sha256(
+        json.dumps(concern_models, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
     model_payload = {
         "schemaVersion": 1,
         "modelType": "hashed-multilabel-logistic-regression",
@@ -471,6 +515,8 @@ def main() -> int:
         "featureDimension": args.dimension,
         "seed": args.seed,
         "epochs": args.epochs,
+        "modelFingerprint": model_fingerprint,
+        "expectedCatalogFingerprint": catalog_fingerprint,
         "trainingProducts": len(train_rows),
         "validationProducts": len(validation_rows),
         "labelType": "weak-supervision-from-ingredient-functions-and-reviewed-links",
@@ -482,6 +528,9 @@ def main() -> int:
         "aggregateMetrics": {
             "macroF1": round(macro_f1, 4),
             "macroRocAuc": round(macro_auc, 4),
+            "macroNdcgAt10": round(macro_ndcg, 4),
+            "macroRecallAt10": round(macro_recall, 4),
+            "macroAveragePrecisionAt10": round(macro_map, 4),
         },
         "trainingHistory": aggregate_history(concern_models, args.epochs),
         "sourceChecksums": source_checksums,
@@ -492,6 +541,7 @@ def main() -> int:
         "schemaVersion": 1,
         "catalogVersion": "incidecoder-local-2026.07.1",
         "generatedAt": trained_at,
+        "catalogFingerprint": catalog_fingerprint,
         "source": "Local repository fixtures originally collected from INCIDecoder",
         "limitations": [
             "Data katalog bukan verifikasi BPOM dan bukan ground truth klinis.",
@@ -499,11 +549,14 @@ def main() -> int:
         ],
         "products": products,
     }
+    quality_payload = build_data_quality_report(products, args.chem_data_dir)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.catalog_output.parent.mkdir(parents=True, exist_ok=True)
+    args.quality_output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(model_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     args.catalog_output.write_text(json.dumps(catalog_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    args.quality_output.write_text(json.dumps(quality_payload, ensure_ascii=False, indent=2), encoding="utf-8")
     image_path = write_training_jpeg(model_payload, args.images_dir)
 
     print(
@@ -512,12 +565,16 @@ def main() -> int:
                 "model": str(args.output),
                 "catalog": str(args.catalog_output),
                 "trainingImage": str(image_path),
+                "dataQuality": str(args.quality_output),
                 "products": len(products),
                 "train": len(train_rows),
                 "validation": len(validation_rows),
                 "concerns": len(concern_models),
                 "macroF1": round(macro_f1, 4),
                 "macroRocAuc": round(macro_auc, 4),
+                "macroNdcgAt10": round(macro_ndcg, 4),
+                "macroRecallAt10": round(macro_recall, 4),
+                "macroAveragePrecisionAt10": round(macro_map, 4),
             },
             indent=2,
         )

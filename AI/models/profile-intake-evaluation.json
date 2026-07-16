@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "engineering-reviewed-synthetic-not-clinical",
+  "cases": 6,
+  "fieldExactAccuracy": 1.0,
+  "concernRecall": 1.0,
+  "safetyGateAccuracy": 1.0,
+  "failures": []
+}

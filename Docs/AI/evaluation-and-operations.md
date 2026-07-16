@@ -28,11 +28,15 @@ Critical false negative lebih berat daripada score agreement. Tetapkan release g
 ## Current local recommender baseline
 
 local-recommender-2026.07.1 dilatih pada 373 dan divalidasi pada 128 produk
-setelah pembersihan kategori non-skincare. Weak-label macro F1 0.8904 dan macro
-ROC-AUC 0.9354. Nilai ini bukan clinical accuracy. Runtime confidence dibatasi
+setelah pembersihan kategori non-skincare. Weak-label macro F1 0.9052, macro
+ROC-AUC 0.9384, NDCG@10 1.0000, dan Recall@10 0.1546. Nilai ini bukan clinical
+accuracy. Runtime confidence dibatasi
 maksimum medium; model card per-concern berada di AI/models/MODEL_CARD.md.
 Setiap training menulis history per epoch dan JPEG loss/F1 ke folder AI/images
 agar overfitting dan regression dapat ditinjau tanpa dashboard eksternal.
+Training juga menulis fingerprint model/katalog dan data-quality report. Parser
+profil memiliki golden set sintetis terpisah; statusnya engineering-reviewed,
+belum clinical-reviewed.
 
 ## Test layers
 
