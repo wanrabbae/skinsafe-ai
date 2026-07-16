@@ -236,11 +236,13 @@ class RecommendedProduct(Schema):
     source: str
     matching_chemicals: list[str] = []
     matching_symptoms: list[str] = []
+    overall_score: float = 0.0
     relevance_score: float = 0.0
     model_score: float | None = None
     confidence: Literal["high", "medium", "low"] = "low"
     reasons: list[str] = Field(default_factory=list)
     cautions: list[str] = Field(default_factory=list)
+    score_breakdown: dict[str, float] = Field(default_factory=dict)
 
 
 class RecommendResponse(Schema):
@@ -251,6 +253,7 @@ class RecommendResponse(Schema):
     chemicals_targeted: list[str]
     total_matched: int
     model_version: str | None = None
+    scoring_version: str | None = None
     unsupported_concerns: list[str] = Field(default_factory=list)
     limitations: list[str] = Field(default_factory=list)
     education: list[EducationItem] = Field(default_factory=list)
