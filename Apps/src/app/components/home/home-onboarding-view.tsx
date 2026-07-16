@@ -42,7 +42,7 @@ export function HomeOnboardingView() {
           size="pill"
           className="mt-4 bg-white text-primary-strong hover:bg-white/90 hover:shadow-none"
         >
-          <Link href="/profile">
+          <Link href="/test">
             <Play aria-hidden="true" />
             Mulai Tes Profil Kulit
           </Link>
@@ -59,9 +59,6 @@ export function HomeOnboardingView() {
               Trending Populer
             </h2>
           </div>
-          <Link className="py-2 text-[0.8rem] font-bold text-primary-strong" href="/history">
-            Lihat semua
-          </Link>
         </div>
 
         <article

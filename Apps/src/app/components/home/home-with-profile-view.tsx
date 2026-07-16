@@ -6,12 +6,15 @@ import {
   Droplet,
   Droplets,
   Leaf,
+  ChevronRight,
   Target,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { PageMain } from "@/shared/components/page-main";
+import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 
 import { HomeHeader } from "./home-header";
@@ -79,6 +82,12 @@ export function HomeWithProfileView() {
           Berdasarkan hasil kuis, berikut adalah analisis dan rekomendasi khusus
           untuk kulit Anda.
         </p>
+        <Button asChild variant="primary" size="pill" className="mt-4">
+          <Link href="/test/hasil">
+            Lihat hasil kamu
+            <ChevronRight aria-hidden="true" />
+          </Link>
+        </Button>
       </div>
 
       <section

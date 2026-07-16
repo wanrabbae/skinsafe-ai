@@ -4,7 +4,7 @@ import { SkinProfileIntake } from "@/modules/profile";
 import { PageMain } from "@/shared/components/page-main";
 import { BrandLockup, IconButton, MicroLabel } from "@/shared/components/primitives";
 
-export function ProfileView() {
+export function TestView() {
   return (
     <PageMain>
       <header className="mb-5 grid grid-cols-[auto_1fr_auto] items-center gap-3">
