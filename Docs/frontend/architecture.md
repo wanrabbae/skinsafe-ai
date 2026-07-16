@@ -7,34 +7,32 @@ Frontend bertanggung jawab atas presentasi, interaksi, validasi cepat, dan cache
 ## Struktur aplikasi
 
 ```text
-Apps/web/src/
+Apps/src/
   app/
-    (marketing)/page.tsx
-    (product)/profile/page.tsx
-    (product)/scan/page.tsx
-    (product)/scan/[scanId]/loading/page.tsx
-    (product)/scan/[scanId]/report/page.tsx
-    compare/page.tsx
+    page.tsx
+    profile/page.tsx
+    scan/page.tsx
     history/page.tsx
-    ingredients/[name]/page.tsx
-    api/v1/.../route.ts
+    offline/page.tsx
+    api/v1/health/route.ts
     layout.tsx
     manifest.ts
-  components/
-    profile/
-    scan/
-    report/
-    shared/
-  lib/
-    api-client.ts
-    contracts.ts
-    formatters.ts
-  hooks/
-  public/
-    sw.js
+  modules/
+    health/{route,service,index.ts}
+    profile/{route,service,aggregator,actions,index.ts}
+    scan/{route,service,aggregator,actions,index.ts}
+    ingredient/{route,service,aggregator,actions,index.ts}
+    compare/{route,service,aggregator,actions,index.ts}
+  shared/
+    components/ui/
+    components/service-worker-register.tsx
+    lib/{env.ts,utils.ts}
+    prisma/client.ts
 ```
 
-Route groups boleh dipakai untuk organisasi tanpa mengubah URL. Komponen default adalah React Server Component. Tambahkan `"use client"` hanya pada komponen yang memerlukan event handler, browser API, atau local state.
+`app/` hanya memegang entry point framework. Logic dikelompokkan per domain di `modules/`; Route Handler fisik melakukan re-export tipis dari module terkait. Cross-module read hanya lewat public `index.ts`, sedangkan write tetap menjadi tanggung jawab service/actions pemilik entity. ESLint melarang deep import ke internal module lain.
+
+Komponen dan infrastructure lintas domain berada di `shared/`. Komponen default adalah React Server Component. Tambahkan `"use client"` hanya pada komponen yang memerlukan event handler, browser API, atau local state.
 
 ## Rendering strategy
 

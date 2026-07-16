@@ -1,12 +1,30 @@
 # SkinSafe AI Web
 
-Next.js 16 PWA plus REST Backend for Frontend.
+Next.js 16 PWA dan REST Backend for Frontend dengan struktur modular monolith.
+
+## Menjalankan lokal
+
+Pastikan PostgreSQL lokal sudah aktif. Buat database/user `skinsafe` atau sesuaikan `DATABASE_URL` di `.env` dengan kredensial PostgreSQL milikmu.
 
 ```bash
+cp .env.example .env
 npm install
+npm run db:generate
+npm run db:push
 npm run dev
 ```
 
-Open `http://localhost:3000`. Health check: `GET /api/v1/health`.
+Buka `http://localhost:3000`. Health check tersedia di `GET http://localhost:3000/api/v1/health` dan mengembalikan HTTP 200 jika Postgres sehat atau 503 jika database tidak tersedia.
 
-Architecture and contracts live in `../../Docs/frontend` and `../../Docs/backend`.
+## Struktur
+
+- `src/app`: page, layout, metadata, dan Route Handler fisik.
+- `src/modules`: domain module dengan `route`, `actions`, `service`, `aggregator`, dan public `index.ts`.
+- `src/shared`: Prisma singleton, env validation, komponen shadcn, dan utility lintas module.
+- `prisma`: schema database; pass ini belum memiliki model bisnis.
+
+Database dikelola langsung melalui PostgreSQL lokal dan Prisma. Tidak ada Docker atau Docker Compose dalam setup aplikasi ini.
+
+Cross-module import hanya melalui `@/modules/<name>`. Baca `src/modules/README.md` untuk konvensi boundary.
+
+Dokumentasi lengkap berada di `../Docs/frontend` dan `../Docs/backend`.
