@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Cek keamanan skincare sebelum dibeli atau dipakai.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f5fbf7",
-    theme_color: "#146b4c",
+    background_color: "#fef7ff",
+    theme_color: "#6d28d9",
     lang: "id-ID",
     icons: [
       { src: "/icon.svg", sizes: "any", type: "image/svg+xml", purpose: "any" },
