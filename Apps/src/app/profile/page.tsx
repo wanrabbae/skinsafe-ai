@@ -1,4 +1,4 @@
-import { ProfileView } from "./profile-view";
+import { ProfileView } from "@/app/components/profile/profile-view";
 
 export const metadata = { title: "Profil kulit" };
 

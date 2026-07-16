@@ -1,4 +1,4 @@
-import { ScanView } from "./scan-view";
+import { ScanView } from "@/app/components/scan/scan-view";
 
 export const metadata = { title: "Scan produk" };
 

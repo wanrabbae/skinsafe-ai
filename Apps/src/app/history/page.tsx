@@ -4,7 +4,7 @@ import {
 } from "@tanstack/react-query";
 import { getScanHistory } from "@/modules/scan";
 import { getQueryClient } from "@/shared/lib/query-client";
-import { HistoryView } from "./history-view";
+import { HistoryView } from "@/app/components/history/history-view";
 
 export const metadata = { title: "Riwayat scan" };
 

@@ -73,13 +73,20 @@ Saat membuat domain baru, buat empat folder layer dan barrel `index.ts`, walaupu
 - Semua akses browser-only harus berada di Client Component dan aman terhadap SSR.
 - Untuk perubahan UI, pertahankan aksesibilitas, responsive layout, loading state, error state, dan empty state.
 
+### Styling (Tailwind utility-first)
+
+- Styling default memakai utility Tailwind v4 langsung di JSX. `globals.css` hanya berisi: import font/Tailwind, token di `:root` + `@theme inline`, base reset yang dibungkus `@layer base` (`*`, `html`, `body`, reset margin heading/`p`, `a`, `button`, focus-visible), dan CSS yang genuinely kompleks/dekoratif (pseudo-element & keyframe): ilustrasi botol produk (`.product-mark`/`.product-thumbnail`), bingkai viewfinder scan (`.viewfinder`/`.corner*`/`.scan-beam`), garis `.divider`, ilustrasi offline (`.offline-visual`/`.cloud*`/`.connection-dot`), dan spinner `.spin`. Base reset WAJIB di dalam `@layer base` supaya utility (mis. `text-white`) selalu menang atas default elemen seperti `a`/`button { color: inherit }`; kalau tidak, CSS unlayered akan mengalahkan utility Tailwind. Jangan menambah class komponen baru di CSS untuk hal yang bisa jadi utility.
+- Token warna/shadow ada sebagai utility lewat `@theme inline` (mis. `bg-surface-lowest`, `text-safe`, `shadow-card`, `border-outline-variant`). Selektor `data-*`/`aria-*` jadi variant (`data-[active=true]:`, `aria-selected:`). Nilai non-token pakai arbitrary value (`text-[0.62rem]`, `rounded-[20px]`).
+- Tombol app memakai komponen shadcn `Button` di `src/shared/components/ui/button.tsx` dengan `variant` `primary` (ungu `#6d28d9`), `secondary` (bg putih + border), atau `text`, plus `size="pill"`; pakai `asChild` untuk merender elemen lain (`<Link>`/`<label>`/`<a>`). Primitive utility lintas halaman ada di `src/shared/components/primitives.tsx` (`MicroLabel`, `BrandLockup`, `IconButton`, `CardIcon`, `Chip`). Shell halaman memakai `src/shared/components/page-main.tsx` (`PageMain`). Gabungkan/override class dengan `cn` dari `src/shared/lib/utils`.
+
 ### Page/client split & data fetching
 
-- Setiap `page.tsx` adalah Server Component tipis: metadata + (jika ada data) `prefetchQuery` via module service langsung + `<HydrationBoundary>`.
-- Markup dan interaktivitas hidup di file pendamping `<nama-route>-view.tsx` di folder yang sama (contoh: `history/history-view.tsx`, root `home-view.tsx`).
-- View hanya diberi `"use client"` bila memang butuh hook, browser API, atau `useQuery`; halaman tanpa data dinamis tetap Server Component.
-- Kalau halaman punya data yang bisa berubah: `page.tsx` prefetch via module service (import langsung, bukan HTTP) lalu dehydrate; view client memanggil `useQuery` ke endpoint BFF `/api/v1/<module>/...` milik module yang sama — client tidak pernah memanggil service/Prisma langsung.
+- Setiap `page.tsx` di folder route hanya berisi wiring: metadata, `prefetchQuery` (jika ada data) via module service langsung + `<HydrationBoundary>`, dan import komponen tampilannya dari `src/app/components/`. Folder route (misal `history/`, `scan/`) hanya boleh berisi `page.tsx` dan file spesial Next.js lain (`layout.tsx`, `route.ts`).
+- Semua komponen presentational/client untuk halaman (view, switcher, header) disimpan di `src/app/components/<halaman>/` (satu subfolder per halaman: `home/`, `scan/`, `history/`, `profile/`, `offline/`) — **bukan** co-located di folder route masing-masing. Folder ini aman dari routing Next.js karena tidak berisi `page.tsx`/`route.ts`/`layout.tsx`. Import dari `page.tsx` memakai alias `@/app/components/<halaman>/<nama>` (contoh: `@/app/components/history/history-view`, `@/app/components/home/home-mode-switcher`). Komponen yang dipakai beberapa view di halaman yang sama (mis. `home/home-header.tsx` dipakai oleh with-profile & onboarding) tetap di subfolder halaman tersebut.
+- Komponen di `src/app/components/` hanya diberi `"use client"` bila memang butuh hook, browser API, atau `useQuery`; komponen tanpa data dinamis tetap Server Component.
+- Kalau halaman punya data yang bisa berubah: `page.tsx` prefetch via module service (import langsung, bukan HTTP) lalu dehydrate; komponen client di `src/app/components/` memanggil `useQuery` ke endpoint BFF `/api/v1/<module>/...` milik module yang sama — client tidak pernah memanggil service/Prisma langsung.
 - Satu-satunya sumber `QueryClient`: `src/shared/lib/query-client.ts` (`getQueryClient()`), di-provide oleh `src/shared/components/query-provider.tsx` yang dipasang sekali di `layout.tsx`.
+- `src/app/components/` berbeda dari `src/shared/components/`: yang pertama khusus komponen tampilan tiap halaman (page-specific), yang kedua untuk UI benar-benar reusable lintas halaman (nav, provider, dsb).
 
 ## API, environment, and security
 
