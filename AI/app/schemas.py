@@ -76,6 +76,8 @@ class Report(Schema):
     applied_gates: list[str]
     recommendation: str
     disclaimer: str = "Informasi edukatif, bukan diagnosis medis."
+    ingredient_details: list["IngredientDetail"] = []
+    interaction_warnings: list["InteractionWarning"] = []
 
 
 class Versions(Schema):
@@ -100,3 +102,69 @@ class NeedsInputAnalysis(Schema):
     missing_fields: list[str]
     instructions: list[str]
     versions: Versions
+
+
+# ---------------------------------------------------------------------------
+# Enrichment schemas — produced by the Core Engine
+# ---------------------------------------------------------------------------
+
+
+class IngredientDetail(Schema):
+    """Per-ingredient analysis detail attached to a completed report."""
+
+    name: str
+    canonical_name: str | None = None
+    match_confidence: float = 0.0
+    match_type: str = "unresolved"
+    chemical_type: str | None = None
+    risk_level: str = "unresolved"
+    benefits_summary: str | None = None
+    relevant_symptoms: list[str] = []
+    compatibility_notes: str | None = None
+    caution_notes: str | None = None
+    usage_frequency: str | None = None
+
+
+class InteractionWarning(Schema):
+    """A detected conflict or interaction between ingredients."""
+
+    code: str
+    severity: str
+    message: str
+    involved_ingredients: list[str] = []
+
+
+# ---------------------------------------------------------------------------
+# Recommendation schemas
+# ---------------------------------------------------------------------------
+
+
+class RecommendRequest(Schema):
+    """Request body for the product recommendation endpoint."""
+
+    concerns: list[str]
+    skin_type: str
+    budget_max: float | None = None
+    limit: int = Field(default=10, le=50)
+
+
+class RecommendedProduct(Schema):
+    """A single product recommendation."""
+
+    name: str
+    brand: str
+    price: float
+    link: str
+    source: str
+    matching_chemicals: list[str] = []
+    matching_symptoms: list[str] = []
+    relevance_score: float = 0.0
+
+
+class RecommendResponse(Schema):
+    """Response from the product recommendation endpoint."""
+
+    products: list[RecommendedProduct]
+    concerns_used: list[str]
+    chemicals_targeted: list[str]
+    total_matched: int
