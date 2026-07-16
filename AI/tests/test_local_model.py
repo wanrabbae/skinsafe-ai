@@ -83,6 +83,9 @@ class LocalModelTests(unittest.TestCase):
         self.assertIn("macroNdcgAt10", model["aggregateMetrics"])
         self.assertIn("macroRecallAt10", model["aggregateMetrics"])
         self.assertIn("macroAveragePrecisionAt10", model["aggregateMetrics"])
+        self.assertIn("macroF1", model["aggregateBrandHoldoutMetrics"])
+        self.assertTrue(set(model["trainingBrands"]).isdisjoint(model["brandHoldoutBrands"]))
+        self.assertTrue(set(model["validationBrands"]).isdisjoint(model["brandHoldoutBrands"]))
         self.assertEqual(len(model["modelFingerprint"]), 64)
         with Image.open(image) as chart:
             self.assertEqual(chart.format, "JPEG")

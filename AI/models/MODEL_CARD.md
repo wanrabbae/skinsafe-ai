@@ -7,7 +7,8 @@
 - Runtime: Python standard library, CPU-only
 - External AI/LLM API: none
 - Catalog: 501 skincare products
-- Train/validation: 373/128 products, grouped by product identity
+- Train/validation/brand-holdout: 336/111/54 products
+- Brand holdout: 11 brands tidak muncul pada train atau threshold tuning
 - Supported concerns: 12
 
 ## Intended use
@@ -22,27 +23,31 @@ Validation mengukur agreement terhadap weak labels yang diturunkan dari
 chemical-symptom links, ingredient function tags, dan explicit product intent.
 Ini bukan clinical accuracy.
 
-- Macro F1: 0.9052
-- Macro ROC-AUC: 0.9384
-- Weak-label NDCG@10: 1.0000
-- Weak-label Recall@10: 0.1546
-- Weak-label MAP@10: 1.0000
+- Validation macro F1: 0.9082
+- Validation macro ROC-AUC: 0.9422
+- Validation weak-label NDCG@10: 0.9945
+- Validation weak-label Recall@10: 0.1924
+- Validation weak-label MAP@10: 0.9908
+- Brand-holdout macro F1: 0.8217
+- Brand-holdout macro ROC-AUC: 0.9020
+- Brand-holdout weak-label NDCG@10: 0.9629
+- Brand-holdout weak-label Recall@10: 0.3412
 - Training curves: `../../images/local-recommender-2026.07.1/training-metrics.jpg`
 
-| Concern | Precision | Recall | F1 | ROC-AUC | NDCG@10 | Recall@10 | Positive validation |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| acne | 0.9888 | 0.9167 | 0.9514 | 0.9678 | 1.0000 | 0.1042 | 96/128 |
-| aging | 0.9759 | 0.9205 | 0.9474 | 0.9750 | 1.0000 | 0.1136 | 88/128 |
-| discomfort | 0.8370 | 0.9167 | 0.8750 | 0.9077 | 1.0000 | 0.1190 | 84/128 |
-| dryness | 0.9186 | 0.9294 | 0.9240 | 0.9453 | 1.0000 | 0.1176 | 85/128 |
-| dullness | 0.9615 | 0.9901 | 0.9756 | 0.9710 | 1.0000 | 0.0990 | 101/128 |
-| exfoliator/cleanser | 0.9100 | 0.9479 | 0.9286 | 0.9287 | 1.0000 | 0.1042 | 96/128 |
-| hydrating | 0.8533 | 0.9275 | 0.8889 | 0.9354 | 1.0000 | 0.1449 | 69/128 |
-| oiliness | 0.8824 | 0.7143 | 0.7895 | 0.9030 | 1.0000 | 0.4762 | 21/128 |
-| redness | 0.8052 | 0.9394 | 0.8671 | 0.9367 | 1.0000 | 0.1515 | 66/128 |
-| rough | 0.7800 | 0.9630 | 0.8619 | 0.8692 | 1.0000 | 0.1235 | 81/128 |
-| sun protectant | 1.0000 | 0.8654 | 0.9278 | 0.9717 | 1.0000 | 0.1923 | 52/128 |
-| uneven skintone | 0.9759 | 0.8804 | 0.9257 | 0.9490 | 1.0000 | 0.1087 | 92/128 |
+| Concern | Val F1 | Val AUC | Holdout F1 | Holdout AUC | Val positive | Holdout positive |
+|---|---:|---:|---:|---:|---:|---:|
+| acne | 0.9634 | 0.9785 | 0.9189 | 0.9470 | 83/111 | 39/54 |
+| aging | 0.9536 | 0.9720 | 0.8364 | 0.9517 | 78/111 | 32/54 |
+| discomfort | 0.8676 | 0.8974 | 0.9157 | 0.9477 | 68/111 | 44/54 |
+| dryness | 0.9262 | 0.9484 | 0.8657 | 0.8668 | 73/111 | 31/54 |
+| dullness | 0.9780 | 0.9746 | 0.9412 | 0.9730 | 90/111 | 32/54 |
+| exfoliator/cleanser | 0.9425 | 0.9373 | 0.8718 | 0.9285 | 87/111 | 37/54 |
+| hydrating | 0.8906 | 0.9606 | 0.7302 | 0.8207 | 58/111 | 25/54 |
+| oiliness | 0.7826 | 0.8658 | 0.2667 | 0.8405 | 13/111 | 13/54 |
+| redness | 0.8571 | 0.9448 | 0.9014 | 0.9474 | 51/111 | 38/54 |
+| rough | 0.8649 | 0.9003 | 0.8471 | 0.7566 | 69/111 | 38/54 |
+| sun protectant | 0.9176 | 0.9639 | 0.9286 | 0.9453 | 46/111 | 15/54 |
+| uneven skintone | 0.9542 | 0.9628 | 0.8364 | 0.8986 | 79/111 | 30/54 |
 
 ## Safety and explainability
 
@@ -58,7 +63,8 @@ Ini bukan clinical accuracy.
 
 - Label bukan hasil pemakaian pengguna dan belum direview klinis per produk.
 - Dataset tidak seimbang antarbrand.
-- Oiliness adalah model terlemah dan membutuhkan lebih banyak golden labels.
+- Oiliness adalah model terlemah, terutama pada brand holdout, dan membutuhkan
+  label manusia serta contoh lintas-brand sebelum confidence dapat dinaikkan.
 - NDCG/MAP sempurna hanya mengukur top-10 terhadap label lemah yang sangat
   padat; Recall@10 menunjukkan sepuluh hasil hanya mencakup sebagian kandidat
   relevan dan bukan bukti hasil klinis.

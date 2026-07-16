@@ -19,7 +19,7 @@ import json
 import math
 import random
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -162,6 +162,24 @@ def is_validation_product(product: dict[str, Any]) -> bool:
     identity = f"{product['brand']}::{product['name']}".lower().encode("utf-8")
     bucket = int.from_bytes(hashlib.blake2b(identity, digest_size=2).digest(), "little") % 5
     return bucket == 0
+
+
+def select_brand_holdout(products: list[dict[str, Any]], seed: int) -> set[str]:
+    counts = Counter(str(product["brand"]) for product in products)
+    maximum_brand_size = max(20, round(len(products) * 0.05))
+    candidates = [brand for brand, count in counts.items() if count <= maximum_brand_size]
+    candidates.sort(
+        key=lambda brand: hashlib.sha256(f"{seed}:{brand.lower()}".encode("utf-8")).hexdigest()
+    )
+    target_products = max(30, round(len(products) * 0.10))
+    selected: set[str] = set()
+    selected_products = 0
+    for brand in candidates:
+        selected.add(brand)
+        selected_products += counts[brand]
+        if len(selected) >= 5 and selected_products >= target_products:
+            break
+    return selected
 
 
 def train_binary_model(
@@ -404,10 +422,19 @@ def write_training_jpeg(model_payload: dict[str, Any], images_dir: Path) -> Path
         fill=ink,
         font=font(13),
     )
+    draw.text(
+        (660, 160),
+        (
+            f"Brand holdout F1: {model_payload['aggregateBrandHoldoutMetrics']['macroF1']} | "
+            f"ROC-AUC: {model_payload['aggregateBrandHoldoutMetrics']['macroRocAuc']}"
+        ),
+        fill=ink,
+        font=font(12),
+    )
     draw.line((660, 520, 1260, 520), fill=axis, width=2)
-    draw.line((660, 170, 660, 520), fill=axis, width=2)
+    draw.line((660, 190, 660, 520), fill=axis, width=2)
     for index, (name, score) in enumerate(zip(concerns, concern_f1, strict=True)):
-        bar_height = score * 350
+        bar_height = score * 320
         bar_x = 660 + index * bar_width
         draw.rectangle(
             (bar_x, 520 - bar_height, bar_x + bar_width - 5, 520),
@@ -449,15 +476,19 @@ def main() -> int:
         if features:
             labelled_products.append((product, labels, features))
 
-    train_rows = [row for row in labelled_products if not is_validation_product(row[0])]
-    validation_rows = [row for row in labelled_products if is_validation_product(row[0])]
-    if not validation_rows:
-        raise SystemExit("validation split is empty")
+    test_brands = select_brand_holdout(products, args.seed)
+    test_rows = [row for row in labelled_products if row[0]["brand"] in test_brands]
+    development_rows = [row for row in labelled_products if row[0]["brand"] not in test_brands]
+    train_rows = [row for row in development_rows if not is_validation_product(row[0])]
+    validation_rows = [row for row in development_rows if is_validation_product(row[0])]
+    if not validation_rows or not test_rows:
+        raise SystemExit("validation or brand-holdout split is empty")
 
     concern_models: dict[str, Any] = {}
     for concern_index, concern in enumerate(CANONICAL_CONCERNS):
         train_samples = [(features, int(concern in labels)) for _, labels, features in train_rows]
         validation_samples = [(features, int(concern in labels)) for _, labels, features in validation_rows]
+        test_samples = [(features, int(concern in labels)) for _, labels, features in test_rows]
         train_positive = sum(label for _, label in train_samples)
         validation_positive = sum(label for _, label in validation_samples)
         if train_positive < 5 or validation_positive < 2:
@@ -480,6 +511,16 @@ def main() -> int:
         metrics["trainPositive"] = train_positive
         metrics["validationPositive"] = validation_positive
         metrics["validationTotal"] = len(validation_samples)
+        test_pairs = [
+            (predict_probability(weights, bias, features), label)
+            for features, label in test_samples
+        ]
+        holdout_metrics = confusion_at_threshold(test_pairs, threshold)
+        holdout_metrics["rocAuc"] = round(roc_auc(test_pairs), 4)
+        holdout_metrics.update(ranking_metrics(test_pairs))
+        holdout_metrics["positive"] = sum(label for _, label in test_samples)
+        holdout_metrics["total"] = len(test_samples)
+        metrics["brandHoldout"] = holdout_metrics
         concern_models[concern] = {
             "bias": round(bias, 7),
             "weights": round_weights(weights),
@@ -496,6 +537,10 @@ def main() -> int:
     macro_ndcg = sum(model["metrics"]["ndcgAt10"] for model in concern_models.values()) / len(concern_models)
     macro_recall = sum(model["metrics"]["recallAt10"] for model in concern_models.values()) / len(concern_models)
     macro_map = sum(model["metrics"]["averagePrecisionAt10"] for model in concern_models.values()) / len(concern_models)
+    macro_holdout_f1 = sum(model["metrics"]["brandHoldout"]["f1"] for model in concern_models.values()) / len(concern_models)
+    macro_holdout_auc = sum(model["metrics"]["brandHoldout"]["rocAuc"] for model in concern_models.values()) / len(concern_models)
+    macro_holdout_ndcg = sum(model["metrics"]["brandHoldout"]["ndcgAt10"] for model in concern_models.values()) / len(concern_models)
+    macro_holdout_recall = sum(model["metrics"]["brandHoldout"]["recallAt10"] for model in concern_models.values()) / len(concern_models)
     source_checksums = {path.name: file_sha256(path) for path in source_files}
     source_checksums["chem_full.csv"] = file_sha256(args.chem_data_dir / "chem_full.csv")
     source_checksums["symp_to_chem_names.csv"] = file_sha256(args.chem_data_dir / "symp_to_chem_names.csv")
@@ -519,6 +564,10 @@ def main() -> int:
         "expectedCatalogFingerprint": catalog_fingerprint,
         "trainingProducts": len(train_rows),
         "validationProducts": len(validation_rows),
+        "brandHoldoutProducts": len(test_rows),
+        "trainingBrands": sorted({row[0]["brand"] for row in train_rows}),
+        "validationBrands": sorted({row[0]["brand"] for row in validation_rows}),
+        "brandHoldoutBrands": sorted(test_brands),
         "labelType": "weak-supervision-from-ingredient-functions-and-reviewed-links",
         "limitations": [
             "Label training bersifat weak supervision, bukan outcome klinis atau feedback dokter.",
@@ -531,6 +580,12 @@ def main() -> int:
             "macroNdcgAt10": round(macro_ndcg, 4),
             "macroRecallAt10": round(macro_recall, 4),
             "macroAveragePrecisionAt10": round(macro_map, 4),
+        },
+        "aggregateBrandHoldoutMetrics": {
+            "macroF1": round(macro_holdout_f1, 4),
+            "macroRocAuc": round(macro_holdout_auc, 4),
+            "macroNdcgAt10": round(macro_holdout_ndcg, 4),
+            "macroRecallAt10": round(macro_holdout_recall, 4),
         },
         "trainingHistory": aggregate_history(concern_models, args.epochs),
         "sourceChecksums": source_checksums,
@@ -569,12 +624,16 @@ def main() -> int:
                 "products": len(products),
                 "train": len(train_rows),
                 "validation": len(validation_rows),
+                "brandHoldout": len(test_rows),
+                "brandHoldoutBrands": sorted(test_brands),
                 "concerns": len(concern_models),
                 "macroF1": round(macro_f1, 4),
                 "macroRocAuc": round(macro_auc, 4),
                 "macroNdcgAt10": round(macro_ndcg, 4),
                 "macroRecallAt10": round(macro_recall, 4),
                 "macroAveragePrecisionAt10": round(macro_map, 4),
+                "brandHoldoutMacroF1": round(macro_holdout_f1, 4),
+                "brandHoldoutMacroRocAuc": round(macro_holdout_auc, 4),
             },
             indent=2,
         )
