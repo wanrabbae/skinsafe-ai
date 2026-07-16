@@ -1,2 +1,2 @@
-// Public read-only API. Isi saat module scan diimplementasikan.
-export {};
+export { getScanHistory } from "./service/scan.service";
+export type { ScanHistoryItem, ScanHistoryTone } from "./service/scan.service";

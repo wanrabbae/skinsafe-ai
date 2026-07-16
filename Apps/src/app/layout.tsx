@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { MobileNavigation } from "@/shared/components/mobile-navigation";
+import { QueryProvider } from "@/shared/components/query-provider";
 import { ServiceWorkerRegister } from "@/shared/components/service-worker-register";
 import "./globals.css";
 
@@ -30,9 +31,11 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body>
-        <div className="app-frame">{children}</div>
-        <MobileNavigation />
-        <ServiceWorkerRegister />
+        <QueryProvider>
+          <div className="app-frame">{children}</div>
+          <MobileNavigation />
+          <ServiceWorkerRegister />
+        </QueryProvider>
       </body>
     </html>
   );

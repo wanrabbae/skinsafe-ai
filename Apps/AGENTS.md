@@ -21,6 +21,7 @@ Service AI Python/FastAPI berada di `../AI`. Dokumentasi produk dan arsitektur b
 
 - Node.js `>=20.9.0`.
 - Next.js `16.2.10`, React `19`, TypeScript, Tailwind CSS v4, dan shadcn/ui.
+- TanStack Query (`@tanstack/react-query`) untuk client-side data fetching.
 - Prisma `6.x` dan PostgreSQL lokal.
 - Tidak menggunakan Docker atau Docker Compose untuk development maupun database aplikasi.
 
@@ -71,6 +72,14 @@ Saat membuat domain baru, buat empat folder layer dan barrel `index.ts`, walaupu
 - Pertahankan metadata, manifest, service worker, dan halaman `/offline` saat mengubah shell aplikasi.
 - Semua akses browser-only harus berada di Client Component dan aman terhadap SSR.
 - Untuk perubahan UI, pertahankan aksesibilitas, responsive layout, loading state, error state, dan empty state.
+
+### Page/client split & data fetching
+
+- Setiap `page.tsx` adalah Server Component tipis: metadata + (jika ada data) `prefetchQuery` via module service langsung + `<HydrationBoundary>`.
+- Markup dan interaktivitas hidup di file pendamping `<nama-route>-view.tsx` di folder yang sama (contoh: `history/history-view.tsx`, root `home-view.tsx`).
+- View hanya diberi `"use client"` bila memang butuh hook, browser API, atau `useQuery`; halaman tanpa data dinamis tetap Server Component.
+- Kalau halaman punya data yang bisa berubah: `page.tsx` prefetch via module service (import langsung, bukan HTTP) lalu dehydrate; view client memanggil `useQuery` ke endpoint BFF `/api/v1/<module>/...` milik module yang sama — client tidak pernah memanggil service/Prisma langsung.
+- Satu-satunya sumber `QueryClient`: `src/shared/lib/query-client.ts` (`getQueryClient()`), di-provide oleh `src/shared/components/query-provider.tsx` yang dipasang sekali di `layout.tsx`.
 
 ## API, environment, and security
 
