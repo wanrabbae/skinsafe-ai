@@ -15,6 +15,7 @@ dev = ["pytest>=8.3,<10"]
 [project.scripts]
 skinsafe-train = "training.train_recommender:main"
 skinsafe-evaluate-profile = "evaluation.evaluate_profile_intake:main"
+skinsafe-evaluate-reviews = "evaluation.human_review:main"
 
 [tool.fastapi]
 entrypoint = "app.main:app"
