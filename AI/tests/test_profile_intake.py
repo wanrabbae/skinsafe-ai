@@ -26,6 +26,17 @@ class ProfileIntakeTests(unittest.TestCase):
         self.assertIn("salicylic acid", result.profile.current_ingredients)
         self.assertTrue(result.can_recommend)
 
+    def test_colloquial_combination_skin_keeps_sensitivity_separate(self) -> None:
+        result = resolve_profile(
+            ProfileIntakeRequest(
+                narrative="Kulitku kombinasi dan mudah merah, tetapi aku tidak sedang hamil."
+            )
+        )
+        self.assertEqual(result.profile.skin_type, "combination")
+        self.assertEqual(result.profile.sensitivity_level, "high")
+        self.assertIn("redness", result.profile.concerns)
+        self.assertTrue(result.can_recommend)
+
     def test_complete_questionnaire_resolves_profile(self) -> None:
         result = resolve_profile(
             ProfileIntakeRequest(

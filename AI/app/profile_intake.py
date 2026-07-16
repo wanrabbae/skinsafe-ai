@@ -67,7 +67,7 @@ QUESTIONNAIRE = QuestionnaireResponse(
 
 _NEGATIONS = {"tidak", "bukan", "enggak", "nggak", "ga", "gak", "tanpa", "belum"}
 _SKIN_PHRASES = {
-    "combination": ("kulit kombinasi", "t zone berminyak", "tzone berminyak", "pipi kering tapi", "berminyak di t zone"),
+    "combination": ("kulit kombinasi", "kombinasi", "t zone berminyak", "tzone berminyak", "pipi kering tapi", "berminyak di t zone"),
     "dry": ("kulit kering", "kering", "terasa tertarik", "terasa ketarik", "mudah mengelupas"),
     "oily": ("kulit berminyak", "berminyak", "cepat berminyak", "mudah berminyak", "seluruh wajah mengilap"),
     "normal": ("kulit normal", "kulit seimbang"),
