@@ -1,4 +1,4 @@
-import { Bell, ShieldCheck } from "lucide-react";
+import { Bell, ShieldCheck, UserRound } from "lucide-react";
 
 import { SkinProfileIntake } from "@/modules/profile";
 
@@ -7,7 +7,7 @@ export function ProfileView() {
     <main className="mobile-page profile-page">
       <header className="profile-topbar">
         <div className="avatar" aria-hidden="true">
-          S
+          <UserRound />
         </div>
         <div className="brand-lockup">
           <span className="brand-mark">

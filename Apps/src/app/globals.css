@@ -227,6 +227,11 @@ label:has(input:focus-visible) {
   width: 38px;
 }
 
+.avatar svg {
+  height: 19px;
+  width: 19px;
+}
+
 .icon-button,
 .edit-button,
 .card-action {
@@ -296,6 +301,10 @@ label:has(input:focus-visible) {
 .readiness-card .supporting-text {
   margin-top: 8px;
   max-width: 19rem;
+}
+
+.profile-card-chips {
+  margin-top: 12px;
 }
 
 .card-icon {

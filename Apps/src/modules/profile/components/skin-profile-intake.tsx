@@ -10,6 +10,7 @@ import {
   ShieldAlert,
   Sparkles,
 } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { FormEvent, useEffect, useState } from "react";
 
 import type {
@@ -17,36 +18,17 @@ import type {
   ProfileRecommendationResult,
   QuestionChoice,
 } from "../profile.types";
+import {
+  currentProfileQueryKey,
+  useCurrentProfileResult,
+} from "../profile-cache";
+import { formatProfileLabel } from "../profile-display";
 
 type IntakeMode = "story" | "questions";
 
-function label(value: string | null) {
-  if (!value) return "Belum diketahui";
-  const names: Record<string, string> = {
-    acne: "Jerawat",
-    aging: "Penuaan",
-    combination: "Kombinasi",
-    discomfort: "Iritasi/tidak nyaman",
-    dryness: "Kering",
-    dullness: "Kusam",
-    hydrating: "Butuh hidrasi",
-    low: "Rendah",
-    medium: "Sedang",
-    high: "Tinggi",
-    normal: "Normal",
-    oily: "Berminyak",
-    oiliness: "Minyak berlebih",
-    pregnant: "Hamil",
-    breastfeeding: "Menyusui",
-    none: "Tidak hamil/menyusui",
-    redness: "Kemerahan",
-    sensitive: "Sensitif",
-    "uneven skintone": "Warna tidak merata",
-  };
-  return names[value] ?? value.replaceAll("_", " ");
-}
-
 export function SkinProfileIntake() {
+  const queryClient = useQueryClient();
+  const { data: result } = useCurrentProfileResult();
   const [mode, setMode] = useState<IntakeMode>("story");
   const [questions, setQuestions] = useState<ProfileQuestionnaire | null>(null);
   const [questionsError, setQuestionsError] = useState("");
@@ -54,7 +36,6 @@ export function SkinProfileIntake() {
   const [pregnancyStatus, setPregnancyStatus] = useState<"none" | "pregnant" | "breastfeeding">("none");
   const [activeText, setActiveText] = useState("");
   const [answers, setAnswers] = useState<Record<string, QuestionChoice>>({});
-  const [result, setResult] = useState<ProfileRecommendationResult | null>(null);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
@@ -75,7 +56,7 @@ export function SkinProfileIntake() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    setResult(null);
+    queryClient.setQueryData(currentProfileQueryKey, null);
     if (mode === "story" && narrative.trim().length < 15) {
       setError("Ceritakan kondisi kulitmu sedikit lebih lengkap (minimal 15 karakter). ");
       return;
@@ -108,7 +89,7 @@ export function SkinProfileIntake() {
         error?: { message?: string };
       };
       if (!response.ok) throw new Error(body.error?.message || "Profil belum dapat dianalisis.");
-      setResult(body);
+      queryClient.setQueryData(currentProfileQueryKey, body);
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Profil belum dapat dianalisis.");
     } finally {
@@ -221,13 +202,13 @@ function ProfileResult({ result }: { result: ProfileRecommendationResult }) {
           <span data-level={resolution.confidence.level}>{resolution.confidence.score}%</span>
         </div>
         <dl>
-          <div><dt>Tipe kulit</dt><dd>{label(resolution.profile.skinType)}</dd></div>
-          <div><dt>Sensitivitas</dt><dd>{label(resolution.profile.sensitivityLevel)}</dd></div>
-          <div><dt>Safety status</dt><dd>{label(resolution.profile.pregnancyStatus)}</dd></div>
+          <div><dt>Tipe kulit</dt><dd>{formatProfileLabel(resolution.profile.skinType)}</dd></div>
+          <div><dt>Sensitivitas</dt><dd>{formatProfileLabel(resolution.profile.sensitivityLevel)}</dd></div>
+          <div><dt>Safety status</dt><dd>{formatProfileLabel(resolution.profile.pregnancyStatus)}</dd></div>
         </dl>
         <div className="chip-row large-gap">
-          {resolution.profile.concerns.map((concern) => <span className="chip" key={concern}>{label(concern)}</span>)}
-          {resolution.profile.conditions.map((condition) => <span className="chip chip-caution" key={condition}>{label(condition)}</span>)}
+          {resolution.profile.concerns.map((concern) => <span className="chip" key={concern}>{formatProfileLabel(concern)}</span>)}
+          {resolution.profile.conditions.map((condition) => <span className="chip chip-caution" key={condition}>{formatProfileLabel(condition)}</span>)}
         </div>
       </section>
 
