@@ -3,13 +3,14 @@
     "source": "https://incidecoder.com",
     "mode": "brand",
     "brand": "wardah",
-    "scrapedAt": "2026-07-16T12:48:55.419Z",
+    "scrapedAt": "2026-07-16T13:10:46.295Z",
     "total": 20,
     "failed": 0,
     "resumed": false,
     "target": 5,
     "listed": "50+",
-    "scrapedNow": 0
+    "scrapedNow": 0,
+    "skippedNow": 0
   },
   "products": [
     {

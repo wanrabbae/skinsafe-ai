@@ -1,0 +1,959 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "breylee",
+    "scrapedAt": "2026-07-16T13:14:19.133Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": 46,
+    "scrapedNow": 5,
+    "skippedNow": 0
+  },
+  "products": [
+    {
+      "slug": "breylee-24k-gold-collagen-serum",
+      "name": "Breylee 24k Gold Collagen Serum",
+      "brand": "Breylee",
+      "brandSlug": "breylee",
+      "category": null,
+      "productTitle": "24k Gold Collagen Serum",
+      "description": null,
+      "uploadedBy": "jeff1998",
+      "uploadedAt": "2021-09-06",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "PEG/​PPG-17/​6 Copolymer",
+        "Betaine",
+        "Proline",
+        "Glyceryl Acrylate/​Acrylic Acid Copolymer",
+        "Propylene Glycol",
+        "Pca",
+        "PEG-400",
+        "Trehalose",
+        "Panthenol",
+        "Gold",
+        "Disodium EDTA",
+        "Carbomer",
+        "Triethanolamine",
+        "Sodium Hyaluronate",
+        "PEG-40 Hydrogenated Castor Oil",
+        "Caprylhydroxamic Acid",
+        "1,2-Hexanediol",
+        "Propanediol",
+        "Parfum"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "PEG/PPG-17/6 Copolymer",
+          "slug": "peg-ppg-17-6-copolymer",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Betaine",
+          "slug": "betaine",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Proline",
+          "slug": "proline",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Glyceryl Acrylate/Acrylic Acid Copolymer",
+          "slug": "glyceryl-acrylate-acrylic-acid-copolymer",
+          "functions": [
+            "moisturizer/​humectant",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propylene Glycol",
+          "slug": "propylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Pca",
+          "slug": "pca",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "PEG-400",
+          "slug": "peg-400",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Trehalose",
+          "slug": "trehalose",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Gold",
+          "slug": "gold",
+          "functions": [
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Carbomer",
+          "slug": "carbomer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Triethanolamine",
+          "slug": "triethanolamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "PEG-40 Hydrogenated Castor Oil",
+          "slug": "peg-40-hydrogenated-castor-oil",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Caprylhydroxamic Acid",
+          "slug": "caprylhydroxamic-acid",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/breylee-24k-gold-collagen-serum",
+      "scrapedAt": "2026-07-16T13:14:07.545Z"
+    },
+    {
+      "slug": "breylee-acne-clearing-soap",
+      "name": "Breylee Acne Clearing Soap",
+      "brand": "Breylee",
+      "brandSlug": "breylee",
+      "category": null,
+      "productTitle": "Acne Clearing Soap",
+      "description": null,
+      "uploadedBy": "jeff1998",
+      "uploadedAt": "2021-09-12",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Sorbic Acid",
+        "Stearic Acid",
+        "Lauric Acid",
+        "Glycerin",
+        "Ammonium Lauryl Sulfate",
+        "Sodium Hydroxide",
+        "Betaine",
+        "Melaleuca Alternifolia (Tea Tree) Leaf Oil (Tea Tree Oil)",
+        "Disodium EDTA"
+      ],
+      "ingredients": [
+        {
+          "name": "Sorbic Acid",
+          "slug": "sorbic-acid",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Lauric Acid",
+          "slug": "lauric-acid",
+          "functions": [
+            "anti-acne",
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "4",
+          "rating": "goodie"
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Ammonium Lauryl Sulfate",
+          "slug": "ammonium-lauryl-sulfate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hydroxide",
+          "slug": "sodium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Betaine",
+          "slug": "betaine",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Melaleuca Alternifolia (Tea Tree) Leaf Oil (Tea Tree Oil)",
+          "slug": "melaleuca-alternifolia-leaf-oil",
+          "functions": [
+            "soothing",
+            "anti-acne",
+            "antioxidant",
+            "antimicrobial/​antibacterial",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/breylee-acne-clearing-soap",
+      "scrapedAt": "2026-07-16T13:14:11.086Z"
+    },
+    {
+      "slug": "breylee-acne-cream-acne-treatment",
+      "name": "Breylee Acne Cream Acne Treatment",
+      "brand": "Breylee",
+      "brandSlug": "breylee",
+      "category": null,
+      "productTitle": "Acne Cream Acne Treatment",
+      "description": null,
+      "uploadedBy": "jasminum",
+      "uploadedAt": "2024-10-09",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "Centella Asiatica Extract",
+        "Arbutin",
+        "Portulaca Oleracea Extract",
+        "Trehalose",
+        "Lavandula Angustifolia Extract",
+        "Fucose",
+        "Oligopeptide-4",
+        "Niacinamide",
+        "Hyaluronic Acid",
+        "Carbomer",
+        "Triethanolamine",
+        "Phenoxyethanol",
+        "Allantoin"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Centella Asiatica Extract",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Arbutin",
+          "slug": "arbutin",
+          "functions": [
+            "antioxidant",
+            "skin brightening"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Portulaca Oleracea Extract",
+          "slug": "portulaca-oleracea-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Trehalose",
+          "slug": "trehalose",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Lavandula Angustifolia Extract",
+          "slug": "lavandula-angustifolia-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fucose",
+          "slug": "fucose",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Oligopeptide-4",
+          "slug": "oligopeptide-4",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Hyaluronic Acid",
+          "slug": "hyaluronic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Carbomer",
+          "slug": "carbomer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Triethanolamine",
+          "slug": "triethanolamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/breylee-acne-cream-acne-treatment",
+      "scrapedAt": "2026-07-16T13:14:13.386Z"
+    },
+    {
+      "slug": "breylee-acne-scar-removal-cream-2",
+      "name": "Breylee Acne Scar Removal Cream",
+      "brand": "Breylee",
+      "brandSlug": "breylee",
+      "category": null,
+      "productTitle": "Acne Scar Removal Cream",
+      "description": null,
+      "uploadedBy": "blue_sicheng",
+      "uploadedAt": "2020-10-03",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua/​Water",
+        "Glycerol",
+        "Allantoin",
+        "Phenoxyethanol",
+        "Carbomer",
+        "Hyaluronic Acid",
+        "Triethanolamine",
+        "Trehalose",
+        "Nicotinamide",
+        "Portulaca Oleracea Extract",
+        "Lavandula Extract",
+        "Centella Asiatica Extract",
+        "Fucose",
+        "Arbutin",
+        "Epidermal Growth Factor"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua/Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerol",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Carbomer",
+          "slug": "carbomer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Hyaluronic Acid",
+          "slug": "hyaluronic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Triethanolamine",
+          "slug": "triethanolamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Trehalose",
+          "slug": "trehalose",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Nicotinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Portulaca Oleracea Extract",
+          "slug": "portulaca-oleracea-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Lavandula Extract",
+          "slug": "lavandula-angustifolia-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Extract",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Fucose",
+          "slug": "fucose",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arbutin",
+          "slug": "arbutin",
+          "functions": [
+            "antioxidant",
+            "skin brightening"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Epidermal Growth Factor",
+          "slug": "sh-oligopeptide-1",
+          "functions": [
+            "cell-communicating ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/breylee-acne-scar-removal-cream-2",
+      "scrapedAt": "2026-07-16T13:14:16.387Z"
+    },
+    {
+      "slug": "breylee-acne-scar-removal-gel",
+      "name": "Breylee Acne Scar Removal Gel",
+      "brand": "Breylee",
+      "brandSlug": "breylee",
+      "category": null,
+      "productTitle": "Acne Scar Removal Gel",
+      "description": null,
+      "uploadedBy": "honey",
+      "uploadedAt": "2021-03-07",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Tea Tree Oil",
+        "Salicylic Acid",
+        "Glycerin",
+        "Ethylhexylglycerin",
+        "Arbutin",
+        "Nicotinamide",
+        "Glycyrrhiza Inflata Root Extract",
+        "Sophora Angustifolia Root Extract",
+        "Centella Asiatica Extract",
+        "Carbomer",
+        "Triethanolamine",
+        "Sodium Hyaluronate"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tea Tree Oil",
+          "slug": "melaleuca-alternifolia-leaf-oil",
+          "functions": [
+            "soothing",
+            "anti-acne",
+            "antioxidant",
+            "antimicrobial/​antibacterial",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arbutin",
+          "slug": "arbutin",
+          "functions": [
+            "antioxidant",
+            "skin brightening"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Nicotinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Glycyrrhiza Inflata Root Extract",
+          "slug": "glycyrrhiza-inflata-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sophora Angustifolia Root Extract",
+          "slug": "sophora-angustifolia-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Extract",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Carbomer",
+          "slug": "carbomer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Triethanolamine",
+          "slug": "triethanolamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/breylee-acne-scar-removal-gel",
+      "scrapedAt": "2026-07-16T13:14:19.131Z"
+    }
+  ],
+  "errors": []
+}

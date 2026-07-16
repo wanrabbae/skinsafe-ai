@@ -1,0 +1,1661 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "senka",
+    "scrapedAt": "2026-07-16T13:17:19.500Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": 50,
+    "scrapedNow": 5,
+    "skippedNow": 0
+  },
+  "products": [
+    {
+      "slug": "senka-acne-care-3x-repair-gel-cream",
+      "name": "Senka Acne Care 3x Repair Gel Cream",
+      "brand": "Senka",
+      "brandSlug": "senka",
+      "category": null,
+      "productTitle": "Acne Care 3x Repair Gel Cream",
+      "description": null,
+      "uploadedBy": "tristan_t1234",
+      "uploadedAt": "2025-11-28",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Water (Aqua)",
+        "Dipropylene Glycol",
+        "Butylene Glycol",
+        "Glycerin",
+        "Dimethicone",
+        "Tranexamic Acid",
+        "Diphenylsiloxy Phenyl Trimethicone",
+        "Ammonium Acryloyldimethyltaurate/​Beheneth-25 Methacrylate Crosspolymer",
+        "Chamomilla Recutita (Matricaria) Flower Extract",
+        "Sodium Acetylated Hyaluronate",
+        "Sodium Hyaluronate",
+        "Sericin",
+        "Octyldodecanol",
+        "Salicylic Acid",
+        "Hydroxypropyl Methylcellulose Stearoxy Ether",
+        "PEG-10 Dimethicone",
+        "Carbomer",
+        "Sodium Metaphosphate",
+        "Acrylates/​C10-30 Alkyl Acrylate Crosspolymer",
+        "Bis-Ethoxydiglycol Cyclohexane 1,4-Dicarboxylate",
+        "Tocopherol",
+        "Centella Asiatica Leaf/​Stem Extract",
+        "Potassium Sorbate",
+        "Citric Acid",
+        "Phenoxyethanol"
+      ],
+      "ingredients": [
+        {
+          "name": "Water (Aqua)",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dipropylene Glycol",
+          "slug": "dipropylene-glycol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Butylene Glycol",
+          "slug": "butylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Tranexamic Acid",
+          "slug": "tranexamic-acid",
+          "functions": [
+            "skin brightening",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Diphenylsiloxy Phenyl Trimethicone",
+          "slug": "diphenylsiloxy-phenyl-trimethicone",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ammonium Acryloyldimethyltaurate/Beheneth-25 Methacrylate Crosspolymer",
+          "slug": "ammonium-acryloyldimethyltaurate-beheneth-25-methacrylate-crosspolymer",
+          "functions": [
+            "viscosity controlling",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Chamomilla Recutita (Matricaria) Flower Extract",
+          "slug": "chamomilla-recutita-flower-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Acetylated Hyaluronate",
+          "slug": "sodium-acetylated-hyaluronate",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Sericin",
+          "slug": "sericin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Octyldodecanol",
+          "slug": "octyldodecanol",
+          "functions": [
+            "emollient",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Hydroxypropyl Methylcellulose Stearoxy Ether",
+          "slug": "hydroxypropyl-methylcellulose-stearoxy-ether",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-10 Dimethicone",
+          "slug": "peg-10-dimethicone",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Carbomer",
+          "slug": "carbomer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Sodium Metaphosphate",
+          "slug": "sodium-metaphosphate",
+          "functions": [
+            "buffering",
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Acrylates/C10-30 Alkyl Acrylate Crosspolymer",
+          "slug": "acrylates-c10-30-alkyl-acrylate-crosspolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Bis-Ethoxydiglycol Cyclohexane 1,4-Dicarboxylate",
+          "slug": "bis-ethoxydiglycol-cyclohexane-1-4-dicarboxylate",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tocopherol",
+          "slug": "tocopherol",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Centella Asiatica Leaf/Stem Extract",
+          "slug": "centella-asiatica-leaf-stem-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Sorbate",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/senka-acne-care-3x-repair-gel-cream",
+      "scrapedAt": "2026-07-16T13:17:08.686Z"
+    },
+    {
+      "slug": "senka-all-clear-double-w",
+      "name": "Senka All Clear Double W",
+      "brand": "Senka",
+      "brandSlug": "senka",
+      "category": null,
+      "productTitle": "All Clear Double W",
+      "description": null,
+      "uploadedBy": "cherish",
+      "uploadedAt": "2023-03-29",
+      "highlights": [],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Stearic Acid",
+        "Myristic Acid",
+        "Hydroxylated K",
+        "Lauric Acid Pg",
+        "Lauric Acid",
+        "PEG-8",
+        "Cocamidopropyl Betaine",
+        "Cocoyl Methyl Taurine Na",
+        "Glyceryl Stearate (Se)",
+        "Polyquaternium-7",
+        "PEG-90M",
+        "Hyaluronic Acid Na",
+        "Acetyl Hyaluronate Na",
+        "Sericin",
+        "Hydrolyzed Silk",
+        "EDTA 2Na",
+        "Sodium Pyrosulfite Na",
+        "Cetyl Ethylhexanoate",
+        "Silica",
+        "BHT",
+        "Ethanol",
+        "Citric Acid",
+        "Sorbic Acid K",
+        "Sodium Benzoate",
+        "Perfume"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Myristic Acid",
+          "slug": "myristic-acid",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Hydroxylated K",
+          "slug": "potassium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauric Acid Pg",
+          "slug": "lauric-acid-pg",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauric Acid",
+          "slug": "lauric-acid",
+          "functions": [
+            "anti-acne",
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "4",
+          "rating": "goodie"
+        },
+        {
+          "name": "PEG-8",
+          "slug": "peg-8",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Betaine",
+          "slug": "cocamidopropyl-betaine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocoyl Methyl Taurine Na",
+          "slug": "sodium-methyl-cocoyl-taurate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glyceryl Stearate (Se)",
+          "slug": "glyceryl-stearate",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Polyquaternium-7",
+          "slug": "polyquaternium-7",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-90M",
+          "slug": "peg-90m",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hyaluronic Acid Na",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Acetyl Hyaluronate Na",
+          "slug": "sodium-acetylated-hyaluronate",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sericin",
+          "slug": "sericin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrolyzed Silk",
+          "slug": "hydrolyzed-silk",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "EDTA 2Na",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Pyrosulfite Na",
+          "slug": "sodium-pyrosulfite-na",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetyl Ethylhexanoate",
+          "slug": "cetyl-ethylhexanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Silica",
+          "slug": "silica",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "BHT",
+          "slug": "bht",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethanol",
+          "slug": "alcohol",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "solvent",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sorbic Acid K",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Perfume",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/senka-all-clear-double-w",
+      "scrapedAt": "2026-07-16T13:17:11.314Z"
+    },
+    {
+      "slug": "senka-all-clear-double-w-foam",
+      "name": "Senka All Clear Double W Foam",
+      "brand": "Senka",
+      "brandSlug": "senka",
+      "category": null,
+      "productTitle": "All Clear Double W Foam",
+      "description": null,
+      "uploadedBy": "delectableblooms",
+      "uploadedAt": "2024-06-10",
+      "highlights": [],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Sorbitol",
+        "Dipropylene Glycol",
+        "Lauryl Betaine",
+        "Sodium Methyltaurate",
+        "Lauric Acid",
+        "Potassium Cocoyl Glutamate",
+        "Arginine Cocoate",
+        "Myristic Acid",
+        "Diglycerin",
+        "Ethylhexylglycerin",
+        "Fragrance",
+        "Pentasodium Pentetate",
+        "Potassium Hydroxide",
+        "Sodium Benzoate",
+        "Sodium Metabisulfite",
+        "Cetyl Ethylhexanoate",
+        "Ethylhexyl Palmitate",
+        "Oryza Sativa Rice Germ Oil",
+        "PEG-8 Glyceryl Isostearate",
+        "Sodium Hyaluronate",
+        "Tocopherol",
+        "Sodium Acetylated Hyaluronate",
+        "Sericin",
+        "Alcohol",
+        "Citric Acid",
+        "Potassium Sorbate",
+        "Hydrolyzed Silk"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Sorbitol",
+          "slug": "sorbitol",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Dipropylene Glycol",
+          "slug": "dipropylene-glycol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauryl Betaine",
+          "slug": "lauryl-betaine",
+          "functions": [
+            "surfactant/​cleansing",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Methyltaurate",
+          "slug": "sodium-methyltaurate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauric Acid",
+          "slug": "lauric-acid",
+          "functions": [
+            "anti-acne",
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "4",
+          "rating": "goodie"
+        },
+        {
+          "name": "Potassium Cocoyl Glutamate",
+          "slug": "potassium-cocoyl-glutamate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arginine Cocoate",
+          "slug": "arginine-cocoate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Myristic Acid",
+          "slug": "myristic-acid",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Diglycerin",
+          "slug": "diglycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Pentasodium Pentetate",
+          "slug": "pentasodium-pentetate",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Hydroxide",
+          "slug": "potassium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Metabisulfite",
+          "slug": "sodium-metabisulfite",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetyl Ethylhexanoate",
+          "slug": "cetyl-ethylhexanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethylhexyl Palmitate",
+          "slug": "ethylhexyl-palmitate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Oryza Sativa Rice Germ Oil",
+          "slug": "oryza-sativa-germ-oil",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-8 Glyceryl Isostearate",
+          "slug": "peg-8-glyceryl-isostearate",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Tocopherol",
+          "slug": "tocopherol",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Acetylated Hyaluronate",
+          "slug": "sodium-acetylated-hyaluronate",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sericin",
+          "slug": "sericin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Alcohol",
+          "slug": "alcohol",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "solvent",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Sorbate",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrolyzed Silk",
+          "slug": "hydrolyzed-silk",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/senka-all-clear-double-w-foam",
+      "scrapedAt": "2026-07-16T13:17:13.633Z"
+    },
+    {
+      "slug": "senka-all-clear-double-wash-2in1",
+      "name": "Senka All Clear Double Wash 2in1",
+      "brand": "Senka",
+      "brandSlug": "senka",
+      "category": null,
+      "productTitle": "All Clear Double Wash 2in1",
+      "description": null,
+      "uploadedBy": "tacoma",
+      "uploadedAt": "2025-07-20",
+      "highlights": [],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Stearic Acid",
+        "Myristic Acid",
+        "Lauric Acid",
+        "PEG-8",
+        "Cocamidopropyl Betaine",
+        "Polyquaternium-7",
+        "PEG-90M",
+        "Sericin",
+        "Hydrolyzed Silk",
+        "PEG-8 Glyceryl Isostearate",
+        "Silica",
+        "BHT",
+        "Ethanol",
+        "Citric Acid",
+        "Tocopherol",
+        "Fragrance",
+        "Propylene Glycol Laurate",
+        "Sodium Acetylated Hyaluronate",
+        "Na Hyaluronate",
+        "Na Benzoate",
+        "Potassium Hydroxide",
+        "Sodium Pyrosulfite",
+        "Sorbic Acid K",
+        "Cetyl Ethylhexanoate",
+        "Sodium Benzoate",
+        "Sodium Hyaluronate",
+        "Tetrasodium EDTA",
+        "Cetyl Ethylhexanoate",
+        "Na Acetyl Hyaluronate",
+        "EDTA 2Na",
+        "EDTA-4 Na",
+        "Na Pyrosulfite",
+        "Glyceryl Stearate SE",
+        "Sodium",
+        "Lauryl Glycol",
+        "E Acetate",
+        "K Hydroxide",
+        "Potassium Sorbate",
+        "Disodium EDTA",
+        "Na",
+        "Lauryl Glycol",
+        "E Acetate",
+        "Glyceryl Stearate (Se)"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Myristic Acid",
+          "slug": "myristic-acid",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Lauric Acid",
+          "slug": "lauric-acid",
+          "functions": [
+            "anti-acne",
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "4",
+          "rating": "goodie"
+        },
+        {
+          "name": "PEG-8",
+          "slug": "peg-8",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Betaine",
+          "slug": "cocamidopropyl-betaine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polyquaternium-7",
+          "slug": "polyquaternium-7",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-90M",
+          "slug": "peg-90m",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sericin",
+          "slug": "sericin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrolyzed Silk",
+          "slug": "hydrolyzed-silk",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-8 Glyceryl Isostearate",
+          "slug": "peg-8-glyceryl-isostearate",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Silica",
+          "slug": "silica",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "BHT",
+          "slug": "bht",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethanol",
+          "slug": "alcohol",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "solvent",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tocopherol",
+          "slug": "tocopherol",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Propylene Glycol Laurate",
+          "slug": "propylene-glycol-laurate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Sodium Acetylated Hyaluronate",
+          "slug": "sodium-acetylated-hyaluronate",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Na Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Na Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Hydroxide",
+          "slug": "potassium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Pyrosulfite",
+          "slug": "sodium-metabisulfite",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sorbic Acid K",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetyl Ethylhexanoate",
+          "slug": "cetyl-ethylhexanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Tetrasodium EDTA",
+          "slug": "tetrasodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetyl Ethylhexanoate",
+          "slug": "cetyl-ethylhexanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Na Acetyl Hyaluronate",
+          "slug": "sodium-acetylated-hyaluronate",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "EDTA 2Na",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "EDTA-4 Na",
+          "slug": "tetrasodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Na Pyrosulfite",
+          "slug": "sodium-metabisulfite",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glyceryl Stearate SE",
+          "slug": "glyceryl-stearate-se",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Sodium",
+          "slug": "sodium",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauryl Glycol",
+          "slug": "lauryl-glycol",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "E Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "K Hydroxide",
+          "slug": "potassium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Sorbate",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Na",
+          "slug": "na",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lauryl Glycol",
+          "slug": "lauryl-glycol",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "E Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Glyceryl Stearate (Se)",
+          "slug": "glyceryl-stearate",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/senka-all-clear-double-wash-2in1",
+      "scrapedAt": "2026-07-16T13:17:17.168Z"
+    },
+    {
+      "slug": "senka-all-clear-milk",
+      "name": "Senka All Clear Milk",
+      "brand": "Senka",
+      "brandSlug": "senka",
+      "category": null,
+      "productTitle": "All Clear Milk",
+      "description": null,
+      "uploadedBy": "ghinafirsya",
+      "uploadedAt": "2020-05-23",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Water (Aqua)",
+        "C11-12 Isoparaffin",
+        "Dipropylene Glycol",
+        "Hydrogenated Polydecene",
+        "Butylene Glycol",
+        "PEG-5 Glyceryl Stearate",
+        "C13-14 Isoparaffin",
+        "Hydroxypropyl Methylcellulose",
+        "Ceteth-25",
+        "Methylparaben",
+        "Cetyl Ethylhexanoate",
+        "Acrylates/​C10-30 Alkyl Acrylate Crosspolymer"
+      ],
+      "ingredients": [
+        {
+          "name": "Water (Aqua)",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "C11-12 Isoparaffin",
+          "slug": "c11-12-isoparaffin",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dipropylene Glycol",
+          "slug": "dipropylene-glycol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrogenated Polydecene",
+          "slug": "hydrogenated-polydecene",
+          "functions": [
+            "emollient",
+            "perfuming",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Butylene Glycol",
+          "slug": "butylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "PEG-5 Glyceryl Stearate",
+          "slug": "peg-5-glyceryl-stearate",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "C13-14 Isoparaffin",
+          "slug": "c13-14-isoparaffin",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxypropyl Methylcellulose",
+          "slug": "hydroxypropyl-methylcellulose",
+          "functions": [
+            "surfactant/​cleansing",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Ceteth-25",
+          "slug": "ceteth-25",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Methylparaben",
+          "slug": "methylparaben",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Cetyl Ethylhexanoate",
+          "slug": "cetyl-ethylhexanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Acrylates/C10-30 Alkyl Acrylate Crosspolymer",
+          "slug": "acrylates-c10-30-alkyl-acrylate-crosspolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/senka-all-clear-milk",
+      "scrapedAt": "2026-07-16T13:17:19.497Z"
+    }
+  ],
+  "errors": []
+}

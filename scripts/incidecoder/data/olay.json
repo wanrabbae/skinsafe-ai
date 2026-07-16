@@ -1,0 +1,1865 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "olay",
+    "scrapedAt": "2026-07-16T13:16:15.095Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": "50+",
+    "scrapedNow": 5,
+    "skippedNow": 0
+  },
+  "products": [
+    {
+      "slug": "olay-10-years-younger-day-eye-cream",
+      "name": "Olay 10 Years Younger Day Eye Cream",
+      "brand": "Olay",
+      "brandSlug": "olay",
+      "category": null,
+      "productTitle": "10 Years Younger Day Eye Cream",
+      "description": null,
+      "uploadedBy": "17_aaliyah",
+      "uploadedAt": "2023-03-26",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Niacinamide",
+        "Isohexadecane",
+        "Dimethicone",
+        "Isopropyl Isostearate",
+        "Polyacrylamide",
+        "Caffeine",
+        "Palmitoyl Pentapeptide-4",
+        "Panthenol",
+        "C13-14 Isoparaffin",
+        "Dimethiconol",
+        "Caprylyl Glycol",
+        "Laureth-7",
+        "Cetearyl Glucoside",
+        "Cetearyl Alcohol",
+        "Stearic Acid",
+        "Palmitic Acid",
+        "Cetyl Alcohol",
+        "Behenyl Alcohol",
+        "Disodium EDTA",
+        "PEG-100 Stearate",
+        "Titanium Dioxide",
+        "1,2-Hexanediol",
+        "Phenoxyethanol"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Isohexadecane",
+          "slug": "isohexadecane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Isostearate",
+          "slug": "isopropyl-isostearate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "4",
+          "rating": null
+        },
+        {
+          "name": "Polyacrylamide",
+          "slug": "polyacrylamide",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Caffeine",
+          "slug": "caffeine",
+          "functions": [
+            "antioxidant",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Palmitoyl Pentapeptide-4",
+          "slug": "palmitoyl-pentapeptide-4",
+          "functions": [
+            "cell-communicating ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "C13-14 Isoparaffin",
+          "slug": "c13-14-isoparaffin",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dimethiconol",
+          "slug": "dimethiconol",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Caprylyl Glycol",
+          "slug": "caprylyl-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Laureth-7",
+          "slug": "laureth-7",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Glucoside",
+          "slug": "cetearyl-glucoside",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Palmitic Acid",
+          "slug": "palmitic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Cetyl Alcohol",
+          "slug": "cetyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Behenyl Alcohol",
+          "slug": "behenyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-100 Stearate",
+          "slug": "peg-100-stearate",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Titanium Dioxide",
+          "slug": "titanium-dioxide",
+          "functions": [
+            "sunscreen",
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/olay-10-years-younger-day-eye-cream",
+      "scrapedAt": "2026-07-16T13:16:03.339Z"
+    },
+    {
+      "slug": "olay-10-years-younger-night-eye-cream",
+      "name": "Olay 10 Years Younger Night Eye Cream",
+      "brand": "Olay",
+      "brandSlug": "olay",
+      "category": null,
+      "productTitle": "10 Years Younger Night Eye Cream",
+      "description": null,
+      "uploadedBy": "ceceliabr",
+      "uploadedAt": "2026-03-02",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Isohexadecane",
+        "Niacinamide*",
+        "Distarch Phosphate",
+        "Isopropyl Isostearate",
+        "Dimethicone",
+        "Panthenol**",
+        "Retinol",
+        "Palmitoyl Pentapeptide-4***",
+        "Caprylic/​Capric Triglyceride",
+        "Ethylhexylglycerin",
+        "Hydroxyacetophenone",
+        "Dimethiconol",
+        "Cetearyl Glucoside",
+        "Cetearyl Alcohol",
+        "Stearic Acid",
+        "Palmitic Acid",
+        "Stearyl Alcohol",
+        "Cetyl Alcohol",
+        "Behenyl Alcohol",
+        "Disodium EDTA",
+        "Sodium Acrylates Copolymer",
+        "PEG-100 Stearate",
+        "Titanium Dioxide",
+        "Phenoxyethanol",
+        "*Vitamin B3",
+        "**Pro-Vitamin B5",
+        "***Peptide"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Isohexadecane",
+          "slug": "isohexadecane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Niacinamide*",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Distarch Phosphate",
+          "slug": "distarch-phosphate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Isostearate",
+          "slug": "isopropyl-isostearate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "4",
+          "rating": null
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Panthenol**",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Retinol",
+          "slug": "retinol",
+          "functions": [
+            "cell-communicating ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Palmitoyl Pentapeptide-4***",
+          "slug": "palmitoyl-pentapeptide-4",
+          "functions": [
+            "cell-communicating ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Caprylic/Capric Triglyceride",
+          "slug": "caprylic-capric-triglyceride",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dimethiconol",
+          "slug": "dimethiconol",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Glucoside",
+          "slug": "cetearyl-glucoside",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Palmitic Acid",
+          "slug": "palmitic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Stearyl Alcohol",
+          "slug": "stearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Cetyl Alcohol",
+          "slug": "cetyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Behenyl Alcohol",
+          "slug": "behenyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Acrylates Copolymer",
+          "slug": "sodium-acrylates-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-100 Stearate",
+          "slug": "peg-100-stearate",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Titanium Dioxide",
+          "slug": "titanium-dioxide",
+          "functions": [
+            "sunscreen",
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "*Vitamin B3",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "**Pro-Vitamin B5",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "***Peptide",
+          "slug": "peptide",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/olay-10-years-younger-night-eye-cream",
+      "scrapedAt": "2026-07-16T13:16:05.866Z"
+    },
+    {
+      "slug": "olay-2in1-hydration-radiant-glow-moisturiser-lotion",
+      "name": "Olay 2In1 Hydration + Radiant Glow Moisturiser Lotion",
+      "brand": "Olay",
+      "brandSlug": "olay",
+      "category": null,
+      "productTitle": "2In1 Hydration + Radiant Glow Moisturiser Lotion",
+      "description": null,
+      "uploadedBy": "octaviab",
+      "uploadedAt": "2018-05-26",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "Ethylhexyl Salicylate",
+        "Butyl Methoxydibenzoylmethane",
+        "Niacinamide",
+        "Dimethicone",
+        "Titanium Dioxide",
+        "Mica",
+        "Isopropyl Palmitate",
+        "Octocrylene",
+        "Phenylbenzimidazole Sulfonic Acid",
+        "Cetyl Alcohol",
+        "Stearyl Alcohol",
+        "Panthenol",
+        "Tocopheryl Acetate",
+        "Dimethiconol",
+        "Cetearyl Alcohol",
+        "Citrus Nobilis Peel Extract",
+        "Acrylamide/​Sodium Acryloyldimethyltaurate Copolymer",
+        "Polyethylene",
+        "Aluminum Starch Octenylsuccinate",
+        "Triethanolamine",
+        "C13-14 Alkane",
+        "Sorbitan Stearate",
+        "Laureth-7",
+        "Cetearyl Glucoside",
+        "Peg-100 Stearate",
+        "Stearic Acid",
+        "Disodium Edta",
+        "Tin Oxide",
+        "Benzyl Alcohol",
+        "Methylparaben",
+        "Ethylparaben",
+        "Propylparaben",
+        "Phenoxyethanol",
+        "Parfum",
+        "Linalool",
+        "Alpha-Isomethyl Ionone",
+        "Limonene",
+        "Eugenol"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Ethylhexyl Salicylate",
+          "slug": "ethylhexyl-salicylate",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Butyl Methoxydibenzoylmethane",
+          "slug": "butyl-methoxydibenzoylmethane",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Titanium Dioxide",
+          "slug": "titanium-dioxide",
+          "functions": [
+            "sunscreen",
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Mica",
+          "slug": "mica",
+          "functions": [
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Palmitate",
+          "slug": "isopropyl-palmitate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Octocrylene",
+          "slug": "octocrylene",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenylbenzimidazole Sulfonic Acid",
+          "slug": "phenylbenzimidazole-sulfonic-acid",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Cetyl Alcohol",
+          "slug": "cetyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Stearyl Alcohol",
+          "slug": "stearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Tocopheryl Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Dimethiconol",
+          "slug": "dimethiconol",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Citrus Nobilis Peel Extract",
+          "slug": "citrus-nobilis-peel-extract",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Acrylamide/Sodium Acryloyldimethyltaurate Copolymer",
+          "slug": "acrylamide-sodium-acryloyldimethyltaurate-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polyethylene",
+          "slug": "polyethylene",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Aluminum Starch Octenylsuccinate",
+          "slug": "aluminum-starch-octenylsuccinate",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Triethanolamine",
+          "slug": "triethanolamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "C13-14 Alkane",
+          "slug": "c13-14-alkane",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sorbitan Stearate",
+          "slug": "sorbitan-stearate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Laureth-7",
+          "slug": "laureth-7",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Glucoside",
+          "slug": "cetearyl-glucoside",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Peg-100 Stearate",
+          "slug": "peg-100-stearate",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Disodium Edta",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tin Oxide",
+          "slug": "tin-oxide",
+          "functions": [
+            "colorant",
+            "abrasive/​scrub",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Benzyl Alcohol",
+          "slug": "benzyl-alcohol",
+          "functions": [
+            "preservative",
+            "perfuming",
+            "solvent",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Methylparaben",
+          "slug": "methylparaben",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Ethylparaben",
+          "slug": "ethylparaben",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propylparaben",
+          "slug": "propylparaben",
+          "functions": [
+            "preservative",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Linalool",
+          "slug": "linalool",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Alpha-Isomethyl Ionone",
+          "slug": "alpha-isomethyl-ionone",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Limonene",
+          "slug": "limonene",
+          "functions": [
+            "perfuming",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Eugenol",
+          "slug": "eugenol",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/olay-2in1-hydration-radiant-glow-moisturiser-lotion",
+      "scrapedAt": "2026-07-16T13:16:09.382Z"
+    },
+    {
+      "slug": "olay-7-in-1-serum-niacinamide-vitamin-c-peptide",
+      "name": "Olay 7 In 1 Serum Niacinamide Vitamin C Peptide",
+      "brand": "Olay",
+      "brandSlug": "olay",
+      "category": null,
+      "productTitle": "7 In 1 Serum Niacinamide Vitamin C Peptide",
+      "description": null,
+      "uploadedBy": "kaygee",
+      "uploadedAt": "2025-09-19",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Water",
+        "Glycerin",
+        "Dimethicone",
+        "Niacinamide",
+        "Lactic Acid",
+        "Polyacrylate Crosspolymer-6",
+        "Trehalose",
+        "Sodium Lactate",
+        "Panthenol",
+        "2-O-Ethyl Ascorbic Acid",
+        "Tocopheryl Acetate",
+        "Mica",
+        "PEG-32 Methyl Ether Dimethicone",
+        "Sodium Benzoate",
+        "Fragrance",
+        "Sodium Hyaluronate",
+        "Limonene",
+        "Linalool",
+        "Palmitoyl Pentapeptide-4"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Lactic Acid",
+          "slug": "lactic-acid",
+          "functions": [
+            "exfoliant",
+            "moisturizer/​humectant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Polyacrylate Crosspolymer-6",
+          "slug": "polyacrylate-crosspolymer-6",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Trehalose",
+          "slug": "trehalose",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Lactate",
+          "slug": "sodium-lactate",
+          "functions": [
+            "buffering",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "2-O-Ethyl Ascorbic Acid",
+          "slug": "2-o-ethyl-ascorbic-acid",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tocopheryl Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Mica",
+          "slug": "mica",
+          "functions": [
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-32 Methyl Ether Dimethicone",
+          "slug": "peg-32-methyl-ether-dimethicone",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Limonene",
+          "slug": "limonene",
+          "functions": [
+            "perfuming",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Linalool",
+          "slug": "linalool",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Palmitoyl Pentapeptide-4",
+          "slug": "palmitoyl-pentapeptide-4",
+          "functions": [
+            "cell-communicating ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/olay-7-in-1-serum-niacinamide-vitamin-c-peptide",
+      "scrapedAt": "2026-07-16T13:16:12.304Z"
+    },
+    {
+      "slug": "olay-7-in-one-night-creme",
+      "name": "Olay 7 In One Night Crème",
+      "brand": "Olay",
+      "brandSlug": "olay",
+      "category": null,
+      "productTitle": "7 In One Night Crème",
+      "description": null,
+      "uploadedBy": "suuzyq",
+      "uploadedAt": "2025-08-04",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "Niacinamide",
+        "Isohexadecane",
+        "Dimethicone",
+        "Isopropyl Isostearate",
+        "Stearyl Alcohol",
+        "Polyacrylamide",
+        "Panthenol",
+        "Tocopheryl Acetate",
+        "Camellia Sinensis Leaf Extract",
+        "Ethylhexylglycerin",
+        "Sodium Ascorbyl Phosphate",
+        "Caprylyl Glycol",
+        "Dimethiconol",
+        "Laureth-7",
+        "Cetearyl Alcohol",
+        "Cetearyl Glucoside",
+        "Stearic Acid",
+        "Palmitic Acid",
+        "Cetyl Alcohol",
+        "Behenyl Alcohol",
+        "Arachidyl Alcohol",
+        "Disodium EDTA",
+        "Zea Mays Starch",
+        "Citric Acid",
+        "PEG-100",
+        "Mg Stearate+",
+        "Ammonium Polyacrylate",
+        "Titanium Dioxide",
+        "C13-14 Alkane",
+        "1,2-Hexanediol",
+        "Phenoxyethanol",
+        "Parfum",
+        "Benzyl Salicylate",
+        "Alpha-Isomethyl Ionone"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Isohexadecane",
+          "slug": "isohexadecane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Isostearate",
+          "slug": "isopropyl-isostearate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "4",
+          "rating": null
+        },
+        {
+          "name": "Stearyl Alcohol",
+          "slug": "stearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Polyacrylamide",
+          "slug": "polyacrylamide",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Tocopheryl Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Camellia Sinensis Leaf Extract",
+          "slug": "camellia-sinensis-leaf-extract",
+          "functions": [
+            "antioxidant",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Ascorbyl Phosphate",
+          "slug": "sodium-ascorbyl-phosphate",
+          "functions": [
+            "antioxidant",
+            "anti-acne"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Caprylyl Glycol",
+          "slug": "caprylyl-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dimethiconol",
+          "slug": "dimethiconol",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Laureth-7",
+          "slug": "laureth-7",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Glucoside",
+          "slug": "cetearyl-glucoside",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Palmitic Acid",
+          "slug": "palmitic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Cetyl Alcohol",
+          "slug": "cetyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Behenyl Alcohol",
+          "slug": "behenyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arachidyl Alcohol",
+          "slug": "arachidyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Zea Mays Starch",
+          "slug": "zea-mays-starch",
+          "functions": [
+            "viscosity controlling",
+            "abrasive/​scrub"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-100",
+          "slug": "peg-100",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Mg Stearate+",
+          "slug": "magnesium-stearate",
+          "functions": [
+            "colorant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Ammonium Polyacrylate",
+          "slug": "ammonium-polyacrylate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Titanium Dioxide",
+          "slug": "titanium-dioxide",
+          "functions": [
+            "sunscreen",
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "C13-14 Alkane",
+          "slug": "c13-14-alkane",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Benzyl Salicylate",
+          "slug": "benzyl-salicylate",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Alpha-Isomethyl Ionone",
+          "slug": "alpha-isomethyl-ionone",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/olay-7-in-one-night-creme",
+      "scrapedAt": "2026-07-16T13:16:15.093Z"
+    }
+  ],
+  "errors": []
+}

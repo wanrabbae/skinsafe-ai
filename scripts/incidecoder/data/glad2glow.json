@@ -1,0 +1,2246 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "glad2glow",
+    "scrapedAt": "2026-07-16T13:13:01.451Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": "50+",
+    "scrapedNow": 5,
+    "skippedNow": 0
+  },
+  "products": [
+    {
+      "slug": "glad2glow-2-centella-ceramide-soothing-acne-cica-toner",
+      "name": "Glad2Glow 2% Centella Ceramide Soothing Acne Cica Toner",
+      "brand": "Glad2Glow",
+      "brandSlug": "glad2glow",
+      "category": null,
+      "productTitle": "2% Centella Ceramide Soothing Acne Cica Toner",
+      "description": null,
+      "uploadedBy": "artifex.idn",
+      "uploadedAt": "2024-04-12",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Hydroxyethyl Urea",
+        "Methylpropanediol",
+        "Glycereth-26",
+        "1,2-Hexanediol",
+        "Pentylene Glycol",
+        "Polyglycerin-3",
+        "Hydroxyacetophenone",
+        "Bis-PEG-18 Methyl Ether Dimethyl Silane",
+        "Centella Asiatica Leaf Extract",
+        "Ceramide NP",
+        "Butylene Glycol",
+        "Hyaluronic Acid",
+        "Allantoin",
+        "Maltodextrin",
+        "Abronia Villosa Leaf Extract",
+        "Silk Amino Acids",
+        "Gentiana Scabra Root Extract",
+        "Sodium Hyaluronate",
+        "Menthol",
+        "Castanea Sativa (Chestnut) Seed Extract",
+        "Helianthus Annuus (Sunflower) Seed Extract",
+        "Menthyl Lactate",
+        "PEG-35 Castor Oil",
+        "Glycine Soja (Soybean) Seed Extract",
+        "Secale Cereale (Rye) Seed Extract",
+        "Pyrus Cydonia Seed Extract",
+        "Hibiscus Abelmoschus Seed Extract",
+        "Panicum Miliaceum (Millet) Seed Extract",
+        "Glycerin",
+        "PEG-40 Hydrogenated Castor Oil",
+        "Glyceryl Polymethacrylate",
+        "PPG-26-Buteth-26",
+        "Xanthan Gum",
+        "Disodium EDTA",
+        "PEG-50 Hydrogenated Castor Oil",
+        "Nonoxynol-12",
+        "Propylene Glycol",
+        "BHT",
+        "Ethylhexylglycerin"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyethyl Urea",
+          "slug": "hydroxyethyl-urea",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Methylpropanediol",
+          "slug": "methylpropanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycereth-26",
+          "slug": "glycereth-26",
+          "functions": [
+            "moisturizer/​humectant",
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Pentylene Glycol",
+          "slug": "pentylene-glycol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polyglycerin-3",
+          "slug": "polyglycerin-3",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Bis-PEG-18 Methyl Ether Dimethyl Silane",
+          "slug": "bis-peg-18-methyl-ether-dimethyl-silane",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Leaf Extract",
+          "slug": "centella-asiatica-leaf-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide NP",
+          "slug": "ceramide-np",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Butylene Glycol",
+          "slug": "butylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Hyaluronic Acid",
+          "slug": "hyaluronic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Maltodextrin",
+          "slug": "maltodextrin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Abronia Villosa Leaf Extract",
+          "slug": "abronia-villosa-leaf-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Silk Amino Acids",
+          "slug": "silk-amino-acids",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Gentiana Scabra Root Extract",
+          "slug": "gentiana-scabra-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Menthol",
+          "slug": "menthol",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Castanea Sativa (Chestnut) Seed Extract",
+          "slug": "castanea-sativa-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Helianthus Annuus (Sunflower) Seed Extract",
+          "slug": "helianthus-annuus-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Menthyl Lactate",
+          "slug": "menthyl-lactate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "PEG-35 Castor Oil",
+          "slug": "peg-35-castor-oil",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycine Soja (Soybean) Seed Extract",
+          "slug": "glycine-soja-seed-extract",
+          "functions": [
+            "antioxidant",
+            "skin brightening",
+            "soothing",
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Secale Cereale (Rye) Seed Extract",
+          "slug": "secale-cereale-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Pyrus Cydonia Seed Extract",
+          "slug": "pyrus-cydonia-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hibiscus Abelmoschus Seed Extract",
+          "slug": "hibiscus-abelmoschus-seed-extract",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Panicum Miliaceum (Millet) Seed Extract",
+          "slug": "panicum-miliaceum-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "PEG-40 Hydrogenated Castor Oil",
+          "slug": "peg-40-hydrogenated-castor-oil",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glyceryl Polymethacrylate",
+          "slug": "glyceryl-polymethacrylate",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PPG-26-Buteth-26",
+          "slug": "ppg-26-buteth-26",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Xanthan Gum",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-50 Hydrogenated Castor Oil",
+          "slug": "peg-50-hydrogenated-castor-oil",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Nonoxynol-12",
+          "slug": "nonoxynol-12",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propylene Glycol",
+          "slug": "propylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "BHT",
+          "slug": "bht",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/glad2glow-2-centella-ceramide-soothing-acne-cica-toner",
+      "scrapedAt": "2026-07-16T13:12:45.491Z"
+    },
+    {
+      "slug": "glad2glow-5-blueberry-moisturizer-cream",
+      "name": "Glad2Glow 5% Blueberry Moisturizer Cream",
+      "brand": "Glad2Glow",
+      "brandSlug": "glad2glow",
+      "category": null,
+      "productTitle": "5% Blueberry Moisturizer Cream",
+      "description": null,
+      "uploadedBy": "pfrgr",
+      "uploadedAt": "2023-05-25",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "Butylene Glycol",
+        "Hydrogenated Polyisobutene",
+        "Propylene Glycol Dicaprylate/​Dicaprate",
+        "Cyclopentasiloxane",
+        "Ceramide EOP",
+        "Ceramide AP",
+        "Ceramide NS",
+        "Ceramide NG",
+        "Ceramide AS",
+        "Sodium Hyaluronate",
+        "Centella Asiatica Leaf Extract",
+        "Ammonium Acryloyldimethyltaurate/​VP Copolymer",
+        "Hydroxyacetophenone",
+        "Betaine",
+        "Cyclohexasiloxane",
+        "Allantoin",
+        "Tridecyl Trimellitate",
+        "Hydroxyethyl Acrylate/​Sodium Acryloyldimethyl Taurate Copolymer",
+        "Squalane",
+        "Trehalose",
+        "Sophora Flavescens Root Extract",
+        "Opuntia Ficus-Indica Stem Extract",
+        "Ophiopogon Japonicus Root Extract",
+        "Pentylene Glycol",
+        "Panicum Miliaceum (Millet) Seed Extract",
+        "Hibiscus Abelmoschus Seed Extract",
+        "Pyrus Cydonia Seed Extract",
+        "Secale Cereale (Rye) Seed Extract",
+        "Glycine Soja (Soybean) Seed Extract",
+        "Tocopherol",
+        "Ceramide NP",
+        "Castanea Sativa (Chestnut) Seed Extract",
+        "Vaccinium Angustifolium (Blueberry) Fruit Extract",
+        "Helianthus Annuus (Sunflower) Seed Extract",
+        "Maltodextrin",
+        "Gentiana Scabra Extract",
+        "Hydrogenated Lecithin",
+        "Dimethiconol",
+        "1,2-Hexanediol",
+        "Polysorbate 60",
+        "Sorbitan Isostearate",
+        "Xanthan Gum",
+        "Disodium EDTA"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Butylene Glycol",
+          "slug": "butylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Hydrogenated Polyisobutene",
+          "slug": "hydrogenated-polyisobutene",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Propylene Glycol Dicaprylate/Dicaprate",
+          "slug": "propylene-glycol-dicaprylate-dicaprate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Cyclopentasiloxane",
+          "slug": "cyclopentasiloxane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ceramide EOP",
+          "slug": "ceramide-1",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide AP",
+          "slug": "ceramide-ap",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide NS",
+          "slug": "ceramide-ns",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide NG",
+          "slug": "ceramide-ng",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide AS",
+          "slug": "ceramide-as",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Centella Asiatica Leaf Extract",
+          "slug": "centella-asiatica-leaf-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ammonium Acryloyldimethyltaurate/VP Copolymer",
+          "slug": "ammonium-acryloyldimethyltaurate-vp-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Betaine",
+          "slug": "betaine",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Cyclohexasiloxane",
+          "slug": "cyclohexasiloxane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Tridecyl Trimellitate",
+          "slug": "tridecyl-trimellitate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyethyl Acrylate/Sodium Acryloyldimethyl Taurate Copolymer",
+          "slug": "hydroxyethyl-acrylate-sodium-acryloyldimethyl-taurate-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Squalane",
+          "slug": "squalane",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": "goodie"
+        },
+        {
+          "name": "Trehalose",
+          "slug": "trehalose",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sophora Flavescens Root Extract",
+          "slug": "sophora-flavescens-root-extract",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Opuntia Ficus-Indica Stem Extract",
+          "slug": "opuntia-ficus-indica-stem-extract",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ophiopogon Japonicus Root Extract",
+          "slug": "ophiopogon-japonicus-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Pentylene Glycol",
+          "slug": "pentylene-glycol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Panicum Miliaceum (Millet) Seed Extract",
+          "slug": "panicum-miliaceum-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hibiscus Abelmoschus Seed Extract",
+          "slug": "hibiscus-abelmoschus-seed-extract",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Pyrus Cydonia Seed Extract",
+          "slug": "pyrus-cydonia-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Secale Cereale (Rye) Seed Extract",
+          "slug": "secale-cereale-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Glycine Soja (Soybean) Seed Extract",
+          "slug": "glycine-soja-seed-extract",
+          "functions": [
+            "antioxidant",
+            "skin brightening",
+            "soothing",
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Tocopherol",
+          "slug": "tocopherol",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Ceramide NP",
+          "slug": "ceramide-np",
+          "functions": [
+            "skin-identical ingredient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Castanea Sativa (Chestnut) Seed Extract",
+          "slug": "castanea-sativa-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Vaccinium Angustifolium (Blueberry) Fruit Extract",
+          "slug": "vaccinium-angustifolium-fruit-extract",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Helianthus Annuus (Sunflower) Seed Extract",
+          "slug": "helianthus-annuus-seed-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Maltodextrin",
+          "slug": "maltodextrin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Gentiana Scabra Extract",
+          "slug": "gentiana-scabra-extract",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrogenated Lecithin",
+          "slug": "hydrogenated-lecithin",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Dimethiconol",
+          "slug": "dimethiconol",
+          "functions": [
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polysorbate 60",
+          "slug": "polysorbate-60",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sorbitan Isostearate",
+          "slug": "sorbitan-isostearate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Xanthan Gum",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/glad2glow-5-blueberry-moisturizer-cream",
+      "scrapedAt": "2026-07-16T13:12:47.969Z"
+    },
+    {
+      "slug": "glad2glow-aha-bha-pha-intensive-peeling-solution",
+      "name": "Glad2Glow AHA BHA PHA Intensive Peeling Solution",
+      "brand": "Glad2Glow",
+      "brandSlug": "glad2glow",
+      "category": null,
+      "productTitle": "AHA BHA PHA Intensive Peeling Solution",
+      "description": null,
+      "uploadedBy": "lyx",
+      "uploadedAt": "2024-11-10",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin",
+        "Glycereth-26",
+        "Glycolic Acid",
+        "PEG-12 Dimethicone",
+        "Polysorbate 20",
+        "Niacinamide",
+        "PEG/​PPG-17/​6 Copolymer",
+        "Dipropylene Glycol",
+        "Lactic Acid",
+        "Aloe Barbadensis Leaf Water",
+        "Potassium Hydroxide",
+        "PEG-40 Hydrogenated Castor Oil",
+        "Phenoxyethanol",
+        "Citric Acid",
+        "Hydroxypropyl Cyclodextrin",
+        "Salicylic Acid",
+        "Cellulose Gum",
+        "Polyacrylate Crosspolymer-6",
+        "Xanthan Gum",
+        "Inositol",
+        "1,2-Hexanediol",
+        "Beta Vulgaris Root Extract",
+        "Dipeptide-15",
+        "Hydroxyacetophenone",
+        "Parfum",
+        "Brassica Oleracea Acephala Leaf Extract",
+        "Maltodextrin",
+        "Gluconolactone",
+        "O-Cymen-5-Ol",
+        "Ethylhexylglycerin",
+        "Butylene Glycol",
+        "Polyquaternium-51",
+        "Pentylene Glycol",
+        "Beta-Glucan",
+        "Hydrogenated Lecithin",
+        "Zinc Pca",
+        "Sodium Hyaluronate",
+        "Fomes Officinalis Extract",
+        "Propanediol",
+        "Centella Asiatica Leaf Extract",
+        "Sodium Lactate",
+        "Paeonia Albiflora Root Extract",
+        "Sucrose",
+        "Urea",
+        "Sodium Citrate",
+        "Tartaric Acid",
+        "Malic Acid",
+        "Quaternium-73"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Glycereth-26",
+          "slug": "glycereth-26",
+          "functions": [
+            "moisturizer/​humectant",
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Glycolic Acid",
+          "slug": "glycolic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "PEG-12 Dimethicone",
+          "slug": "peg-12-dimethicone",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polysorbate 20",
+          "slug": "polysorbate-20",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Niacinamide",
+          "slug": "niacinamide",
+          "functions": [
+            "cell-communicating ingredient",
+            "skin brightening",
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "PEG/PPG-17/6 Copolymer",
+          "slug": "peg-ppg-17-6-copolymer",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Dipropylene Glycol",
+          "slug": "dipropylene-glycol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lactic Acid",
+          "slug": "lactic-acid",
+          "functions": [
+            "exfoliant",
+            "moisturizer/​humectant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Aloe Barbadensis Leaf Water",
+          "slug": "aloe-barbadensis-leaf-water",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Hydroxide",
+          "slug": "potassium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-40 Hydrogenated Castor Oil",
+          "slug": "peg-40-hydrogenated-castor-oil",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxypropyl Cyclodextrin",
+          "slug": "hydroxypropyl-cyclodextrin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Cellulose Gum",
+          "slug": "cellulose-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Polyacrylate Crosspolymer-6",
+          "slug": "polyacrylate-crosspolymer-6",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Xanthan Gum",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Inositol",
+          "slug": "inositol",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Beta Vulgaris Root Extract",
+          "slug": "beta-vulgaris-root-extract",
+          "functions": [
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Dipeptide-15",
+          "slug": "dipeptide-15",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Brassica Oleracea Acephala Leaf Extract",
+          "slug": "brassica-oleracea-acephala-leaf-extract",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Maltodextrin",
+          "slug": "maltodextrin",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Gluconolactone",
+          "slug": "gluconolactone",
+          "functions": [
+            "exfoliant",
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "O-Cymen-5-Ol",
+          "slug": "o-cymen-5-ol",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethylhexylglycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Butylene Glycol",
+          "slug": "butylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Polyquaternium-51",
+          "slug": "polyquaternium-51",
+          "functions": [
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Pentylene Glycol",
+          "slug": "pentylene-glycol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Beta-Glucan",
+          "slug": "beta-glucan",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Hydrogenated Lecithin",
+          "slug": "hydrogenated-lecithin",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Zinc Pca",
+          "slug": "zinc-pca",
+          "functions": [
+            "anti-acne",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Fomes Officinalis Extract",
+          "slug": "fomes-officinalis-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Leaf Extract",
+          "slug": "centella-asiatica-leaf-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Lactate",
+          "slug": "sodium-lactate",
+          "functions": [
+            "buffering",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Paeonia Albiflora Root Extract",
+          "slug": "paeonia-albiflora-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sucrose",
+          "slug": "sucrose",
+          "functions": [
+            "moisturizer/​humectant",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Urea",
+          "slug": "urea",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Sodium Citrate",
+          "slug": "sodium-citrate",
+          "functions": [
+            "chelating",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tartaric Acid",
+          "slug": "tartaric-acid",
+          "functions": [
+            "buffering",
+            "exfoliant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Malic Acid",
+          "slug": "malic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Quaternium-73",
+          "slug": "quaternium-73",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/glad2glow-aha-bha-pha-intensive-peeling-solution",
+      "scrapedAt": "2026-07-16T13:12:50.280Z"
+    },
+    {
+      "slug": "glad2glow-apricot-glycolic-acid-exfo-smooth-peeling-gel",
+      "name": "Glad2Glow Apricot Glycolic Acid Exfo Smooth Peeling Gel",
+      "brand": "Glad2Glow",
+      "brandSlug": "glad2glow",
+      "category": null,
+      "productTitle": "Apricot Glycolic Acid Exfo Smooth Peeling Gel",
+      "description": null,
+      "uploadedBy": "ija.sd",
+      "uploadedAt": "2024-10-27",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Cellulose",
+        "Glycerin",
+        "Methylpropanediol",
+        "1,2-Hexanediol",
+        "Glycolic Acid",
+        "Acrylates/​C10-30 Alkyl Acrylate Crosspolymer",
+        "Malic Acid",
+        "Citric Acid",
+        "Hydroxyacetophenone",
+        "Malva Sylvestris Flower Extract",
+        "Paeonia Lactiflora Root Extract",
+        "Aloe Barbadensis Leaf Juice",
+        "Prunus Armeniaca Kernel Extract",
+        "Lonicera Japonica Flower Extract",
+        "Taraxacum Officinale Rhizome/​Root Extract",
+        "Chamomilla Recutita (Matricaria) Flower Extract",
+        "Hydrolyzed Rhodophyceae Extract",
+        "Tocopheryl Acetate",
+        "Ascorbyl Palmitate",
+        "Viola Yedoensis Extract",
+        "Maris Aqua",
+        "Ci 77492",
+        "Hydroxypropyl Methylcellulose",
+        "Sodium Hydroxide",
+        "Tartaric Acid",
+        "Aroma",
+        "Ethylhexyl-Glycerin",
+        "Phenoxyethanol",
+        "Sodium Benzoate",
+        "Potassium Sorbate"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cellulose",
+          "slug": "cellulose",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Methylpropanediol",
+          "slug": "methylpropanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycolic Acid",
+          "slug": "glycolic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Acrylates/C10-30 Alkyl Acrylate Crosspolymer",
+          "slug": "acrylates-c10-30-alkyl-acrylate-crosspolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Malic Acid",
+          "slug": "malic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Malva Sylvestris Flower Extract",
+          "slug": "malva-sylvestris-flower-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Paeonia Lactiflora Root Extract",
+          "slug": "paeonia-lactiflora-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Aloe Barbadensis Leaf Juice",
+          "slug": "aloe-barbadensis-leaf-juice",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Prunus Armeniaca Kernel Extract",
+          "slug": "prunus-armeniaca-kernel-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lonicera Japonica Flower Extract",
+          "slug": "lonicera-japonica-flower-extract",
+          "functions": [
+            "soothing",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Taraxacum Officinale Rhizome/Root Extract",
+          "slug": "taraxacum-officinale-rhizome-root-extract",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Chamomilla Recutita (Matricaria) Flower Extract",
+          "slug": "chamomilla-recutita-flower-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Hydrolyzed Rhodophyceae Extract",
+          "slug": "hydrolyzed-rhodophyceae-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tocopheryl Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Ascorbyl Palmitate",
+          "slug": "ascorbyl-palmitate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": "icky"
+        },
+        {
+          "name": "Viola Yedoensis Extract",
+          "slug": "viola-yedoensis-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Maris Aqua",
+          "slug": "maris-aqua",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ci 77492",
+          "slug": "ci-77492",
+          "functions": [
+            "colorant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Hydroxypropyl Methylcellulose",
+          "slug": "hydroxypropyl-methylcellulose",
+          "functions": [
+            "surfactant/​cleansing",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Sodium Hydroxide",
+          "slug": "sodium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tartaric Acid",
+          "slug": "tartaric-acid",
+          "functions": [
+            "buffering",
+            "exfoliant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Aroma",
+          "slug": "aroma",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ethylhexyl-Glycerin",
+          "slug": "ethylhexylglycerin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Benzoate",
+          "slug": "sodium-benzoate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Potassium Sorbate",
+          "slug": "potassium-sorbate",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/glad2glow-apricot-glycolic-acid-exfo-smooth-peeling-gel",
+      "scrapedAt": "2026-07-16T13:12:59.042Z"
+    },
+    {
+      "slug": "glad2glow-b5-cica-barrier-cream",
+      "name": "Glad2Glow B5-Cica Barrier Cream",
+      "brand": "Glad2Glow",
+      "brandSlug": "glad2glow",
+      "category": null,
+      "productTitle": "B5-Cica Barrier Cream",
+      "description": null,
+      "uploadedBy": "iinsss",
+      "uploadedAt": "2026-04-22",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Panthenol",
+        "Dimethicone",
+        "Methylpropanediol",
+        "Cetearyl Olivate",
+        "Coco-Caprylate/​Caprate",
+        "Squalane",
+        "Sorbitan Olivate",
+        "Centella Asiatica Leaf Extract",
+        "Centella Asiatica Extract",
+        "Bisabolol",
+        "Ectoin",
+        "Madecassoside",
+        "Tocopherol",
+        "Asiaticoside",
+        "Dicaprylyl Ether",
+        "1,2-Hexanediol",
+        "Ammonium Acryloyldimethyltaurate/​VP Copolymer",
+        "Sodium Acrylates Copolymer",
+        "Cetearyl Alcohol",
+        "Dimethicone/​Vinyl Dimethicone Crosspolymer",
+        "Acrylates/​C10-30 Alkyl Acrylate Crosspolymer",
+        "Lecithin",
+        "Aminomethyl Propanol",
+        "Hydroxyacetophenone"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Dimethicone",
+          "slug": "dimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Methylpropanediol",
+          "slug": "methylpropanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Olivate",
+          "slug": "cetearyl-olivate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Coco-Caprylate/Caprate",
+          "slug": "coco-caprylate-caprate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Squalane",
+          "slug": "squalane",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": "goodie"
+        },
+        {
+          "name": "Sorbitan Olivate",
+          "slug": "sorbitan-olivate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Centella Asiatica Leaf Extract",
+          "slug": "centella-asiatica-leaf-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Centella Asiatica Extract",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Bisabolol",
+          "slug": "bisabolol",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Ectoin",
+          "slug": "ectoin",
+          "functions": [
+            "antioxidant",
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Madecassoside",
+          "slug": "madecassoside",
+          "functions": [
+            "antioxidant",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Tocopherol",
+          "slug": "tocopherol",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Asiaticoside",
+          "slug": "asiaticoside",
+          "functions": [
+            "antioxidant",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Dicaprylyl Ether",
+          "slug": "dicaprylyl-ether",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "1,2-Hexanediol",
+          "slug": "1-2-hexanediol",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ammonium Acryloyldimethyltaurate/VP Copolymer",
+          "slug": "ammonium-acryloyldimethyltaurate-vp-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Acrylates Copolymer",
+          "slug": "sodium-acrylates-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Dimethicone/Vinyl Dimethicone Crosspolymer",
+          "slug": "dimethicone-vinyl-dimethicone-crosspolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Acrylates/C10-30 Alkyl Acrylate Crosspolymer",
+          "slug": "acrylates-c10-30-alkyl-acrylate-crosspolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Lecithin",
+          "slug": "lecithin",
+          "functions": [
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Aminomethyl Propanol",
+          "slug": "aminomethyl-propanol",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydroxyacetophenone",
+          "slug": "hydroxyacetophenone",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/glad2glow-b5-cica-barrier-cream",
+      "scrapedAt": "2026-07-16T13:13:01.447Z"
+    }
+  ],
+  "errors": []
+}

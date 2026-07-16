@@ -1,0 +1,1007 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "neutrogena",
+    "scrapedAt": "2026-07-16T13:16:30.662Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": "50+",
+    "scrapedNow": 5,
+    "skippedNow": 0
+  },
+  "products": [
+    {
+      "slug": "neutrogena-2-in-1-dandruff-shampoo-plus-conditioner",
+      "name": "Neutrogena 2-In-1 Dandruff Shampoo Plus Conditioner",
+      "brand": "Neutrogena",
+      "brandSlug": "neutrogena",
+      "category": null,
+      "productTitle": "2-In-1 Dandruff Shampoo Plus Conditioner",
+      "description": null,
+      "uploadedBy": "michelle4321",
+      "uploadedAt": "2020-12-26",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Pyrithione Zinc",
+        "Water",
+        "Sodium Laureth Sulfate",
+        "Cocamidopropyl Betaine",
+        "Ammonium Lauryl Sulfate",
+        "Sodium Methyl Cocoyl Taurate",
+        "Divinyldimethicone/​Dimethicone Copolymer",
+        "C12-13 Pareth-3",
+        "C12-13 Pareth-23",
+        "Guar Hydroxypropyltrimonium Chloride",
+        "Hydrolyzed Wheat Protein Pg-Propyl Silanetriol",
+        "Tocopheryl Acetate",
+        "Amodimethicone",
+        "Cetearyl Alcohol",
+        "Ceteareth-20",
+        "Castor Isostearate Succinate",
+        "Sodium Hydroxide",
+        "Sodium Chloride",
+        "Acrylates Copolymer",
+        "DMDM Hydantoin",
+        "Blue 1",
+        "Fragrance"
+      ],
+      "ingredients": [
+        {
+          "name": "Pyrithione Zinc",
+          "slug": "zinc-pyrithione",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Laureth Sulfate",
+          "slug": "sodium-laureth-sulfate",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Betaine",
+          "slug": "cocamidopropyl-betaine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Ammonium Lauryl Sulfate",
+          "slug": "ammonium-lauryl-sulfate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Methyl Cocoyl Taurate",
+          "slug": "sodium-methyl-cocoyl-taurate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Divinyldimethicone/Dimethicone Copolymer",
+          "slug": "divinyldimethicone-dimethicone-copolymer",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "C12-13 Pareth-3",
+          "slug": "c12-13-pareth-3",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "C12-13 Pareth-23",
+          "slug": "c12-13-pareth-23",
+          "functions": [
+            "surfactant/​cleansing",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Guar Hydroxypropyltrimonium Chloride",
+          "slug": "guar-hydroxypropyltrimonium-chloride",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Hydrolyzed Wheat Protein Pg-Propyl Silanetriol",
+          "slug": "hydrolyzed-wheat-protein-pg-propyl-silanetriol",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Tocopheryl Acetate",
+          "slug": "tocopheryl-acetate",
+          "functions": [
+            "antioxidant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Amodimethicone",
+          "slug": "amodimethicone",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Ceteareth-20",
+          "slug": "ceteareth-20",
+          "functions": [
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Castor Isostearate Succinate",
+          "slug": "castor-isostearate-succinate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hydroxide",
+          "slug": "sodium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Chloride",
+          "slug": "sodium-chloride",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Acrylates Copolymer",
+          "slug": "acrylates-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "DMDM Hydantoin",
+          "slug": "dmdm-hydantoin",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Blue 1",
+          "slug": "ci-42090",
+          "functions": [
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/neutrogena-2-in-1-dandruff-shampoo-plus-conditioner",
+      "scrapedAt": "2026-07-16T13:16:18.805Z"
+    },
+    {
+      "slug": "neutrogena-6-hour-protection-lip-balm",
+      "name": "Neutrogena 6 Hour Protection Lip Balm",
+      "brand": "Neutrogena",
+      "brandSlug": "neutrogena",
+      "category": null,
+      "productTitle": "6 Hour Protection Lip Balm",
+      "description": null,
+      "uploadedBy": "rawan__omar_",
+      "uploadedAt": "2021-01-21",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Ricinus Communis Oil",
+        "Paraffin",
+        "Cera Alba",
+        "Ethylhexyl Methoxycinnamate",
+        "Isodecyl Neopentanoate",
+        "Cetyl Palmitate",
+        "Isopropyl Myristate",
+        "Cetearyl Alcohol",
+        "Butyl Methoxydibenzoylmethane",
+        "Cetyl Alcohol",
+        "Cera Microcristallina",
+        "Vp/​Eicosene Copolymer",
+        "Isohexadecane",
+        "Titanium Dioxide",
+        "Bisabolol",
+        "Propylene Glycol",
+        "Stearic Acid",
+        "Palmitic Acid",
+        "Isopropyl Palmitate",
+        "Isopropyl Laurate",
+        "Sodium Cetearyl Sulfate",
+        "Candelilla Cera",
+        "Sodium Sulfate",
+        "BHT",
+        "BHA",
+        "Citric Acid",
+        "Parfum"
+      ],
+      "ingredients": [
+        {
+          "name": "Ricinus Communis Oil",
+          "slug": "ricinus-communis-seed-oil",
+          "functions": [
+            "emollient",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Paraffin",
+          "slug": "paraffin",
+          "functions": [
+            "viscosity controlling",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cera Alba",
+          "slug": "cera-alba",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Ethylhexyl Methoxycinnamate",
+          "slug": "ethylhexyl-methoxycinnamate",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Isodecyl Neopentanoate",
+          "slug": "isodecyl-neopentanoate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cetyl Palmitate",
+          "slug": "cetyl-palmitate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Myristate",
+          "slug": "isopropyl-myristate",
+          "functions": [
+            "emollient",
+            "perfuming"
+          ],
+          "irritancy": "3",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Cetearyl Alcohol",
+          "slug": "cetearyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling",
+            "emulsifying",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Butyl Methoxydibenzoylmethane",
+          "slug": "butyl-methoxydibenzoylmethane",
+          "functions": [
+            "sunscreen"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Cetyl Alcohol",
+          "slug": "cetyl-alcohol",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "2",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Cera Microcristallina",
+          "slug": "microcrystalline-wax",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Vp/Eicosene Copolymer",
+          "slug": "vp-eicosene-copolymer",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Isohexadecane",
+          "slug": "isohexadecane",
+          "functions": [
+            "emollient",
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Titanium Dioxide",
+          "slug": "titanium-dioxide",
+          "functions": [
+            "sunscreen",
+            "colorant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Bisabolol",
+          "slug": "bisabolol",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Propylene Glycol",
+          "slug": "propylene-glycol",
+          "functions": [
+            "moisturizer/​humectant",
+            "solvent"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Stearic Acid",
+          "slug": "stearic-acid",
+          "functions": [
+            "emollient",
+            "viscosity controlling"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Palmitic Acid",
+          "slug": "palmitic-acid",
+          "functions": [
+            "skin-identical ingredient",
+            "emollient",
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "2",
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Palmitate",
+          "slug": "isopropyl-palmitate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "1",
+          "comedogenicity": "3",
+          "rating": null
+        },
+        {
+          "name": "Isopropyl Laurate",
+          "slug": "isopropyl-laurate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Cetearyl Sulfate",
+          "slug": "sodium-cetearyl-sulfate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Candelilla Cera",
+          "slug": "candelilla-cera",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "1",
+          "rating": null
+        },
+        {
+          "name": "Sodium Sulfate",
+          "slug": "sodium-sulfate",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "BHT",
+          "slug": "bht",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "BHA",
+          "slug": "bha",
+          "functions": [
+            "antioxidant",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/neutrogena-6-hour-protection-lip-balm",
+      "scrapedAt": "2026-07-16T13:16:21.574Z"
+    },
+    {
+      "slug": "neutrogena-gel-de-limpeza-acne-proofing",
+      "name": "Neutrogena Acne Proofing Gel Cleanser",
+      "brand": "Neutrogena",
+      "brandSlug": "neutrogena",
+      "category": null,
+      "productTitle": "Acne Proofing Gel Cleanser",
+      "description": null,
+      "uploadedBy": "napelepreta",
+      "uploadedAt": "2020-07-07",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Cocamidopropyl Hydroxysultaine",
+        "Sodium Methyl Cocoyl Taurate",
+        "Salicylic Acid",
+        "Glycerin",
+        "Sodium Hydrolyzed Potato Starch Dodecenylsuccinate",
+        "Parfum",
+        "PEG-120 Methyl Glucose Dioleate",
+        "Sodium Hydroxide",
+        "Panthenol",
+        "C12-15 Alkyl Lactate",
+        "Disodium EDTA",
+        "Cocamidopropyl Pg-Dimonium Chloride Phosphate",
+        "Benzalkonium Chloride"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Hydroxysultaine",
+          "slug": "cocamidopropyl-hydroxysultaine",
+          "functions": [
+            "surfactant/​cleansing",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Methyl Cocoyl Taurate",
+          "slug": "sodium-methyl-cocoyl-taurate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Sodium Hydrolyzed Potato Starch Dodecenylsuccinate",
+          "slug": "sodium-hydrolyzed-potato-starch-dodecenylsuccinate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Parfum",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "PEG-120 Methyl Glucose Dioleate",
+          "slug": "peg-120-methyl-glucose-dioleate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Sodium Hydroxide",
+          "slug": "sodium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "C12-15 Alkyl Lactate",
+          "slug": "c12-15-alkyl-lactate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Pg-Dimonium Chloride Phosphate",
+          "slug": "cocamidopropyl-pg-dimonium-chloride-phosphate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Benzalkonium Chloride",
+          "slug": "benzalkonium-chloride",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "preservative",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/neutrogena-gel-de-limpeza-acne-proofing",
+      "scrapedAt": "2026-07-16T13:16:23.939Z"
+    },
+    {
+      "slug": "neutrogena-acne-proofing-gel-facial-cleanser-with-salicylic-acid",
+      "name": "Neutrogena Acne Proofing Gel Facial Cleanser with Salicylic Acid",
+      "brand": "Neutrogena",
+      "brandSlug": "neutrogena",
+      "category": null,
+      "productTitle": "Acne Proofing Gel Facial Cleanser with Salicylic Acid",
+      "description": null,
+      "uploadedBy": "biancarebello",
+      "uploadedAt": "2020-09-10",
+      "highlights": [
+        "Alcohol Free"
+      ],
+      "ingredientOverview": [
+        "Water",
+        "Cocamidopropyl Hydroxysultaine",
+        "Sodium Methyl Cocoyl Taurate",
+        "Sodium Chloride",
+        "Glycerin",
+        "Sodium Hydrolyzed Potato Starch Dodecenylsuccinate",
+        "Fragrance",
+        "Sodium Hydroxide",
+        "PEG-120 Methyl Glucose Dioleate",
+        "Panthenol",
+        "C12-15 Alkyl Lactate",
+        "Disodium EDTA",
+        "Cocamidopropyl Pg-Dimonium Chloride Phosphate",
+        "Benzalkonium Chloride"
+      ],
+      "ingredients": [
+        {
+          "name": "Water",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Hydroxysultaine",
+          "slug": "cocamidopropyl-hydroxysultaine",
+          "functions": [
+            "surfactant/​cleansing",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Methyl Cocoyl Taurate",
+          "slug": "sodium-methyl-cocoyl-taurate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Chloride",
+          "slug": "sodium-chloride",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Sodium Hydrolyzed Potato Starch Dodecenylsuccinate",
+          "slug": "sodium-hydrolyzed-potato-starch-dodecenylsuccinate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Sodium Hydroxide",
+          "slug": "sodium-hydroxide",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "PEG-120 Methyl Glucose Dioleate",
+          "slug": "peg-120-methyl-glucose-dioleate",
+          "functions": [
+            "emulsifying"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": null
+        },
+        {
+          "name": "Panthenol",
+          "slug": "panthenol",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "C12-15 Alkyl Lactate",
+          "slug": "c12-15-alkyl-lactate",
+          "functions": [
+            "emollient"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium EDTA",
+          "slug": "disodium-edta",
+          "functions": [
+            "chelating"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Pg-Dimonium Chloride Phosphate",
+          "slug": "cocamidopropyl-pg-dimonium-chloride-phosphate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Benzalkonium Chloride",
+          "slug": "benzalkonium-chloride",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "preservative",
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/neutrogena-acne-proofing-gel-facial-cleanser-with-salicylic-acid",
+      "scrapedAt": "2026-07-16T13:16:26.977Z"
+    },
+    {
+      "slug": "neutrogena-adapalene-gel",
+      "name": "Neutrogena Adapalene Gel",
+      "brand": "Neutrogena",
+      "brandSlug": "neutrogena",
+      "category": null,
+      "productTitle": "Adapalene Gel",
+      "description": null,
+      "uploadedBy": "bleh6leh",
+      "uploadedAt": "2025-05-29",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Adapalene Usp (0.1%)"
+      ],
+      "ingredients": [
+        {
+          "name": "Adapalene Usp (0.1%)",
+          "slug": "adapalene",
+          "functions": [
+            "cell-communicating ingredient",
+            "anti-acne"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/neutrogena-adapalene-gel",
+      "scrapedAt": "2026-07-16T13:16:30.661Z"
+    }
+  ],
+  "errors": []
+}

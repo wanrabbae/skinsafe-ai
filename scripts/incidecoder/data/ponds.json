@@ -3,13 +3,14 @@
     "source": "https://incidecoder.com",
     "mode": "brand",
     "brand": "ponds",
-    "scrapedAt": "2026-07-16T10:34:04.651Z",
+    "scrapedAt": "2026-07-16T13:14:56.877Z",
     "total": 245,
     "failed": 0,
     "resumed": false,
-    "target": 245,
+    "target": 5,
     "listed": 245,
-    "scrapedNow": 245
+    "scrapedNow": 0,
+    "skippedNow": 0
   },
   "products": [
     {

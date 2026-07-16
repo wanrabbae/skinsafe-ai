@@ -3,13 +3,14 @@
     "source": "https://incidecoder.com",
     "mode": "brand",
     "brand": "somethinc",
-    "scrapedAt": "2026-07-16T12:49:38.485Z",
+    "scrapedAt": "2026-07-16T13:10:59.901Z",
     "total": 5,
     "failed": 0,
     "resumed": false,
     "target": 5,
     "listed": "50+",
-    "scrapedNow": 5
+    "scrapedNow": 0,
+    "skippedNow": 0
   },
   "products": [
     {

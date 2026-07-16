@@ -1,5 +1,12 @@
 # Apps contributor guide
 
+## Always apply (inherited)
+
+Ikuti selalu aturan repo-root `../AGENTS.md`:
+
+- **graphify** — query graph dulu untuk pertanyaan codebase; `graphify update .` setelah ubah kode.
+- **ponytail** — solusi paling minimal yang bekerja (YAGNI, reuse, stdlib, no bloat). Default intensitas: **full**.
+
 ## Scope
 
 `Apps` adalah aplikasi web utama SkinSafe AI. Aplikasi ini memakai Next.js App Router sebagai:
