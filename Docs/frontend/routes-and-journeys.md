@@ -37,7 +37,10 @@ bebas tetap meminta status hamil/menyusui secara eksplisit dan optional active
 routine. Hasil menampilkan profile resolution, confidence, clarification,
 red-flag, serta maksimal lima rekomendasi. Red flag dan jawaban kontradiktif
 tidak boleh menampilkan ranking produk. Profil belum disimpan sebelum
-session/auth dan consent tersedia.
+session/auth dan consent tersedia. Selama fase ini, hasil resolusi AI hanya
+dibagikan lewat query cache di memori agar dapat dipakai saat navigasi
+client-side ke Beranda. Full refresh mengembalikan UI ke empty state; UI tidak
+boleh menggantinya dengan nama, tipe kulit, confidence, atau insight contoh.
 
 ### Scan
 

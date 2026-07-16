@@ -20,6 +20,11 @@ token tidak pernah dikirim ke client. Halaman mendukung cerita bebas dan empat
 pertanyaan A-D, lalu menampilkan profil terstruktur, clarification/red flag,
 dan produk yang diranking model lokal.
 
+Hasil profil terbaru juga dipakai oleh kartu kesiapan dan wawasan di Beranda
+selama navigasi client-side. Data ini hanya berada di memory query cache dan
+tidak dipersist ke browser atau database sampai alur auth serta consent
+tersedia; setelah full refresh aplikasi kembali menampilkan profil belum diisi.
+
 Buka `http://localhost:3000`. Health check tersedia di `GET http://localhost:3000/api/v1/health` dan mengembalikan HTTP 200 jika Postgres sehat atau 503 jika database tidak tersedia.
 
 ## Struktur
