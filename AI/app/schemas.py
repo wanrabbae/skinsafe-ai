@@ -67,6 +67,13 @@ class ProductSnapshot(Schema):
     ingredients: list[str]
 
 
+class EducationItem(Schema):
+    code: str
+    title: str
+    message: str
+    evidence: list[str] = Field(default_factory=list)
+
+
 class Report(Schema):
     overall_score: int = Field(ge=0, le=100)
     status: Literal["recommended", "generally_ok", "use_with_caution", "high_caution", "avoid"]
@@ -78,6 +85,7 @@ class Report(Schema):
     disclaimer: str = "Informasi edukatif, bukan diagnosis medis."
     ingredient_details: list["IngredientDetail"] = []
     interaction_warnings: list["InteractionWarning"] = []
+    education: list[EducationItem] = Field(default_factory=list)
 
 
 class Versions(Schema):
@@ -142,10 +150,14 @@ class InteractionWarning(Schema):
 class RecommendRequest(Schema):
     """Request body for the product recommendation endpoint."""
 
-    concerns: list[str]
-    skin_type: str
-    budget_max: float | None = None
-    limit: int = Field(default=10, le=50)
+    concerns: list[str] = Field(min_length=1, max_length=12)
+    skin_type: Literal["normal", "dry", "oily", "combination", "sensitive"]
+    sensitivity_level: Literal["low", "medium", "high"] = "medium"
+    conditions: list[str] = Field(default_factory=list)
+    pregnancy_status: Literal["none", "pregnant", "breastfeeding"] = "none"
+    current_ingredients: list[str] = Field(default_factory=list)
+    budget_max: float | None = Field(default=None, ge=0)
+    limit: int = Field(default=10, ge=1, le=50)
 
 
 class RecommendedProduct(Schema):
@@ -153,12 +165,16 @@ class RecommendedProduct(Schema):
 
     name: str
     brand: str
-    price: float
+    price: float | None = None
     link: str
     source: str
     matching_chemicals: list[str] = []
     matching_symptoms: list[str] = []
     relevance_score: float = 0.0
+    model_score: float | None = None
+    confidence: Literal["high", "medium", "low"] = "low"
+    reasons: list[str] = Field(default_factory=list)
+    cautions: list[str] = Field(default_factory=list)
 
 
 class RecommendResponse(Schema):
@@ -168,3 +184,26 @@ class RecommendResponse(Schema):
     concerns_used: list[str]
     chemicals_targeted: list[str]
     total_matched: int
+    model_version: str | None = None
+    unsupported_concerns: list[str] = Field(default_factory=list)
+    limitations: list[str] = Field(default_factory=list)
+    education: list[EducationItem] = Field(default_factory=list)
+
+
+class IngredientKnowledgeResponse(Schema):
+    """Traceable ingredient literacy response for the PWA dictionary."""
+
+    query: str
+    canonical_name: str | None = None
+    match_type: str
+    match_confidence: float = Field(ge=0, le=1)
+    category: str | None = None
+    risk_level: str
+    benefits: str | None = None
+    cautions: str | None = None
+    compatible_with: str | None = None
+    usage_frequency: str | None = None
+    relevant_concerns: list[str] = Field(default_factory=list)
+    education: list[EducationItem] = Field(default_factory=list)
+    dataset_version: str
+    disclaimer: str = "Informasi edukatif, bukan diagnosis medis."
