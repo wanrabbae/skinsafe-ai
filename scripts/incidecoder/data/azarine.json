@@ -1,0 +1,1063 @@
+{
+  "meta": {
+    "source": "https://incidecoder.com",
+    "mode": "brand",
+    "brand": "azarine",
+    "scrapedAt": "2026-07-16T12:49:17.788Z",
+    "total": 5,
+    "failed": 0,
+    "resumed": false,
+    "target": 5,
+    "listed": "50+",
+    "scrapedNow": 5
+  },
+  "products": [
+    {
+      "slug": "azarine-aha-bha-pha-peeling-serum-marvel-edition",
+      "name": "Azarine AHA-BHA-PHA Peeling Serum Marvel Edition",
+      "brand": "Azarine",
+      "brandSlug": "azarine",
+      "category": null,
+      "productTitle": "AHA-BHA-PHA Peeling Serum Marvel Edition",
+      "description": null,
+      "uploadedBy": "shansabila",
+      "uploadedAt": "2022-07-25",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycolic Acid",
+        "Lactic Acid",
+        "Mandelic Acid",
+        "Salicylic Acid",
+        "Portulaca Oleracea Extract",
+        "Carica Papaya Fruit Extract",
+        "Sodium Hyaluronate",
+        "Lactobionic Acid",
+        "Aloe Barbadensis Leaf Juice",
+        "Allantoin",
+        "Royal Jelly",
+        "Chlorphenesin",
+        "Phenoxyethanol",
+        "Xanthan Gum",
+        "Gluconobacter/​Honey Ferment Filtrate"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycolic Acid",
+          "slug": "glycolic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Lactic Acid",
+          "slug": "lactic-acid",
+          "functions": [
+            "exfoliant",
+            "moisturizer/​humectant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Mandelic Acid",
+          "slug": "mandelic-acid",
+          "functions": [
+            "exfoliant",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Portulaca Oleracea Extract",
+          "slug": "portulaca-oleracea-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Carica Papaya Fruit Extract",
+          "slug": "carica-papaya-fruit-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sodium Hyaluronate",
+          "slug": "sodium-hyaluronate",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Lactobionic Acid",
+          "slug": "lactobionic-acid",
+          "functions": [
+            "exfoliant",
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Aloe Barbadensis Leaf Juice",
+          "slug": "aloe-barbadensis-leaf-juice",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Royal Jelly",
+          "slug": "royal-jelly",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Chlorphenesin",
+          "slug": "chlorphenesin",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Xanthan Gum",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Gluconobacter/Honey Ferment Filtrate",
+          "slug": "gluconobacter-honey-ferment-filtrate",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/azarine-aha-bha-pha-peeling-serum-marvel-edition",
+      "scrapedAt": "2026-07-16T12:49:02.461Z"
+    },
+    {
+      "slug": "azarine-acne-gentle-cleansing-foam",
+      "name": "Azarine Acne Gentle Cleansing Foam",
+      "brand": "Azarine",
+      "brandSlug": "azarine",
+      "category": null,
+      "productTitle": "Acne Gentle Cleansing Foam",
+      "description": null,
+      "uploadedBy": "reiva",
+      "uploadedAt": "2021-02-27",
+      "highlights": [],
+      "ingredientOverview": [
+        "Aqua*",
+        "Disodium Laureth Sulfosuccinate*",
+        "Cocamidopropyl Betaine*",
+        "Propanediol*",
+        "Glycerin*",
+        "Aloe Barbadensis Leaf Extract*",
+        "Hamamelis Virginiana Leaf Extract*",
+        "Polyacrylate Crosspolymer-6",
+        "Alcohol",
+        "Citrus Limon (Lemon) Fruit Extract*",
+        "Chlorphenesin",
+        "Salicylic Acid",
+        "Rheum Palmatum Root Extract*",
+        "Allantoin",
+        "Honey (Mel)*",
+        "Portulaca Oleracea Extract*",
+        "Fragrance",
+        "Citric Acid"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua*",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Disodium Laureth Sulfosuccinate*",
+          "slug": "disodium-laureth-sulfosuccinate",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cocamidopropyl Betaine*",
+          "slug": "cocamidopropyl-betaine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol*",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin*",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Aloe Barbadensis Leaf Extract*",
+          "slug": "aloe-barbadensis-leaf-extract",
+          "functions": [
+            "soothing",
+            "emollient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Hamamelis Virginiana Leaf Extract*",
+          "slug": "hamamelis-virginiana-leaf-extract",
+          "functions": [
+            "soothing",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Polyacrylate Crosspolymer-6",
+          "slug": "polyacrylate-crosspolymer-6",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Alcohol",
+          "slug": "alcohol",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "solvent",
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citrus Limon (Lemon) Fruit Extract*",
+          "slug": "citrus-limon-fruit-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Chlorphenesin",
+          "slug": "chlorphenesin",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Rheum Palmatum Root Extract*",
+          "slug": "rheum-palmatum-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Honey (Mel)*",
+          "slug": "honey",
+          "functions": [
+            "soothing",
+            "moisturizer/​humectant",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Portulaca Oleracea Extract*",
+          "slug": "portulaca-oleracea-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        },
+        {
+          "name": "Citric Acid",
+          "slug": "citric-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/azarine-acne-gentle-cleansing-foam",
+      "scrapedAt": "2026-07-16T12:49:05.292Z"
+    },
+    {
+      "slug": "azarine-acne-spot-gel",
+      "name": "Azarine Acne Spot Gel",
+      "brand": "Azarine",
+      "brandSlug": "azarine",
+      "category": null,
+      "productTitle": "Acne Spot Gel",
+      "description": null,
+      "uploadedBy": "lintangjunia0",
+      "uploadedAt": "2020-11-24",
+      "highlights": [],
+      "ingredientOverview": [
+        "Aqua",
+        "Propanediol*",
+        "Glycerin",
+        "Isopropyl Alcohol*",
+        "Salicylic Acid",
+        "Tromethamine",
+        "Rheum Palmatum Root Extract*",
+        "Portulaca Oleracea Extract*",
+        "Epilobium Angustifolium Flower/​Leaf/​Stem Extract*",
+        "Polyacrylate Crosspolymer-6",
+        "Xanthan Gum*",
+        "Allantoin",
+        "Bisabolol*",
+        "Phenoxyethanol",
+        "Chlorphenesin",
+        "Fragrance"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol*",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Isopropyl Alcohol*",
+          "slug": "isopropyl-alcohol",
+          "functions": [
+            "solvent",
+            "viscosity controlling",
+            "perfuming"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "icky"
+        },
+        {
+          "name": "Salicylic Acid",
+          "slug": "salicylic-acid",
+          "functions": [
+            "exfoliant",
+            "anti-acne",
+            "soothing",
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "superstar"
+        },
+        {
+          "name": "Tromethamine",
+          "slug": "tromethamine",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Rheum Palmatum Root Extract*",
+          "slug": "rheum-palmatum-root-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Portulaca Oleracea Extract*",
+          "slug": "portulaca-oleracea-extract",
+          "functions": [
+            "soothing",
+            "antioxidant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Epilobium Angustifolium Flower/Leaf/Stem Extract*",
+          "slug": "epilobium-angustifolium-flower-leaf-stem-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Polyacrylate Crosspolymer-6",
+          "slug": "polyacrylate-crosspolymer-6",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Xanthan Gum*",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Allantoin",
+          "slug": "allantoin",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "goodie"
+        },
+        {
+          "name": "Bisabolol*",
+          "slug": "bisabolol",
+          "functions": [
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Chlorphenesin",
+          "slug": "chlorphenesin",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Fragrance",
+          "slug": "parfum",
+          "functions": [
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "icky"
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/azarine-acne-spot-gel",
+      "scrapedAt": "2026-07-16T12:49:09.533Z"
+    },
+    {
+      "slug": "azarine-acne-spot-serum",
+      "name": "Azarine Acne Spot Serum",
+      "brand": "Azarine",
+      "brandSlug": "azarine",
+      "category": null,
+      "productTitle": "Acne Spot Serum",
+      "description": null,
+      "uploadedBy": "yenara",
+      "uploadedAt": "2022-09-02",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin*",
+        "Succinic Acid",
+        "Propanediol",
+        "Centella Asiatica Extract*",
+        "Capryloyl Glycine",
+        "Carica Papaya Fruit Extract",
+        "Arbutin",
+        "Chlorphenesin",
+        "Nelumbo Nucifera Leaf Extract",
+        "Camellia Sinensis Leaf Extract*",
+        "Psidium Guajava Extract",
+        "Angelica Gigas Extract*",
+        "Phenoxyethanol",
+        "Sarcosine",
+        "Xanthan Gum",
+        "Cinnamomum Zeylanicum Bark Extract*"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin*",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Succinic Acid",
+          "slug": "succinic-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Extract*",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Capryloyl Glycine",
+          "slug": "capryloyl-glycine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Carica Papaya Fruit Extract",
+          "slug": "carica-papaya-fruit-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arbutin",
+          "slug": "arbutin",
+          "functions": [
+            "antioxidant",
+            "skin brightening"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Chlorphenesin",
+          "slug": "chlorphenesin",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Nelumbo Nucifera Leaf Extract",
+          "slug": "nelumbo-nucifera-leaf-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Camellia Sinensis Leaf Extract*",
+          "slug": "camellia-sinensis-leaf-extract",
+          "functions": [
+            "antioxidant",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Psidium Guajava Extract",
+          "slug": "psidium-guajava-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Angelica Gigas Extract*",
+          "slug": "angelica-gigas-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sarcosine",
+          "slug": "sarcosine",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Xanthan Gum",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cinnamomum Zeylanicum Bark Extract*",
+          "slug": "cinnamomum-zeylanicum-bark-extract",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "antioxidant",
+            "emollient",
+            "moisturizer/​humectant",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/azarine-acne-spot-serum",
+      "scrapedAt": "2026-07-16T12:49:12.073Z"
+    },
+    {
+      "slug": "azarine-acne-spot-serum-2",
+      "name": "Azarine Acne Spot Serum",
+      "brand": "Azarine",
+      "brandSlug": "azarine",
+      "category": null,
+      "productTitle": "Acne Spot Serum",
+      "description": null,
+      "uploadedBy": "pororo64",
+      "uploadedAt": "2022-09-23",
+      "highlights": [
+        "Alcohol Free",
+        "Fragrance and Essential Oil Free"
+      ],
+      "ingredientOverview": [
+        "Aqua",
+        "Glycerin*",
+        "Succinic Acid",
+        "Propanediol*",
+        "Centella Asiatica Extract*",
+        "Capryloyl Glycine",
+        "Carica Papaya Fruit Extract*",
+        "Arbutin",
+        "Chlorphenesin",
+        "Nelumbo Nucifera Leaf Extract*",
+        "Camellia Sinensis Leaf Extract*",
+        "Psidium Guajava Leaf Extract*",
+        "Angelica Gigas Extract*",
+        "Phenoxyethanol",
+        "Sarcosine",
+        "Xanthan Gum*",
+        "Cinnamomum Zeylanicum Bark Extract*"
+      ],
+      "ingredients": [
+        {
+          "name": "Aqua",
+          "slug": "water",
+          "functions": [
+            "solvent"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Glycerin*",
+          "slug": "glycerin",
+          "functions": [
+            "skin-identical ingredient",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": "0",
+          "comedogenicity": "0",
+          "rating": "superstar"
+        },
+        {
+          "name": "Succinic Acid",
+          "slug": "succinic-acid",
+          "functions": [
+            "buffering"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Propanediol*",
+          "slug": "propanediol",
+          "functions": [
+            "solvent",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Centella Asiatica Extract*",
+          "slug": "centella-asiatica-extract",
+          "functions": [
+            "soothing",
+            "antioxidant",
+            "moisturizer/​humectant"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Capryloyl Glycine",
+          "slug": "capryloyl-glycine",
+          "functions": [
+            "surfactant/​cleansing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Carica Papaya Fruit Extract*",
+          "slug": "carica-papaya-fruit-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Arbutin",
+          "slug": "arbutin",
+          "functions": [
+            "antioxidant",
+            "skin brightening"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Chlorphenesin",
+          "slug": "chlorphenesin",
+          "functions": [
+            "preservative",
+            "antimicrobial/​antibacterial"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Nelumbo Nucifera Leaf Extract*",
+          "slug": "nelumbo-nucifera-leaf-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Camellia Sinensis Leaf Extract*",
+          "slug": "camellia-sinensis-leaf-extract",
+          "functions": [
+            "antioxidant",
+            "soothing"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Psidium Guajava Leaf Extract*",
+          "slug": "psidium-guajava-leaf-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Angelica Gigas Extract*",
+          "slug": "angelica-gigas-extract",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Phenoxyethanol",
+          "slug": "phenoxyethanol",
+          "functions": [
+            "preservative"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Sarcosine",
+          "slug": "sarcosine",
+          "functions": [],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": "goodie"
+        },
+        {
+          "name": "Xanthan Gum*",
+          "slug": "xanthan-gum",
+          "functions": [
+            "viscosity controlling"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        },
+        {
+          "name": "Cinnamomum Zeylanicum Bark Extract*",
+          "slug": "cinnamomum-zeylanicum-bark-extract",
+          "functions": [
+            "antimicrobial/​antibacterial",
+            "antioxidant",
+            "emollient",
+            "moisturizer/​humectant",
+            "perfuming"
+          ],
+          "irritancy": null,
+          "comedogenicity": null,
+          "rating": null
+        }
+      ],
+      "sourceUrl": "https://incidecoder.com/products/azarine-acne-spot-serum-2",
+      "scrapedAt": "2026-07-16T12:49:17.786Z"
+    }
+  ],
+  "errors": []
+}
