@@ -18,6 +18,18 @@ Base path: `/api/v1`. Media type: `application/json`, kecuali endpoint upload ya
 
 ## Profiles
 
+### `GET /api/v1/profile-intake/questions`
+
+BFF meneruskan questionnaire berversi dari FastAPI. Token service tetap
+server-only dan response tidak di-cache.
+
+### `POST /api/v1/profile-intake/recommendations`
+
+Menerima narasi profil atau jawaban A-D, memvalidasi boundary dengan Zod, lalu
+meneruskan request ke FastAPI. Endpoint ini tidak menyimpan profil dan tidak
+menerima foto atau PII. Response berisi resolution dan optional ranked
+recommendations.
+
 ### `POST /api/v1/profiles`
 
 Membuat profil untuk session saat ini.

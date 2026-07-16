@@ -5,7 +5,7 @@
 | Domain | Komponen | Tanggung jawab |
 |---|---|---|
 | Shared | `AppHeader`, `PageShell`, `DisclaimerBanner`, `ErrorState`, `EmptyState` | layout dan feedback konsisten |
-| Profile | `SkinProfileForm`, `MultiSelectChips`, `RoutineItemInput` | input profil dan validasi |
+| Profile | `SkinProfileIntake`, narrative form, A-D questionnaire, resolution panel | input profil, clarification, dan ranked recommendation |
 | Scan | `ScanModeTabs`, `ImageDropzone`, `UploadPreview`, `ManualInputForm` | capture dan draft scan |
 | Processing | `ProcessingStepper`, `StatusMessage` | status aktual dan recovery |
 | Report | `ScoreGauge`, `SubScoreBar`, `BPOMPanel`, `ClaimFlags`, `IngredientGroups`, `CompatibilityPanel`, `ConflictAlert`, `RecommendationCard` | presentasi evidence dan hasil |

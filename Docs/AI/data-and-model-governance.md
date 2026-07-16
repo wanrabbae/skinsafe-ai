@@ -10,6 +10,13 @@ Seed MVP minimum sebaiknya mencakup diverse ingredients, alias Indonesia/INCI, p
 
 Fixture berisi redacted input, expected normalized fields, expected fired rules, allowed score range, status, confidence range, dan version. Golden fixture mencegah perubahan model/rule menggeser verdict tanpa review.
 
+Human review recommendation memakai JSONL tanpa PII dan divalidasi dengan
+`evaluation/human_review.py`. Release membutuhkan minimal 100 review, 25 query,
+dua reviewer domain, NDCG@10 dan exact agreement minimal 0.8, schema valid, dan
+zero critical false negative. File `human-review.example.jsonl` hanya contoh
+format dan tidak boleh masuk metrik release. Engineering golden set parser
+narasi bukan pengganti review klinis.
+
 ## Prompt governance
 
 Prompt disimpan sebagai versioned text/template di source control. Prompt extraction hanya meminta field schema dan evidence, bukan diagnosis. Prompt recommendation menerima findings terstruktur dan dilarang menambah fact. Catat prompt version dan provider model ID pada response metadata, bukan isi sensitif prompt/user image di log.

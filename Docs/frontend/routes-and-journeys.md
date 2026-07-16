@@ -32,7 +32,12 @@ Sections: hero, problem statement, cara kerja, trust signals, batasan produk, da
 
 ### Profile
 
-Field wajib: `skinType`, `sensitivityLevel`, dan `pregnancyStatus`. Field opsional: conditions, concerns, goals, serta routine items. Autosave tidak diperlukan untuk MVP; simpan eksplisit dan tampilkan dirty-state warning saat keluar.
+Pengguna memilih cerita bebas atau questionnaire empat pertanyaan A-D. Cerita
+bebas tetap meminta status hamil/menyusui secara eksplisit dan optional active
+routine. Hasil menampilkan profile resolution, confidence, clarification,
+red-flag, serta maksimal lima rekomendasi. Red flag dan jawaban kontradiktif
+tidak boleh menampilkan ranking produk. Profil belum disimpan sebelum
+session/auth dan consent tersedia.
 
 ### Scan
 

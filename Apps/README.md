@@ -14,6 +14,12 @@ npm run db:push
 npm run dev
 ```
 
+Jalankan FastAPI lokal pada `AI_SERVICE_URL` sebelum membuka halaman
+`/profile`. Browser hanya memanggil BFF `/api/v1/profile-intake/*`; service
+token tidak pernah dikirim ke client. Halaman mendukung cerita bebas dan empat
+pertanyaan A-D, lalu menampilkan profil terstruktur, clarification/red flag,
+dan produk yang diranking model lokal.
+
 Buka `http://localhost:3000`. Health check tersedia di `GET http://localhost:3000/api/v1/health` dan mengembalikan HTTP 200 jika Postgres sehat atau 503 jika database tidak tersedia.
 
 ## Struktur

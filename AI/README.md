@@ -13,6 +13,8 @@ di training maupun inference.
 - 501 produk lokal hasil kurasi fixture scripts/incidecoder;
 - alasan rekomendasi, evidence ingredient, caution, confidence, dan literasi;
 - ingredient knowledge endpoint dari chem_full.csv;
+- intake profil dari narasi Bahasa Indonesia atau empat pertanyaan A-D;
+- red-flag, contradiction, missing safety status, dan routine-active gates;
 - artifact model JSON yang reproducible dan dapat dipakai tanpa GPU.
 
 Model relevansi tidak menentukan verdict keselamatan. Keputusan kritis selalu
@@ -34,6 +36,9 @@ Jalankan dari folder AI:
 
 ```powershell
 python training/train_recommender.py
+python evaluation/evaluate_profile_intake.py
+# setelah review domain tersedia:
+python evaluation/human_review.py path/to/deidentified-reviews.jsonl
 ```
 
 Trainer membaca data/chem_full.csv, data/symp_to_chem_names.csv, dan
@@ -62,6 +67,8 @@ product intent. Lihat models/MODEL_CARD.md sebelum menafsirkan metrik.
 - GET /health/ready
 - POST /internal/v1/analyses
 - POST /internal/v1/recommendations
+- GET /internal/v1/profile-intake/questions
+- POST /internal/v1/profile-recommendations
 - GET /internal/v1/ingredients/{ingredient_name}
 
 Set AI_SERVICE_TOKEN di luar local development. Browser/PWA tidak boleh

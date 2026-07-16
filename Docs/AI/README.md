@@ -1,6 +1,8 @@
 # AI System — FastAPI
 
-AI service di `Apps/ai-service` mengubah foto atau input manual menjadi analisis skincare yang evidence-backed. Kata “AI” mencakup OCR/vision extraction dan optional language model, tetapi keputusan safety final memakai normalisasi dan rules yang deterministic.
+AI service di `AI` mengubah input profil atau ingredient manual menjadi
+analisis skincare yang evidence-backed. Implementasi saat ini sepenuhnya lokal;
+keputusan safety final memakai normalisasi dan rules yang deterministic.
 
 ## Dokumen
 
@@ -12,6 +14,7 @@ AI service di `Apps/ai-service` mengubah foto atau input manual menjadi analisis
 - [scoring-and-safety.md](./scoring-and-safety.md): formula, hard gates, confidence, recommendation policy.
 - [data-and-model-governance.md](./data-and-model-governance.md): dataset, prompt/model version, privacy, reproducibility.
 - [evaluation-and-operations.md](./evaluation-and-operations.md): test sets, metrics, monitoring, incident handling.
+- [profile-intake.md](./profile-intake.md): narasi/questionnaire, safety gate, PWA wiring, dan evaluation.
 
 ## Non-goals
 

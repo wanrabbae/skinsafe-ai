@@ -120,3 +120,27 @@ menghasilkan daftar kosong; service tidak mengarang harga.
 Mengembalikan canonical match, confidence, category, benefits, cautions,
 compatibility, frequency, concern terkait, dan deterministic literacy cards
 dari chem_full.csv. Unknown ingredient mengembalikan 404.
+
+## GET /internal/v1/profile-intake/questions
+
+Mengembalikan questionnaire berversi dengan empat pertanyaan. Setiap
+pertanyaan selalu memiliki pilihan `A`, `B`, `C`, dan `D`; PWA tidak boleh
+mengubah semantic pilihan tanpa menaikkan versi questionnaire.
+
+## POST /internal/v1/profile-recommendations
+
+Menerima narasi atau jawaban A-D. Narasi tetap harus menyertakan status safety:
+
+```json
+{
+  "narrative": "Kulitku cepat berminyak dan sering jerawatan",
+  "pregnancyStatus": "none",
+  "currentIngredients": ["salicylic acid"],
+  "limit": 5
+}
+```
+
+Response memuat `resolution` dengan profile, confidence, field evidence,
+contradictions, clarification questions, red flags, dan `canRecommend`.
+`recommendations` bernilai `null` ketika status hamil/menyusui belum jelas,
+profil belum cukup, input kontradiktif, atau red flag ditemukan.
