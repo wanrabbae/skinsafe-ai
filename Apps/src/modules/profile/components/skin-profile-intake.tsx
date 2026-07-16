@@ -10,6 +10,7 @@ import {
   ShieldAlert,
   Sparkles,
 } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { FormEvent, useEffect, useState } from "react";
 
 import { Chip, MicroLabel } from "@/shared/components/primitives";
@@ -21,6 +22,11 @@ import type {
   ProfileRecommendationResult,
   QuestionChoice,
 } from "../profile.types";
+import {
+  currentProfileQueryKey,
+  useCurrentProfileResult,
+} from "../profile-cache";
+import { formatProfileLabel } from "../profile-display";
 
 type IntakeMode = "story" | "questions";
 
@@ -32,33 +38,9 @@ const alertBase =
 const inlineError =
   "mt-2.5 flex items-center gap-[7px] rounded-[14px] bg-danger-soft px-3 py-2.5 text-[0.72rem] leading-[1.45] text-danger [&_svg]:size-[17px] [&_svg]:shrink-0";
 
-function label(value: string | null) {
-  if (!value) return "Belum diketahui";
-  const names: Record<string, string> = {
-    acne: "Jerawat",
-    aging: "Penuaan",
-    combination: "Kombinasi",
-    discomfort: "Iritasi/tidak nyaman",
-    dryness: "Kering",
-    dullness: "Kusam",
-    hydrating: "Butuh hidrasi",
-    low: "Rendah",
-    medium: "Sedang",
-    high: "Tinggi",
-    normal: "Normal",
-    oily: "Berminyak",
-    oiliness: "Minyak berlebih",
-    pregnant: "Hamil",
-    breastfeeding: "Menyusui",
-    none: "Tidak hamil/menyusui",
-    redness: "Kemerahan",
-    sensitive: "Sensitif",
-    "uneven skintone": "Warna tidak merata",
-  };
-  return names[value] ?? value.replaceAll("_", " ");
-}
-
 export function SkinProfileIntake() {
+  const queryClient = useQueryClient();
+  const { data: result } = useCurrentProfileResult();
   const [mode, setMode] = useState<IntakeMode>("story");
   const [questions, setQuestions] = useState<ProfileQuestionnaire | null>(null);
   const [questionsError, setQuestionsError] = useState("");
@@ -66,7 +48,6 @@ export function SkinProfileIntake() {
   const [pregnancyStatus, setPregnancyStatus] = useState<"none" | "pregnant" | "breastfeeding">("none");
   const [activeText, setActiveText] = useState("");
   const [answers, setAnswers] = useState<Record<string, QuestionChoice>>({});
-  const [result, setResult] = useState<ProfileRecommendationResult | null>(null);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
@@ -87,7 +68,7 @@ export function SkinProfileIntake() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    setResult(null);
+    queryClient.setQueryData(currentProfileQueryKey, null);
     if (mode === "story" && narrative.trim().length < 15) {
       setError("Ceritakan kondisi kulitmu sedikit lebih lengkap (minimal 15 karakter). ");
       return;
@@ -120,7 +101,7 @@ export function SkinProfileIntake() {
         error?: { message?: string };
       };
       if (!response.ok) throw new Error(body.error?.message || "Profil belum dapat dianalisis.");
-      setResult(body);
+      queryClient.setQueryData(currentProfileQueryKey, body);
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Profil belum dapat dianalisis.");
     } finally {
@@ -288,13 +269,13 @@ function ProfileResult({ result }: { result: ProfileRecommendationResult }) {
           </span>
         </div>
         <dl className="my-3.5 grid grid-cols-3 gap-[7px]">
-          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Tipe kulit</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{label(resolution.profile.skinType)}</dd></div>
-          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Sensitivitas</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{label(resolution.profile.sensitivityLevel)}</dd></div>
-          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Safety status</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{label(resolution.profile.pregnancyStatus)}</dd></div>
+          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Tipe kulit</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{formatProfileLabel(resolution.profile.skinType)}</dd></div>
+          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Sensitivitas</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{formatProfileLabel(resolution.profile.sensitivityLevel)}</dd></div>
+          <div className="rounded-[12px] bg-surface-low p-2"><dt className="text-[0.56rem] text-outline">Safety status</dt><dd className="m-0 mt-[3px] text-[0.67rem] font-bold">{formatProfileLabel(resolution.profile.pregnancyStatus)}</dd></div>
         </dl>
         <div className="flex flex-wrap gap-2">
-          {resolution.profile.concerns.map((concern) => <Chip className="min-h-[31px] px-[11px] py-[7px] text-[0.75rem]" key={concern}>{label(concern)}</Chip>)}
-          {resolution.profile.conditions.map((condition) => <Chip tone="caution" className="min-h-[31px] px-[11px] py-[7px] text-[0.75rem]" key={condition}>{label(condition)}</Chip>)}
+          {resolution.profile.concerns.map((concern) => <Chip className="min-h-[31px] px-[11px] py-[7px] text-[0.75rem]" key={concern}>{formatProfileLabel(concern)}</Chip>)}
+          {resolution.profile.conditions.map((condition) => <Chip tone="caution" className="min-h-[31px] px-[11px] py-[7px] text-[0.75rem]" key={condition}>{formatProfileLabel(condition)}</Chip>)}
         </div>
       </section>
 

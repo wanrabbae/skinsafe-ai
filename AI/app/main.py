@@ -56,6 +56,7 @@ def ready() -> dict[str, str]:
         "ruleset": "2026.07.2",
         "engine": "0.3.0",
         "model": ranker.model_version,
+        "scoring": ranker.scoring_version,
     }
 
 
@@ -112,11 +113,13 @@ def _build_recommendations(request: RecommendRequest) -> RecommendResponse:
             source=match.product.get("source", "local"),
             matching_chemicals=match.matched_ingredients,
             matching_symptoms=match.matching_concerns,
+            overall_score=match.relevance_score,
             relevance_score=match.relevance_score,
             model_score=match.model_score,
             confidence=match.confidence,
             reasons=match.reasons,
             cautions=match.cautions,
+            score_breakdown=match.score_breakdown,
         )
         for match in local_result.products
     ]
@@ -127,13 +130,17 @@ def _build_recommendations(request: RecommendRequest) -> RecommendResponse:
         chemicals_targeted=all_targeted_chems,
         total_matched=len(products),
         model_version=local_result.model_version,
+        scoring_version=local_result.scoring_version,
         unsupported_concerns=local_result.unsupported_concerns,
         limitations=local_result.limitations,
         education=[
             EducationItem(
                 code="MODEL_RELEVANCE_NOT_MEDICAL_CERTAINTY",
                 title="Cara membaca rekomendasi",
-                message="Ranking menunjukkan kecocokan ingredient terhadap concern, bukan jaminan hasil atau bebas iritasi.",
+                message=(
+                    "Overall score menggabungkan model relevance, coverage concern, posisi evidence ingredient, "
+                    "intent produk, dan safety penalty. Skor bukan jaminan hasil atau bebas iritasi."
+                ),
             ),
             EducationItem(
                 code="PATCH_TEST",

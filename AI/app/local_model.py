@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import threading
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -22,6 +23,8 @@ from .ml_features import (
 _AI_ROOT = Path(__file__).resolve().parent.parent
 _DEFAULT_MODEL_PATH = _AI_ROOT / "models" / "recommender-v1.json"
 _DEFAULT_CATALOG_PATH = _AI_ROOT / "data" / "local_product_catalog.json"
+_SCORING_VERSION = "overall-compatibility-2026.07.2"
+_MAX_OVERALL_SCORE = 0.95
 
 _PROHIBITED_TERMS = {
     "mercury",
@@ -75,6 +78,7 @@ class LocalRecommendation:
     matching_concerns: list[str] = field(default_factory=list)
     reasons: list[str] = field(default_factory=list)
     cautions: list[str] = field(default_factory=list)
+    score_breakdown: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(slots=True)
@@ -83,6 +87,7 @@ class LocalRecommendationResult:
     supported_concerns: list[str]
     unsupported_concerns: list[str]
     model_version: str
+    scoring_version: str
     limitations: list[str]
 
 
@@ -113,6 +118,36 @@ def _has_function(product: dict[str, Any], phrase: str) -> bool:
     return False
 
 
+def _overall_score(
+    *,
+    model_score: float,
+    evidence_coverage: float,
+    evidence_strength: float,
+    has_explicit_intent: bool,
+    intent_penalty: float,
+    safety_penalty: float,
+) -> tuple[float, dict[str, float]]:
+    """Combine relevance evidence and safety without implying certainty."""
+    contributions = {
+        "modelRelevance": model_score * 0.65,
+        "concernCoverage": evidence_coverage * 0.15,
+        "ingredientEvidence": evidence_strength * 0.10,
+        "explicitProductIntent": 0.05 if has_explicit_intent else 0.0,
+    }
+    score = min(
+        _MAX_OVERALL_SCORE,
+        max(0.0, sum(contributions.values()) - intent_penalty - safety_penalty),
+    )
+    breakdown = {
+        key: round(value * 100, 2)
+        for key, value in contributions.items()
+    }
+    breakdown["safetyPenalty"] = round(safety_penalty * 100, 2)
+    breakdown["intentMismatchPenalty"] = round(intent_penalty * 100, 2)
+    breakdown["uncertaintyReserve"] = round((1.0 - _MAX_OVERALL_SCORE) * 100, 2)
+    return score, breakdown
+
+
 class LocalProductRanker:
     """Loads a trained JSON artifact and ranks the local product catalog."""
 
@@ -135,6 +170,7 @@ class LocalProductRanker:
             raise ValueError("Model and catalog fingerprints do not match")
 
         self.model_version = str(self._model["modelVersion"])
+        self.scoring_version = _SCORING_VERSION
         self.catalog_version = str(self._catalog["catalogVersion"])
         self.limitations = list(self._model.get("limitations") or []) + list(self._catalog.get("limitations") or [])
         self._dimension = int(self._model["featureDimension"])
@@ -170,10 +206,11 @@ class LocalProductRanker:
         self,
         product: dict[str, Any],
         concerns: list[str],
-    ) -> tuple[list[str], list[str]]:
+    ) -> tuple[list[str], list[str], float]:
         matched_ingredients: list[str] = []
         matched_concerns: list[str] = []
-        for ingredient in product.get("ingredients") or []:
+        evidence_weights: list[float] = []
+        for position, ingredient in enumerate(product.get("ingredients") or []):
             name = str(ingredient.get("name") or "").strip()
             normalized_name = normalize_ingredient_name(name)
             ingredient_concerns = set(self._chemical_symptoms.get(normalized_name, set()))
@@ -182,10 +219,13 @@ class LocalProductRanker:
             if overlap:
                 if name and name not in matched_ingredients:
                     matched_ingredients.append(name)
+                    evidence_weights.append(1.0 / math.log2(position + 2))
                 for concern in overlap:
                     if concern not in matched_concerns:
                         matched_concerns.append(concern)
-        return matched_ingredients[:5], matched_concerns
+        ideal_weight = sum(1.0 / math.log2(position + 2) for position in range(5))
+        evidence_strength = min(1.0, sum(evidence_weights[:5]) / ideal_weight)
+        return matched_ingredients[:5], matched_concerns, evidence_strength
 
     def _safety_adjustment(
         self,
@@ -244,6 +284,11 @@ class LocalProductRanker:
             penalty += 0.35
             cautions.append("Tidak diprioritaskan saat skin barrier sedang terganggu.")
 
+        dry_skin_goal = any(concern in concerns for concern in {"dryness", "hydrating"})
+        if dry_skin_goal and (retinoid or exfoliant):
+            penalty += 0.08
+            cautions.append("Active kuat tidak diprioritaskan saat kebutuhan utama adalah mengatasi kulit kering.")
+
         if (skin_type == "oily" or "acne" in concerns) and comedogenicity_values:
             high_comedogenic = sum(value >= 3 for value in comedogenicity_values)
             if high_comedogenic:
@@ -276,7 +321,14 @@ class LocalProductRanker:
     ) -> LocalRecommendationResult:
         supported, unsupported = canonicalize_concerns(concerns)
         if not supported:
-            return LocalRecommendationResult([], [], unsupported, self.model_version, self.limitations)
+            return LocalRecommendationResult(
+                products=[],
+                supported_concerns=[],
+                unsupported_concerns=unsupported,
+                model_version=self.model_version,
+                scoring_version=self.scoring_version,
+                limitations=self.limitations,
+            )
 
         candidates: list[LocalRecommendation] = []
         for product in self._catalog["products"]:
@@ -295,7 +347,7 @@ class LocalProductRanker:
                 continue
 
             model_score = sum(probabilities.values()) / len(probabilities)
-            matched_ingredients, matching_concerns = self._evidence(product, supported)
+            matched_ingredients, matching_concerns, evidence_strength = self._evidence(product, supported)
             if not matching_concerns:
                 # A probability without traceable ingredient/function evidence is
                 # not enough for a consumer-health recommendation.
@@ -321,18 +373,14 @@ class LocalProductRanker:
                 # sparse label, explicit product intent prevents noisy links
                 # from ranking unrelated products.
                 continue
-            intent_bonus = 0.22 if intent_overlap else 0.0
             intent_penalty = 0.10 if product_intents and not intent_overlap else 0.0
-            relevance = min(
-                1.0,
-                max(
-                    0.0,
-                    model_score * 0.78
-                    + evidence_coverage * 0.14
-                    + intent_bonus
-                    - intent_penalty
-                    - penalty,
-                ),
+            relevance, score_breakdown = _overall_score(
+                model_score=model_score,
+                evidence_coverage=evidence_coverage,
+                evidence_strength=evidence_strength,
+                has_explicit_intent=bool(intent_overlap),
+                intent_penalty=intent_penalty,
+                safety_penalty=penalty,
             )
             metric_f1 = sum(
                 float(self._model["concerns"][concern]["metrics"]["f1"])
@@ -355,6 +403,7 @@ class LocalProductRanker:
                     matching_concerns=matching_concerns,
                     reasons=reasons,
                     cautions=cautions,
+                    score_breakdown=score_breakdown,
                 )
             )
 
@@ -393,6 +442,7 @@ class LocalProductRanker:
             supported_concerns=supported,
             unsupported_concerns=unsupported,
             model_version=self.model_version,
+            scoring_version=self.scoring_version,
             limitations=self.limitations,
         )
 

@@ -59,6 +59,24 @@ Ini bukan clinical accuracy.
 - Brand diversity dan duplicate-product filter diterapkan setelah ranking.
 - Runtime confidence maksimum medium.
 
+## Overall compatibility score
+
+Scoring policy `overall-compatibility-2026.07.2` mengubah probabilitas model
+menjadi overall score yang dapat dibandingkan antarproduk:
+
+- 65 poin dari probabilitas relevance model;
+- 15 poin dari coverage concern pengguna;
+- maksimal 10 poin dari evidence ingredient, dibobot berdasarkan posisi INCI;
+- 5 poin dari intent produk yang eksplisit;
+- dikurangi safety penalty dan intent-mismatch penalty.
+
+Lima poin terakhir sengaja menjadi uncertainty reserve. Karena data tidak
+memuat konsentrasi, formulasi final, alergi individual, atau outcome klinis,
+overall score dibatasi maksimal 95 dan tidak boleh ditafsirkan sebagai persen
+jaminan cocok. Response menyertakan `overallScore`, raw `modelScore`, dan
+`scoreBreakdown`; `relevanceScore` tetap menjadi alias overall score untuk
+kompatibilitas client lama.
+
 ## Known limitations
 
 - Label bukan hasil pemakaian pengguna dan belum direview klinis per produk.
