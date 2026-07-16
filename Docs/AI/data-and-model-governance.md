@@ -27,6 +27,11 @@ Prompt disimpan sebagai versioned text/template di source control. Prompt extrac
 
 Report menyimpan input fingerprint, normalized product snapshot, fired rule IDs, score components, hard gates, dataset/rules/model versions, dan timestamp. Exact reproduction model generatif tidak selalu mungkin; keputusan safety tetap reproducible karena final gate/rule deterministic.
 
+Local model menyimpan feature dimension, seed, epoch, threshold per concern,
+validation metric, source checksum, model version, dan timestamp di artifact
+JSON. AI/training/train_recommender.py adalah satu-satunya generator artifact
+dan tidak menggunakan external AI/LLM API.
+
 ## Privacy
 
 Minimalkan image retention, hapus EXIF, jangan kirim owner identity ke provider, redact logs, dan batasi debug output ke non-production. Dataset evaluasi dari user upload memerlukan consent dan de-identification.

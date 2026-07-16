@@ -103,3 +103,20 @@ HTTP 4xx/5xx hanya untuk request/service failure dan memakai envelope:
 ## Schema compatibility
 
 Penambahan optional field bersifat backward-compatible. Rename, type change, atau semantic change memerlukan versi endpoint baru. Contract test dijalankan dari kedua repo/module sebelum deployment.
+
+## POST /internal/v1/recommendations
+
+Menerima concerns, skinType, optional sensitivityLevel, conditions,
+pregnancyStatus, currentIngredients, budgetMax, dan limit. Response menyertakan
+ranked products, modelVersion, modelScore, confidence, reasons, cautions,
+limitations, dan education. Produk tanpa traceable ingredient evidence tidak
+ditampilkan.
+
+Karena katalog model belum memiliki harga, request dengan budgetMax dapat
+menghasilkan daftar kosong; service tidak mengarang harga.
+
+## GET /internal/v1/ingredients/{ingredient_name}
+
+Mengembalikan canonical match, confidence, category, benefits, cautions,
+compatibility, frequency, concern terkait, dan deterministic literacy cards
+dari chem_full.csv. Unknown ingredient mengembalikan 404.

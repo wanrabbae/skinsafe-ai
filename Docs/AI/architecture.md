@@ -31,6 +31,10 @@ API → application orchestrator → domain rules
 
 AI service tidak menjadi system of record. Ia boleh memuat read-only dataset ke memory saat startup, tetapi tidak menyimpan user profile, scan history, atau report. Next.js menyimpan snapshot response beserta versi engine.
 
+Local model artifact memakai JSON portable dan dimuat read-only saat startup.
+Inference tidak melakukan network call. Model score diterapkan sebelum
+deterministic profile dan safety reranking.
+
 ## Suggested source layout
 
 ```text

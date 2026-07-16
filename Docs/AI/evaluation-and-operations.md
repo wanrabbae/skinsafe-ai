@@ -25,6 +25,15 @@ Bangun set terpisah untuk:
 
 Critical false negative lebih berat daripada score agreement. Tetapkan release gate: tidak ada regression pada prohibited ingredient dan revoked BPOM fixtures.
 
+## Current local recommender baseline
+
+local-recommender-2026.07.1 dilatih pada 373 dan divalidasi pada 128 produk
+setelah pembersihan kategori non-skincare. Weak-label macro F1 0.8904 dan macro
+ROC-AUC 0.9354. Nilai ini bukan clinical accuracy. Runtime confidence dibatasi
+maksimum medium; model card per-concern berada di AI/models/MODEL_CARD.md.
+Setiap training menulis history per epoch dan SVG loss/F1 ke folder AI/images
+agar overfitting dan regression dapat ditinjau tanpa dashboard eksternal.
+
 ## Test layers
 
 1. Pure unit tests untuk parser, rules, scoring, hard gates.

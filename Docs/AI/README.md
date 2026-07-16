@@ -24,3 +24,16 @@ AI service di `Apps/ai-service` mengubah foto atau input manual menjadi analisis
 ## Output principle
 
 Setiap finding minimal memiliki `code`, severity, message, evidence, source type, dan rule/model version. Jika evidence tidak cukup, service mengembalikan limitation atau `needs_input`, bukan menebak.
+
+## Local ML implementation
+
+Implementasi AI saat ini tidak memanggil API LLM. Product relevance memakai
+model logistic multi-label lokal yang dilatih dari chemical-symptom links,
+ingredient functions, dan fixture produk. Model hanya mengurutkan kandidat;
+prohibited ingredient, pregnancy, damaged barrier, routine conflict, dan
+low-confidence gate tetap deterministic.
+
+Artifact dan model card berada di AI/models. Manual ingredient analysis,
+recommendation, dan ingredient literacy sudah tersedia. OCR kamera masih
+memerlukan labeled image dataset terpisah dan saat ini wajib fallback ke input
+manual.
