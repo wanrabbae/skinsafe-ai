@@ -8,7 +8,7 @@
 - REST Backend-for-Frontend (BFF) untuk endpoint HTTP di `src/app/api`.
 - Modular monolith dengan Prisma sebagai database client.
 
-Service AI Python/FastAPI berada di `../AI`. Dokumentasi produk dan arsitektur berada di `../Docs`.
+Service AI Python/FastAPI berada di `../AI`. Dokumentasi produk dan arsitektur berada di `../Docs`. `../DESIGN.md` adalah sumber utama untuk token visual, layout mobile-first, semantic safety color, dan pola komponen UI.
 
 ## Stack and runtime
 
