@@ -35,3 +35,11 @@ Prinsip:
 Jangan drift ke over-building antar response. Off hanya jika user menghentikannya.
 
 Skill path: `.codex/skills/ponytail/SKILL.md`
+
+---
+
+## local runtime only
+
+- Jangan gunakan Docker untuk development, training, testing, atau verifikasi di repo ini.
+- Jalankan service AI dengan Python 3.12 virtual environment dan aplikasi web dengan runtime Node.js lokal.
+- Jangan menambah atau menjalankan Docker/Docker Compose kecuali user secara eksplisit membatalkan aturan ini.
