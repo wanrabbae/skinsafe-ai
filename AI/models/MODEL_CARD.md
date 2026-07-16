@@ -24,7 +24,7 @@ Ini bukan clinical accuracy.
 
 - Macro F1: 0.8904
 - Macro ROC-AUC: 0.9354
-- Training curves: `../../images/local-recommender-2026.07.1/training-metrics.svg`
+- Training curves: `../../images/local-recommender-2026.07.1/training-metrics.jpg`
 
 | Concern | Precision | Recall | F1 | ROC-AUC | Positive validation |
 |---|---:|---:|---:|---:|---:|

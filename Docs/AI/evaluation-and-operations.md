@@ -31,7 +31,7 @@ local-recommender-2026.07.1 dilatih pada 373 dan divalidasi pada 128 produk
 setelah pembersihan kategori non-skincare. Weak-label macro F1 0.8904 dan macro
 ROC-AUC 0.9354. Nilai ini bukan clinical accuracy. Runtime confidence dibatasi
 maksimum medium; model card per-concern berada di AI/models/MODEL_CARD.md.
-Setiap training menulis history per epoch dan SVG loss/F1 ke folder AI/images
+Setiap training menulis history per epoch dan JPEG loss/F1 ke folder AI/images
 agar overfitting dan regression dapat ditinjau tanpa dashboard eksternal.
 
 ## Test layers

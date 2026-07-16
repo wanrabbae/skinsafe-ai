@@ -43,7 +43,7 @@ Output:
 
 - models/recommender-v1.json: weights, threshold, metrik, checksum, dan versi;
 - data/local_product_catalog.json: katalog runtime yang sudah dibersihkan.
-- images/local-recommender-2026.07.1/training-metrics.svg: train loss,
+- images/local-recommender-2026.07.1/training-metrics.jpg: train loss,
   validation loss, validation F1, dan final F1 per concern;
 - images/local-recommender-2026.07.1/training-history.json: raw metric per epoch.
 

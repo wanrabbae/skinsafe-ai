@@ -1,8 +1,8 @@
 import json
 import unittest
-import xml.etree.ElementTree as ET
 from pathlib import Path
 
+from PIL import Image
 from pydantic import ValidationError
 
 from app.local_model import LocalProductRanker
@@ -71,15 +71,17 @@ class LocalModelTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             RecommendRequest(concerns=["acne"], skin_type="oily", limit=-1)
 
-    def test_training_artifacts_include_history_and_valid_svg(self) -> None:
+    def test_training_artifacts_include_history_and_valid_jpeg(self) -> None:
         ai_root = Path(__file__).resolve().parents[1]
         model = json.loads((ai_root / "models" / "recommender-v1.json").read_text(encoding="utf-8"))
-        image = ai_root / "images" / model["modelVersion"] / "training-metrics.svg"
+        image = ai_root / "images" / model["modelVersion"] / "training-metrics.jpg"
         history = model["trainingHistory"]
         self.assertEqual(len(history), model["epochs"])
         self.assertLess(history[-1]["validationLoss"], history[0]["validationLoss"])
         self.assertGreater(history[-1]["validationF1"], history[0]["validationF1"])
-        ET.parse(image)
+        with Image.open(image) as chart:
+            self.assertEqual(chart.format, "JPEG")
+            self.assertEqual(chart.size, (1400, 680))
 
 
 if __name__ == "__main__":

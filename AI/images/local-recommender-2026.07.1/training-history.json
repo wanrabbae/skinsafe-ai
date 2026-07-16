@@ -31,7 +31,7 @@
   },
   {
     "epoch": 6,
-    "trainLoss": 0.426461,
+    "trainLoss": 0.426462,
     "validationLoss": 0.455713,
     "validationF1": 0.826
   },
@@ -49,7 +49,7 @@
   },
   {
     "epoch": 9,
-    "trainLoss": 0.387666,
+    "trainLoss": 0.387667,
     "validationLoss": 0.423131,
     "validationF1": 0.8497
   },
@@ -93,7 +93,7 @@
     "epoch": 16,
     "trainLoss": 0.347687,
     "validationLoss": 0.392779,
-    "validationF1": 0.8488
+    "validationF1": 0.8489
   },
   {
     "epoch": 17,
@@ -134,7 +134,7 @@
   {
     "epoch": 23,
     "trainLoss": 0.327961,
-    "validationLoss": 0.379375,
+    "validationLoss": 0.379374,
     "validationF1": 0.8494
   },
   {
@@ -279,7 +279,7 @@
     "epoch": 47,
     "trainLoss": 0.289383,
     "validationLoss": 0.353519,
-    "validationF1": 0.8716
+    "validationF1": 0.8717
   },
   {
     "epoch": 48,

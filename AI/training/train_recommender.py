@@ -282,16 +282,40 @@ def aggregate_history(concern_models: dict[str, Any], epochs: int) -> list[dict[
     return result
 
 
-def _polyline(values: list[float], x: int, y: int, width: int, height: int, maximum: float) -> str:
-    if len(values) == 1:
-        return f"{x},{y + height}"
-    return " ".join(
-        f"{x + index * width / (len(values) - 1):.1f},{y + height - min(value, maximum) * height / maximum:.1f}"
-        for index, value in enumerate(values)
-    )
+def write_training_jpeg(model_payload: dict[str, Any], images_dir: Path) -> Path:
+    from PIL import Image, ImageDraw, ImageFont
 
+    def font(size: int, *, bold: bool = False) -> ImageFont.ImageFont:
+        candidates = (
+            ("DejaVuSans-Bold.ttf", "arialbd.ttf")
+            if bold
+            else ("DejaVuSans.ttf", "arial.ttf")
+        )
+        for candidate in candidates:
+            try:
+                return ImageFont.truetype(candidate, size)
+            except OSError:
+                continue
+        return ImageFont.load_default()
 
-def write_training_images(model_payload: dict[str, Any], images_dir: Path) -> Path:
+    def points(
+        values: list[float],
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        maximum: float,
+    ) -> list[tuple[float, float]]:
+        if len(values) == 1:
+            return [(x, y + height)]
+        return [
+            (
+                x + index * width / (len(values) - 1),
+                y + height - min(value, maximum) * height / maximum,
+            )
+            for index, value in enumerate(values)
+        ]
+
     model_dir = images_dir / str(model_payload["modelVersion"])
     model_dir.mkdir(parents=True, exist_ok=True)
     history = model_payload["trainingHistory"]
@@ -303,40 +327,70 @@ def write_training_images(model_payload: dict[str, Any], images_dir: Path) -> Pa
     concern_f1 = [float(model_payload["concerns"][name]["metrics"]["f1"]) for name in concerns]
     bar_width = 600 / len(concerns)
 
-    bars = []
-    labels = []
-    for index, (name, score) in enumerate(zip(concerns, concern_f1, strict=True)):
-        bar_height = score * 170
-        bar_x = 660 + index * bar_width
-        bars.append(
-            f'<rect x="{bar_x:.1f}" y="{540 - bar_height:.1f}" width="{bar_width - 5:.1f}" height="{bar_height:.1f}" fill="#6d28d9"/>'
-        )
-        labels.append(
-            f'<text x="{bar_x + 4:.1f}" y="555" font-size="10" transform="rotate(45 {bar_x + 4:.1f} 555)">{name}</text>'
-        )
+    image = Image.new("RGB", (1400, 680), "white")
+    draw = ImageDraw.Draw(image)
+    ink = "#1d1a24"
+    axis = "#ccc3d7"
+    purple = "#6d28d9"
+    red = "#ba1a1a"
+    green = "#15803d"
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="680" viewBox="0 0 1400 680">
-<rect width="1400" height="680" fill="#fff"/>
-<style>text{{font-family:Arial,sans-serif;fill:#1d1a24}} .axis{{stroke:#ccc3d7;stroke-width:1}}</style>
-<text x="40" y="35" font-size="24" font-weight="700">SkinSafe training metrics</text>
-<text x="40" y="60" font-size="13">{model_payload['modelVersion']} · {model_payload['trainedAt']}</text>
-<text x="40" y="95" font-size="17" font-weight="700">Loss per epoch</text>
-<line class="axis" x1="40" y1="300" x2="620" y2="300"/><line class="axis" x1="40" y1="110" x2="40" y2="300"/>
-<polyline fill="none" stroke="#6d28d9" stroke-width="3" points="{_polyline(train_loss, 40, 110, 580, 190, max_loss)}"/>
-<polyline fill="none" stroke="#ba1a1a" stroke-width="3" points="{_polyline(validation_loss, 40, 110, 580, 190, max_loss)}"/>
-<text x="45" y="320" font-size="12">epoch 1</text><text x="565" y="320" font-size="12">epoch {len(history)}</text>
-<text x="55" y="130" font-size="12" fill="#6d28d9">train loss</text><text x="145" y="130" font-size="12" fill="#ba1a1a">validation loss</text>
-<text x="40" y="365" font-size="17" font-weight="700">Validation F1 @ 0.5</text>
-<line class="axis" x1="40" y1="570" x2="620" y2="570"/><line class="axis" x1="40" y1="380" x2="40" y2="570"/>
-<polyline fill="none" stroke="#15803d" stroke-width="3" points="{_polyline(validation_f1, 40, 380, 580, 190, 1.0)}"/>
-<text x="45" y="590" font-size="12">epoch 1</text><text x="565" y="590" font-size="12">epoch {len(history)}</text>
-<text x="660" y="95" font-size="17" font-weight="700">Final F1 by concern</text>
-<line class="axis" x1="660" y1="540" x2="1260" y2="540"/><line class="axis" x1="660" y1="370" x2="660" y2="540"/>
-{''.join(bars)}{''.join(labels)}
-<text x="660" y="640" font-size="12">Macro F1: {model_payload['aggregateMetrics']['macroF1']} · Macro ROC-AUC: {model_payload['aggregateMetrics']['macroRocAuc']}</text>
-</svg>'''
-    image_path = model_dir / "training-metrics.svg"
-    image_path.write_text(svg, encoding="utf-8")
+    draw.text((40, 24), "SkinSafe training metrics", fill=ink, font=font(25, bold=True))
+    draw.text(
+        (40, 58),
+        f"{model_payload['modelVersion']} | {model_payload['trainedAt']}",
+        fill=ink,
+        font=font(13),
+    )
+
+    draw.text((40, 92), "Loss per epoch", fill=ink, font=font(17, bold=True))
+    draw.line((40, 300, 620, 300), fill=axis, width=2)
+    draw.line((40, 110, 40, 300), fill=axis, width=2)
+    draw.line(points(train_loss, 40, 110, 580, 190, max_loss), fill=purple, width=4)
+    draw.line(points(validation_loss, 40, 110, 580, 190, max_loss), fill=red, width=4)
+    draw.text((45, 306), "epoch 1", fill=ink, font=font(12))
+    draw.text((548, 306), f"epoch {len(history)}", fill=ink, font=font(12))
+    draw.text((55, 118), "train loss", fill=purple, font=font(12, bold=True))
+    draw.text((145, 118), "validation loss", fill=red, font=font(12, bold=True))
+
+    draw.text((40, 360), "Validation F1 @ 0.5", fill=ink, font=font(17, bold=True))
+    draw.line((40, 570, 620, 570), fill=axis, width=2)
+    draw.line((40, 380, 40, 570), fill=axis, width=2)
+    draw.line(points(validation_f1, 40, 380, 580, 190, 1.0), fill=green, width=4)
+    draw.text((45, 576), "epoch 1", fill=ink, font=font(12))
+    draw.text((548, 576), f"epoch {len(history)}", fill=ink, font=font(12))
+
+    draw.text((660, 92), "Final F1 by concern", fill=ink, font=font(17, bold=True))
+    draw.text(
+        (660, 120),
+        (
+            f"Macro F1: {model_payload['aggregateMetrics']['macroF1']} | "
+            f"Macro ROC-AUC: {model_payload['aggregateMetrics']['macroRocAuc']}"
+        ),
+        fill=ink,
+        font=font(13),
+    )
+    draw.line((660, 520, 1260, 520), fill=axis, width=2)
+    draw.line((660, 170, 660, 520), fill=axis, width=2)
+    for index, (name, score) in enumerate(zip(concerns, concern_f1, strict=True)):
+        bar_height = score * 350
+        bar_x = 660 + index * bar_width
+        draw.rectangle(
+            (bar_x, 520 - bar_height, bar_x + bar_width - 5, 520),
+            fill=purple,
+        )
+        draw.text(
+            (bar_x + 5, 503 - bar_height),
+            f"{score:.2f}",
+            fill=ink,
+            font=font(10, bold=True),
+        )
+        label = Image.new("RGBA", (130, 24), (255, 255, 255, 0))
+        ImageDraw.Draw(label).text((0, 2), name, fill=ink, font=font(11))
+        label = label.rotate(45, expand=True, resample=Image.Resampling.BICUBIC)
+        image.paste(label, (int(bar_x), 524), label)
+    image_path = model_dir / "training-metrics.jpg"
+    image.save(image_path, format="JPEG", quality=95, optimize=True)
     (model_dir / "training-history.json").write_text(
         json.dumps(history, ensure_ascii=False, indent=2),
         encoding="utf-8",
@@ -450,7 +504,7 @@ def main() -> int:
     args.catalog_output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(model_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     args.catalog_output.write_text(json.dumps(catalog_payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    image_path = write_training_images(model_payload, args.images_dir)
+    image_path = write_training_jpeg(model_payload, args.images_dir)
 
     print(
         json.dumps(

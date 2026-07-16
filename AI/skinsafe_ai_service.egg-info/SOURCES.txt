@@ -16,6 +16,7 @@ skinsafe_ai_service.egg-info/entry_points.txt
 skinsafe_ai_service.egg-info/requires.txt
 skinsafe_ai_service.egg-info/top_level.txt
 tests/test_api.py
+tests/test_endpoints.py
 tests/test_engine.py
 tests/test_local_model.py
 tests/test_safety_regressions.py
