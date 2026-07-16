@@ -10,6 +10,9 @@ from .schemas import (
     EducationItem,
     IngredientKnowledgeResponse,
     NeedsInputAnalysis,
+    ProfileIntakeRequest,
+    ProfileRecommendationResponse,
+    QuestionnaireResponse,
     RecommendedProduct,
     RecommendRequest,
     RecommendResponse,
@@ -72,6 +75,10 @@ def create_analysis(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputA
 )
 def create_recommendations(request: RecommendRequest) -> RecommendResponse:
     """Rank local products with trained relevance plus deterministic safety."""
+    return _build_recommendations(request)
+
+
+def _build_recommendations(request: RecommendRequest) -> RecommendResponse:
     from .data_loader import get_store
     from .local_model import get_local_ranker
 
@@ -134,6 +141,50 @@ def create_recommendations(request: RecommendRequest) -> RecommendResponse:
                 message="Coba pada area kecil dan hentikan pemakaian bila muncul reaksi yang mengkhawatirkan.",
             ),
         ],
+    )
+
+
+@app.get(
+    "/internal/v1/profile-intake/questions",
+    response_model=QuestionnaireResponse,
+    dependencies=[Depends(require_service_token)],
+)
+def get_profile_questions() -> QuestionnaireResponse:
+    from .profile_intake import questionnaire
+
+    return questionnaire()
+
+
+@app.post(
+    "/internal/v1/profile-recommendations",
+    response_model=ProfileRecommendationResponse,
+    dependencies=[Depends(require_service_token)],
+)
+def create_profile_recommendations(request: ProfileIntakeRequest) -> ProfileRecommendationResponse:
+    from .profile_intake import resolve_profile
+
+    resolution = resolve_profile(request)
+    profile = resolution.profile
+    if not resolution.can_recommend:
+        return ProfileRecommendationResponse(resolution=resolution)
+
+    assert profile.skin_type is not None
+    assert profile.pregnancy_status is not None
+    recommendations = _build_recommendations(
+        RecommendRequest(
+            concerns=profile.concerns,
+            skin_type=profile.skin_type,
+            sensitivity_level=profile.sensitivity_level,
+            conditions=profile.conditions,
+            pregnancy_status=profile.pregnancy_status,
+            current_ingredients=profile.current_ingredients,
+            budget_max=request.budget_max,
+            limit=request.limit,
+        )
+    )
+    return ProfileRecommendationResponse(
+        resolution=resolution,
+        recommendations=recommendations,
     )
 
 

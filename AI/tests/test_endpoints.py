@@ -182,6 +182,76 @@ class EndpointContractTests(unittest.TestCase):
         self.assertLessEqual(len(body["products"]), 5)
         self.assertTrue(all(product["reasons"] and product["matchingChemicals"] for product in body["products"]))
 
+    def test_profile_questionnaire_contract_has_four_ad_options(self) -> None:
+        response = self.client.get("/internal/v1/profile-intake/questions")
+        self.assertEqual(response.status_code, 200)
+        questions = response.json()["questions"]
+        self.assertEqual(len(questions), 4)
+        for question in questions:
+            self.assertEqual([option["value"] for option in question["options"]], ["A", "B", "C", "D"])
+
+    def test_narrative_profile_returns_recommendations_and_evidence(self) -> None:
+        response = self.client.post(
+            "/internal/v1/profile-recommendations",
+            json={
+                "narrative": (
+                    "Kulitku berminyak, sering jerawatan dan kadang merah. "
+                    "Aku tidak sensitif dan tidak sedang hamil."
+                ),
+                "limit": 4,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertTrue(body["resolution"]["canRecommend"])
+        self.assertEqual(body["resolution"]["profile"]["skinType"], "oily")
+        self.assertLessEqual(len(body["recommendations"]["products"]), 4)
+        self.assertTrue(body["resolution"]["fieldEvidence"])
+
+    def test_questionnaire_profile_returns_safe_recommendations(self) -> None:
+        response = self.client.post(
+            "/internal/v1/profile-recommendations",
+            json={
+                "answers": {
+                    "skin_feel": "D",
+                    "reactivity": "C",
+                    "primary_concern": "C",
+                    "safety_status": "B",
+                },
+                "limit": 5,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertEqual(body["resolution"]["profile"]["pregnancyStatus"], "pregnant")
+        self.assertTrue(body["resolution"]["canRecommend"])
+        blocked = ("retinol", "retinal", "retinyl", "retinoate", "tretinoin", "adapalene")
+        for product in body["recommendations"]["products"]:
+            evidence = " ".join(product["matchingChemicals"]).lower()
+            self.assertFalse(any(term in evidence for term in blocked))
+
+    def test_profile_red_flag_and_missing_fields_do_not_rank(self) -> None:
+        payloads = [
+            {
+                "narrative": "Kulitku berminyak dan jerawatan, sekarang bibir bengkak dan sesak napas.",
+                "pregnancyStatus": "none",
+            },
+            {"narrative": "Aku ingin skincare yang bagus."},
+        ]
+        for payload in payloads:
+            with self.subTest(payload=payload):
+                response = self.client.post("/internal/v1/profile-recommendations", json=payload)
+                self.assertEqual(response.status_code, 200)
+                self.assertFalse(response.json()["resolution"]["canRecommend"])
+                self.assertIsNone(response.json()["recommendations"])
+
+    def test_profile_intake_rejects_empty_or_unknown_answers(self) -> None:
+        payloads = [{}, {"answers": {"unknown": "A"}}, {"answers": {"skin_feel": "E"}}]
+        for payload in payloads:
+            with self.subTest(payload=payload):
+                response = self.client.post("/internal/v1/profile-recommendations", json=payload)
+                self.assertEqual(response.status_code, 422)
+
     def test_recommendation_reports_unsupported_concerns(self) -> None:
         unsupported = self.client.post(
             "/internal/v1/recommendations",
