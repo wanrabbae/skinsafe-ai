@@ -59,6 +59,76 @@ class LocalModelTests(unittest.TestCase):
         }
         self.assertEqual(len(identities), len(result.products))
 
+    def test_overall_scores_are_calibrated_and_differentiated(self) -> None:
+        profiles = [
+            (["dryness", "hydrating"], "dry", "low"),
+            (["acne"], "oily", "medium"),
+            (["redness"], "sensitive", "high"),
+            (["dullness", "uneven skintone"], "normal", "medium"),
+        ]
+        for concerns, skin_type, sensitivity in profiles:
+            with self.subTest(concerns=concerns):
+                result = self.ranker.recommend(
+                    concerns=concerns,
+                    skin_type=skin_type,
+                    sensitivity_level=sensitivity,
+                    limit=10,
+                )
+                scores = [item.relevance_score for item in result.products]
+                self.assertGreaterEqual(len(scores), 5)
+                self.assertTrue(all(0 <= score <= 95 for score in scores))
+                self.assertNotIn(100, scores)
+                self.assertGreaterEqual(len(set(scores)), 5)
+                for item in result.products:
+                    self.assertEqual(item.score_breakdown["uncertaintyReserve"], 5.0)
+                    self.assertIn("modelRelevance", item.score_breakdown)
+                    self.assertIn("ingredientEvidence", item.score_breakdown)
+
+    def test_dryness_profile_deprioritizes_strong_actives(self) -> None:
+        result = self.ranker.recommend(
+            concerns=["dryness", "hydrating"],
+            skin_type="dry",
+            sensitivity_level="low",
+            limit=501,
+        )
+        retinol_products = [
+            item
+            for item in result.products
+            if "retinol" in item.product["name"].lower()
+        ]
+        self.assertTrue(retinol_products)
+        self.assertTrue(
+            all(item.score_breakdown["safetyPenalty"] >= 8 for item in retinol_products)
+        )
+
+    def test_safety_penalty_reduces_overall_score(self) -> None:
+        normal = self.ranker.recommend(
+            concerns=["redness"],
+            skin_type="normal",
+            sensitivity_level="low",
+            limit=50,
+        )
+        sensitive = self.ranker.recommend(
+            concerns=["redness"],
+            skin_type="sensitive",
+            sensitivity_level="high",
+            limit=50,
+        )
+        normal_by_name = {
+            (item.product["brand"], item.product["name"]): item
+            for item in normal.products
+        }
+        penalized = [
+            item
+            for item in sensitive.products
+            if item.score_breakdown["safetyPenalty"] > 0
+            and (item.product["brand"], item.product["name"]) in normal_by_name
+        ]
+        self.assertTrue(penalized)
+        for item in penalized:
+            baseline = normal_by_name[(item.product["brand"], item.product["name"])]
+            self.assertLess(item.relevance_score, baseline.relevance_score)
+
     def test_budget_does_not_invent_missing_prices(self) -> None:
         result = self.ranker.recommend(
             concerns=["dryness"],
