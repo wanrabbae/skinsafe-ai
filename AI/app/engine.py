@@ -25,10 +25,13 @@ from .normalizer import IngredientNormalizer, ResolvedIngredient
 # ---------------------------------------------------------------------------
 
 _EXFOLIANT_KEYWORDS = {
-    "exfoliant", "exfoliator", "acid", "aha", "bha", "peel", "chemical exfoliant",
+    "exfoliant", "exfoliator", "aha", "bha", "peel", "chemical exfoliant",
+    "glycolic acid", "lactic acid", "mandelic acid", "salicylic acid",
+    "alpha hydroxy acid", "beta hydroxy acid", "gluconolactone",
 }
 _RETINOID_KEYWORDS = {
-    "retinol", "retinoid", "retinoic", "retinal", "tretinoin", "adapalene",
+    "retinol", "retinoid", "retinoic", "retinal", "retinyl", "tretinoin", "adapalene",
+    "hydroxypinacolone retinoate",
 }
 _STRONG_ACTIVE_KEYWORDS = _EXFOLIANT_KEYWORDS | _RETINOID_KEYWORDS | {
     "vitamin c", "l-ascorbic", "hydroquinone", "benzoyl peroxide", "azelaic acid",
@@ -156,13 +159,20 @@ def _skin_type_compatible(target_text: str, user_skin_type: str) -> str:
 
     target_lower = target_text.lower()
 
+    user_keywords = _SKIN_TYPE_MAP.get(user_skin_type.lower(), [])
+    negative_phrases = ("not recommended", "may want to avoid", "should avoid", "isn't recommended")
+    if any(phrase in target_lower for phrase in negative_phrases) and any(
+        keyword in target_lower for keyword in user_keywords
+    ):
+        return "caution"
+
     # Check if the ingredient is marked as suitable for all skin types
     for kw in _SKIN_TYPE_MAP.get("normal", []):
         if kw in target_lower:
             return "beneficial"
 
     # Check if user's skin type is mentioned positively
-    keywords = _SKIN_TYPE_MAP.get(user_skin_type.lower(), [])
+    keywords = user_keywords
     for kw in keywords:
         if kw in target_lower:
             return "beneficial"
@@ -404,12 +414,13 @@ class RoutineConflictEngine:
         strong_actives: list[str] = []
 
         for report in reports:
-            if report.chemical is None:
-                continue
-            if report.type_category == "retinoid":
+            normalized_name = report.name.lower().replace("_", " ").replace("-", " ")
+            inferred_retinoid = any(keyword in normalized_name for keyword in _RETINOID_KEYWORDS)
+            inferred_exfoliant = any(keyword in normalized_name for keyword in _EXFOLIANT_KEYWORDS)
+            if report.type_category == "retinoid" or inferred_retinoid:
                 retinoids.append(report.name)
                 strong_actives.append(report.name)
-            elif report.type_category == "exfoliant":
+            elif report.type_category == "exfoliant" or inferred_exfoliant:
                 exfoliants.append(report.name)
                 strong_actives.append(report.name)
 
@@ -468,7 +479,10 @@ class RoutineConflictEngine:
 
         # Check against current routine
         if routine_ingredients:
-            routine_set = {r.lower() for r in routine_ingredients}
+            routine_set = {
+                r.lower().replace("_", " ").replace("-", " ").strip()
+                for r in routine_ingredients
+            }
             product_actives = {r.name.lower() for r in reports if r.type_category in ("retinoid", "exfoliant") and r.chemical}
 
             # Duplicate active load
@@ -482,6 +496,26 @@ class RoutineConflictEngine:
                         f"Penggunaan ganda dapat meningkatkan risiko iritasi."
                     ),
                     involved_ingredients=list(overlap),
+                ))
+
+            routine_retinoids = [
+                name for name in routine_set
+                if any(keyword in name for keyword in _RETINOID_KEYWORDS)
+            ]
+            routine_exfoliants = [
+                name for name in routine_set
+                if any(keyword in name for keyword in _EXFOLIANT_KEYWORDS)
+            ]
+            if (retinoids and routine_exfoliants) or (exfoliants and routine_retinoids):
+                involved = retinoids + exfoliants + routine_retinoids + routine_exfoliants
+                conflicts.append(ConflictFinding(
+                    code="ROUTINE_RETINOID_EXFOLIANT",
+                    severity="high",
+                    message=(
+                        "Produk dan rutinitas saat ini berpotensi menumpuk retinoid dengan exfoliant. "
+                        "Pertimbangkan penggunaan pada waktu berbeda dan mulai secara perlahan."
+                    ),
+                    involved_ingredients=involved,
                 ))
 
         # Deduplicate conflicts by code + involved ingredients

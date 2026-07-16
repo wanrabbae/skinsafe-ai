@@ -220,6 +220,15 @@ class DataStore:
                 continue
             chem_key = _norm(chem)
             symptom_key = _norm_symptom(symptom_raw)
+            chemical = self.chemicals.get(chem_key)
+            if chemical is None:
+                continue
+            chemical_type = _norm(chemical.type)
+            # Formulation helpers are not treatment evidence. The seed symptom
+            # CSV links several pure preservatives/emulsifiers to acne/aging,
+            # which otherwise makes unrelated products rank highly.
+            if chemical_type == "preservative" or chemical_type.startswith("emulsifier") or chemical_type.startswith("foaming agent"):
+                continue
 
             # symptom → chemicals
             self.symptom_to_chems.setdefault(symptom_key, [])

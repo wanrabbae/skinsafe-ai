@@ -181,7 +181,7 @@ class IngredientNormalizer:
         tokenization (per docs Stage 3 — Normalization).
         """
         # Split by comma or semicolon, but not inside parentheses
-        parts = _split_ingredients(raw_text)
+        parts = split_ingredients(raw_text)
         return self.resolve_list(parts)
 
     @property
@@ -194,7 +194,7 @@ class IngredientNormalizer:
 # Ingredient string parser
 # ---------------------------------------------------------------------------
 
-def _split_ingredients(raw: str) -> list[str]:
+def split_ingredients(raw: str) -> list[str]:
     """Split an ingredient string by comma/semicolon, parenthesis-aware.
 
     Handles cases like:
@@ -227,3 +227,7 @@ def _split_ingredients(raw: str) -> list[str]:
         result.append(token)
 
     return result
+
+
+# Backward-compatible alias for the existing unit tests and internal imports.
+_split_ingredients = split_ingredients
