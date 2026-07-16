@@ -1,2 +1,7 @@
-// Public read-only API. Isi saat module profile diimplementasikan.
-export {};
+export { SkinProfileIntake } from "./components/skin-profile-intake";
+export type {
+  ProfileIntakePayload,
+  ProfileQuestionnaire,
+  ProfileRecommendationResult,
+  QuestionChoice,
+} from "./profile.types";
