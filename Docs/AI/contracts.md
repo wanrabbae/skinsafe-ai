@@ -108,9 +108,13 @@ Penambahan optional field bersifat backward-compatible. Rename, type change, ata
 
 Menerima concerns, skinType, optional sensitivityLevel, conditions,
 pregnancyStatus, currentIngredients, budgetMax, dan limit. Response menyertakan
-ranked products, modelVersion, modelScore, confidence, reasons, cautions,
-limitations, dan education. Produk tanpa traceable ingredient evidence tidak
-ditampilkan.
+ranked products, overallScore, relevanceScore, modelVersion, scoringVersion,
+modelScore, scoreBreakdown, confidence, reasons, cautions, limitations, dan
+education. `overallScore` adalah hasil gabungan model relevance, concern
+coverage, evidence position, explicit product intent, dan deterministic
+penalty. Nilainya maksimum 95 karena uncertainty reserve. `relevanceScore`
+sementara menjadi alias backward-compatible untuk `overallScore`. Produk tanpa
+traceable ingredient evidence tidak ditampilkan.
 
 Karena katalog model belum memiliki harga, request dengan budgetMax dapat
 menghasilkan daftar kosong; service tidak mengarang harga.

@@ -12,6 +12,7 @@ di training maupun inference.
 - local multi-label logistic ranker untuk 12 concern;
 - 501 produk lokal hasil kurasi fixture scripts/incidecoder;
 - alasan rekomendasi, evidence ingredient, caution, confidence, dan literasi;
+- overall compatibility score terkalibrasi dengan breakdown dan uncertainty reserve;
 - ingredient knowledge endpoint dari chem_full.csv;
 - intake profil dari narasi Bahasa Indonesia atau empat pertanyaan A-D;
 - red-flag, contradiction, missing safety status, dan routine-active gates;
@@ -70,6 +71,11 @@ product intent. Lihat models/MODEL_CARD.md sebelum menafsirkan metrik.
 - GET /internal/v1/profile-intake/questions
 - POST /internal/v1/profile-recommendations
 - GET /internal/v1/ingredients/{ingredient_name}
+
+Endpoint rekomendasi mengembalikan `overallScore`, `modelScore`,
+`scoreBreakdown`, `modelVersion`, dan `scoringVersion`. Overall score maksimum
+95 karena lima poin menjadi uncertainty reserve untuk data formulasi dan
+respons individual yang tidak tersedia.
 
 Set AI_SERVICE_TOKEN di luar local development. Browser/PWA tidak boleh
 memanggil service ini langsung; Next.js BFF meneruskan request server-side.
