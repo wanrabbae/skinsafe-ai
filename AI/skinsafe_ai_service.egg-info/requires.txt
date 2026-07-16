@@ -1,3 +1,4 @@
 fastapi[standard-no-fastapi-cloud-cli]==0.139.0
 
 [dev]
+pytest<10,>=8.3
