@@ -1,8 +1,6 @@
 import {
   AlertTriangle,
-  Ban,
   CircleCheck,
-  CircleX,
   Droplet,
   Droplets,
   Leaf,
@@ -23,19 +21,6 @@ import { cn } from "@/shared/lib/utils";
 const cardShell =
   "rounded-3xl border border-[rgb(109_40_217/8%)] bg-surface-lowest p-[18px] shadow-card";
 
-const fallbackProblems = [
-  {
-    icon: Target,
-    title: "Jerawat Aktif",
-    desc: "Fokus pada penyembuhan tanpa membuat kulit semakin kering.",
-  },
-  {
-    icon: Droplet,
-    title: "Kemerahan",
-    desc: "Reaksi sensitif akibat skin barrier yang terganggu.",
-  },
-];
-
 const problemIcons: Record<string, LucideIcon> = {
   acne: Target,
   redness: Droplet,
@@ -48,18 +33,9 @@ const problemIcons: Record<string, LucideIcon> = {
   "uneven skintone": Droplet,
 };
 
-const recommended = [
-  { name: "Niacinamide", desc: "Mencerahkan & memperkuat barrier kulit." },
-  { name: "Centella Asiatica", desc: "Menenangkan peradangan & kemerahan." },
-  { name: "Salicylic Acid (BHA)", desc: "Membersihkan pori & mengontrol minyak." },
-  { name: "Ceramide", desc: "Menjaga kelembapan & elastisitas." },
-];
-
-const avoid = [
-  { name: "Fragrance (Parfum)", desc: "Potensi iritasi tinggi pada kulit sensitif." },
-  { name: "Simple Alcohols", desc: "Dapat mengikis minyak alami & membuat kering." },
-  { name: "Essential Oils", desc: "Sering memicu reaksi alergi pada barrier lemah." },
-];
+function unique(values: string[]): string[] {
+  return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
 
 function CardHeading({
   icon: Icon,
@@ -104,13 +80,14 @@ export function HomeWithProfileView({
   const problemCodes = profile
     ? [...new Set([...profile.concerns, ...profile.conditions])]
     : [];
-  const problems = problemCodes.length
-    ? problemCodes.map((code) => ({
-        icon: problemIcons[code] ?? Target,
-        title: formatProfileLabel(code),
-        desc: undefined as string | undefined,
-      }))
-    : fallbackProblems;
+  const problems = problemCodes.map((code) => ({
+    icon: problemIcons[code] ?? Target,
+    title: formatProfileLabel(code),
+  }));
+
+  const products = result?.recommendations?.products ?? [];
+  const recommendedChems = unique(products.flatMap((product) => product.matchingChemicals));
+  const attentionNotes = unique(products.flatMap((product) => product.cautions));
 
   return (
     <PageMain>
@@ -159,58 +136,62 @@ export function HomeWithProfileView({
         <CardHeading icon={AlertTriangle} iconClass="text-caution" id="problems-title">
           Masalah Utama
         </CardHeading>
-        <div className="mt-3 space-y-3">
-          {problems.map(({ icon: Icon, title, desc }) => (
-            <div className="flex items-start gap-3" key={title}>
-              <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container text-primary [&_svg]:size-[16px]">
-                <Icon aria-hidden="true" />
-              </span>
-              <div>
-                <h3 className="text-[0.85rem] font-bold">{title}</h3>
-                {desc ? (
-                  <p className="mt-0.5 text-[0.75rem] leading-normal text-on-surface-variant">
-                    {desc}
-                  </p>
-                ) : null}
+        {problems.length ? (
+          <div className="mt-3 space-y-3">
+            {problems.map(({ icon: Icon, title }) => (
+              <div className="flex items-start gap-3" key={title}>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-surface-container text-primary [&_svg]:size-[16px]">
+                  <Icon aria-hidden="true" />
+                </span>
+                <div>
+                  <h3 className="text-[0.85rem] font-bold">{title}</h3>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <p className="mt-3 text-[0.8rem] leading-normal text-on-surface-variant">
+            Belum ada masalah kulit yang terdeteksi dari profilmu. Lengkapi{" "}
+            <Link href="/test" className="font-bold text-primary-strong">
+              tes profil kulit
+            </Link>{" "}
+            untuk analisis yang lebih akurat.
+          </p>
+        )}
       </section>
 
-      <section className={cn(cardShell, "mt-4")} aria-labelledby="recommended-title">
-        <CardHeading icon={CircleCheck} iconClass="text-safe" id="recommended-title">
-          Kandungan yang Dianjurkan
-        </CardHeading>
-        <div className="mt-3 space-y-2">
-          {recommended.map(({ name, desc }) => (
-            <div className="rounded-[14px] bg-safe-soft p-3" key={name}>
-              <div className="flex items-center gap-2 [&_svg]:size-[15px]">
-                <Leaf aria-hidden="true" className="text-safe" />
-                <h3 className="text-[0.8rem] font-bold text-safe">{name}</h3>
+      {recommendedChems.length ? (
+        <section className={cn(cardShell, "mt-4")} aria-labelledby="recommended-title">
+          <CardHeading icon={CircleCheck} iconClass="text-safe" id="recommended-title">
+            Kandungan yang Dianjurkan
+          </CardHeading>
+          <div className="mt-3 space-y-2">
+            {recommendedChems.map((name) => (
+              <div className="rounded-[14px] bg-safe-soft p-3" key={name}>
+                <div className="flex items-center gap-2 [&_svg]:size-[15px]">
+                  <Leaf aria-hidden="true" className="text-safe" />
+                  <h3 className="text-[0.8rem] font-bold capitalize text-safe">{name}</h3>
+                </div>
               </div>
-              <p className="mt-1 text-[0.72rem] leading-snug text-on-surface-variant">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      ) : null}
 
-      <section className={cn(cardShell, "mt-4")} aria-labelledby="avoid-title">
-        <CardHeading icon={CircleX} iconClass="text-danger" id="avoid-title">
-          Kandungan yang Dihindari
-        </CardHeading>
-        <div className="mt-3 space-y-2">
-          {avoid.map(({ name, desc }) => (
-            <div className="rounded-[14px] bg-danger-soft p-3" key={name}>
-              <div className="flex items-center gap-2 [&_svg]:size-[15px]">
-                <Ban aria-hidden="true" className="text-danger" />
-                <h3 className="text-[0.8rem] font-bold text-danger">{name}</h3>
+      {attentionNotes.length ? (
+        <section className={cn(cardShell, "mt-4")} aria-labelledby="attention-title">
+          <CardHeading icon={AlertTriangle} iconClass="text-danger" id="attention-title">
+            Hal yang Perlu Diperhatikan
+          </CardHeading>
+          <div className="mt-3 space-y-2">
+            {attentionNotes.map((note) => (
+              <div className="rounded-[14px] bg-danger-soft p-3" key={note}>
+                <p className="text-[0.75rem] leading-snug text-on-surface-variant">{note}</p>
               </div>
-              <p className="mt-1 text-[0.72rem] leading-snug text-on-surface-variant">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      ) : null}
     </PageMain>
   );
 }

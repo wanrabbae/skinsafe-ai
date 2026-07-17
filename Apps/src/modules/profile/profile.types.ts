@@ -51,5 +51,11 @@ export type ProfileRecommendationResult = {
     }>;
     modelVersion: string | null;
     limitations: string[];
+    education?: Array<{
+      code: string;
+      title: string;
+      message: string;
+      evidence?: string[];
+    }>;
   };
 };

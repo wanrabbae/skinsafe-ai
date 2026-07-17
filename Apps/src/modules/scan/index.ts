@@ -1,4 +1,10 @@
-export { analyzeProduct } from "./service/scan-ai.service";
+export {
+  loadScanResult,
+  saveScanResult,
+  useScanHistory,
+  useScanResult,
+} from "./scan-storage";
+export type { ScanHistoryEntry } from "./scan-storage";
 export type {
   AnalysisReport,
   AnalysisResponse,
