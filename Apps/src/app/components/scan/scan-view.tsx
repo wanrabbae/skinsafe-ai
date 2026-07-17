@@ -2,23 +2,20 @@
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
-  Camera,
+  AlertTriangle,
   Check,
-  FileText,
-  Image as ImageIcon,
   Loader2,
   LockKeyhole,
   ScanLine,
   Search,
   ShieldAlert,
   ShieldCheck,
-  ShoppingBag,
   X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-import type { BpomSearchItem, BpomSearchResponse } from "@/modules/bpom";
+import type { BpomSearchResponse } from "@/modules/bpom";
 import { saveScanResult } from "@/modules/scan";
 import type { AnalysisResponse, ScanProfile } from "@/modules/scan";
 import { useProfileResult } from "@/modules/profile";
@@ -28,6 +25,15 @@ import { MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
 
 type ProfileShape = ReturnType<typeof useProfileResult>["result"];
+
+type InciProduct = {
+  slug: string;
+  name: string;
+  brand: string | null;
+  imageUrl: string | null;
+  ingredients: string[];
+  sourceUrl: string;
+};
 
 function buildScanProfile(result: ProfileShape): ScanProfile {
   const profile = result?.resolution.profile;
@@ -52,38 +58,91 @@ function buildScanProfile(result: ProfileShape): ScanProfile {
 export function ScanView() {
   const router = useRouter();
   const { result } = useProfileResult();
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const bpomDialogRef = useRef<HTMLDialogElement>(null);
+
   const [ingredientsText, setIngredientsText] = useState("");
-  const [photoName, setPhotoName] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
-  const [selected, setSelected] = useState<BpomSearchItem | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<InciProduct | null>(null);
+  const [bpomResult, setBpomResult] = useState<BpomSearchResponse | null>(null);
 
+  // --- Product search (INCIDecoder) ---
   const search = useQuery({
-    queryKey: ["bpom-search", submittedQuery],
-    enabled: submittedQuery.length >= 3,
+    queryKey: ["product-search", submittedQuery],
+    enabled: submittedQuery.length >= 2,
     staleTime: 5 * 60_000,
-    queryFn: async (): Promise<BpomSearchResponse> => {
+    queryFn: async (): Promise<{ results: InciProduct[] }> => {
       const response = await fetch(
-        `/api/v1/bpom/search?q=${encodeURIComponent(submittedQuery)}`,
+        `/api/v1/products/search?q=${encodeURIComponent(submittedQuery)}`,
       );
       const body: unknown = await response.json().catch(() => null);
       if (!response.ok) {
         const message =
           (body as { error?: { message?: string } } | null)?.error?.message ??
-          "Pencarian BPOM sedang tidak tersedia.";
+          "Pencarian produk sedang tidak tersedia.";
         throw new Error(message);
       }
-      return body as BpomSearchResponse;
+      return body as { results: InciProduct[] };
     },
   });
 
-  const selectProduct = (item: BpomSearchItem) => {
-    setSelected(item);
-    if (item.composition) setIngredientsText(item.composition);
-    setSubmittedQuery("");
-    setSearchTerm("");
-  };
+  // Show modal when search results arrive
+  useEffect(() => {
+    if (search.data && search.data.results.length > 0 && !selectedProduct) {
+      dialogRef.current?.showModal();
+    }
+  }, [search.data, selectedProduct]);
 
+  // --- Select product → save to DB → verify BPOM ---
+  const selectProduct = useCallback(
+    async (product: InciProduct) => {
+      setSelectedProduct(product);
+      dialogRef.current?.close();
+
+      // Auto-fill ingredients
+      if (product.ingredients.length > 0) {
+        setIngredientsText(product.ingredients.join(", "));
+      }
+
+      // Save to DB
+      try {
+        await fetch("/api/v1/products/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            slug: product.slug,
+            name: product.name,
+            brand: product.brand,
+            imageUrl: product.imageUrl,
+            ingredients: product.ingredients.join(", "),
+            sourceUrl: product.sourceUrl,
+          }),
+        });
+      } catch {
+        // non-blocking — DB save failure shouldn't block the user
+      }
+
+      // Verify BPOM
+      try {
+        const bpomResponse = await fetch(
+          `/api/v1/bpom/verify?q=${encodeURIComponent(product.name)}`,
+        );
+        const bpomData = (await bpomResponse.json()) as BpomSearchResponse;
+        setBpomResult(bpomData);
+
+        if (!bpomData.results || bpomData.results.length === 0) {
+          bpomDialogRef.current?.showModal();
+        }
+      } catch {
+        setBpomResult(null);
+        bpomDialogRef.current?.showModal();
+      }
+    },
+    [],
+  );
+
+  // --- Analyze mutation (existing logic) ---
   const mutation = useMutation({
     mutationFn: async (): Promise<AnalysisResponse> => {
       const response = await fetch("/api/v1/scans/analyze", {
@@ -94,7 +153,7 @@ export function ScanView() {
           input: {
             method: "manual",
             ingredientsText: ingredientsText.trim(),
-            bpomNumber: selected?.number ?? null,
+            bpomNumber: bpomResult?.results?.[0]?.number ?? null,
           },
           profile: buildScanProfile(result),
         }),
@@ -111,8 +170,8 @@ export function ScanView() {
     onSuccess: (data) => {
       if (data.status === "completed") {
         saveScanResult(data, {
-          productName: selected?.productName,
-          brand: selected?.registrant,
+          productName: selectedProduct?.name,
+          brand: selectedProduct?.brand,
         });
         router.push("/scan/hasil");
       }
@@ -133,222 +192,187 @@ export function ScanView() {
           Scan produk
         </h1>
         <p className="mt-2 max-w-[22rem] text-[0.8rem] leading-normal text-on-surface-variant">
-          Arahkan kamera ke label komposisi agar semua bahan terbaca jelas.
+          Cari nama atau merek produk untuk mengambil daftar bahan secara otomatis.
         </p>
       </header>
 
-      <section
-        className="rounded-3xl border border-[rgb(109_40_217/8%)] bg-surface-lowest p-2.5 shadow-card"
-        aria-labelledby="capture-title"
-      >
-        <div className="viewfinder" aria-hidden="true">
-          <span className="corner corner-tl" />
-          <span className="corner corner-tr" />
-          <span className="corner corner-bl" />
-          <span className="corner corner-br" />
-          <span className="scan-beam" />
-          <span className="viewfinder-icon"><ScanLine /></span>
-        </div>
-        <div className="px-1 pt-2.5 pb-[9px] text-center">
-          <h2 id="capture-title" className="text-[0.94rem] font-bold leading-[1.35] tracking-[-0.02em]">
-            Pastikan komposisi terlihat
-          </h2>
-          <p className="mx-auto mt-[5px] max-w-[18rem] text-[0.7rem] leading-normal text-on-surface-variant">
-            Gunakan pencahayaan terang dan hindari pantulan pada kemasan.
-          </p>
-        </div>
-        <Button asChild variant="primary" size="pill" className="min-h-[46px]">
-          <label htmlFor="camera-upload">
-            <Camera aria-hidden="true" />
-            Ambil foto
-          </label>
-        </Button>
-        <input
-          className="sr-only"
-          id="camera-upload"
-          name="camera-upload"
-          type="file"
-          accept="image/*"
-          capture="environment"
-          onChange={(event) => setPhotoName(event.target.files?.[0]?.name ?? null)}
-        />
-        <Button asChild variant="secondary" size="pill" className="mt-[6px] min-h-[46px]">
-          <label htmlFor="gallery-upload">
-            <ImageIcon aria-hidden="true" />
-            Unggah dari galeri
-          </label>
-        </Button>
-        <input
-          className="sr-only"
-          id="gallery-upload"
-          name="gallery-upload"
-          type="file"
-          accept="image/*"
-          onChange={(event) => setPhotoName(event.target.files?.[0]?.name ?? null)}
-        />
-        {photoName ? (
-          <p className="mt-2.5 px-1 text-center text-[0.7rem] leading-normal text-on-surface-variant">
-            <span className="font-semibold">{photoName}</span> dipilih. Pembacaan
-            teks otomatis (OCR) belum tersedia — tempel daftar bahan di bawah agar
-            bisa dianalisis.
-          </p>
-        ) : null}
-      </section>
-
-      <div className="divider"><span>ATAU</span></div>
-
-      <section aria-labelledby="bpom-title" className="mb-5">
+      {/* --- Search Product --- */}
+      <section aria-labelledby="search-title" className="mb-5">
         <div className="mb-3">
-          <MicroLabel>VERIFIKASI BPOM</MicroLabel>
-          <h2 id="bpom-title" className="mt-1 text-[1.08rem] font-bold leading-[1.35] tracking-[-0.02em]">
-            Cari produk di BPOM
+          <MicroLabel>CARI PRODUK</MicroLabel>
+          <h2 id="search-title" className="mt-1 text-[1.08rem] font-bold leading-[1.35] tracking-[-0.02em]">
+            Nama produk atau Merk
           </h2>
           <p className="mt-1 text-[0.72rem] leading-normal text-on-surface-variant">
-            Cari nama atau merek untuk mengambil nomor notifikasi resmi sekaligus memverifikasi status registrasinya.
+            Cari nama produk skincare untuk mendapatkan daftar komposisi dan verifikasi BPOM.
           </p>
         </div>
 
-        {selected ? (
-          <div
-            className={`flex items-start gap-3 rounded-[16px] border p-3.5 ${
-              selected.active === false
-                ? "border-danger/20 bg-danger-soft"
-                : selected.active
-                  ? "border-safe/20 bg-safe-soft"
-                  : "border-caution/20 bg-caution-soft"
-            }`}
-          >
-            {selected.active === false ? (
-              <ShieldAlert aria-hidden="true" className="mt-0.5 size-[18px] shrink-0 text-danger" />
-            ) : (
-              <ShieldCheck
-                aria-hidden="true"
-                className={`mt-0.5 size-[18px] shrink-0 ${selected.active ? "text-safe" : "text-caution"}`}
+        {selectedProduct ? (
+          <div className="flex items-start gap-3 rounded-[16px] border border-primary/20 bg-primary/5 p-3.5">
+            {selectedProduct.imageUrl ? (
+              <img
+                src={selectedProduct.imageUrl}
+                alt={selectedProduct.name}
+                className="size-12 shrink-0 rounded-[10px] border border-outline-variant object-cover"
               />
-            )}
+            ) : null}
             <div className="min-w-0 flex-1">
-              <h3 className="truncate text-[0.9rem] font-bold">
-                {selected.productName ?? "Produk BPOM terpilih"}
-              </h3>
-              {selected.registrant ? (
-                <p className="truncate text-[0.75rem] text-on-surface-variant">{selected.registrant}</p>
+              <h3 className="truncate text-[0.9rem] font-bold">{selectedProduct.name}</h3>
+              {selectedProduct.brand ? (
+                <p className="truncate text-[0.75rem] text-on-surface-variant">{selectedProduct.brand}</p>
               ) : null}
-              {selected.number ? (
-                <p className="mt-0.5 font-mono text-[0.75rem] text-on-surface">{selected.number}</p>
+              {bpomResult && bpomResult.results.length > 0 ? (
+                <p className="mt-1 flex items-center gap-1 text-[0.72rem] font-bold text-safe">
+                  <ShieldCheck className="size-3.5" aria-hidden="true" />
+                  Terdaftar BPOM
+                </p>
+              ) : bpomResult ? (
+                <p className="mt-1 flex items-center gap-1 text-[0.72rem] font-bold text-danger">
+                  <ShieldAlert className="size-3.5" aria-hidden="true" />
+                  Tidak ditemukan di BPOM
+                </p>
               ) : null}
-              <p className="mt-1 text-[0.72rem] font-bold">
-                {selected.active === false
-                  ? "Status: tidak aktif"
-                  : selected.active
-                    ? "Terdaftar & aktif"
-                    : `Status: ${selected.status ?? "tidak diketahui"}`}
-              </p>
             </div>
             <button
               type="button"
               aria-label="Hapus produk terpilih"
               className="shrink-0 rounded-full p-1 text-on-surface-variant hover:bg-black/5 [&_svg]:size-[18px]"
-              onClick={() => setSelected(null)}
+              onClick={() => {
+                setSelectedProduct(null);
+                setBpomResult(null);
+                setIngredientsText("");
+                setSubmittedQuery("");
+              }}
             >
               <X aria-hidden="true" />
             </button>
           </div>
         ) : (
-          <>
-            <form
-              className="flex items-stretch gap-2"
-              onSubmit={(event) => {
-                event.preventDefault();
+          <form
+            className="flex items-stretch gap-2"
+            onSubmit={(event) => {
+              event.preventDefault();
+              if (searchTerm.trim().length >= 2) {
                 setSubmittedQuery(searchTerm.trim());
-              }}
+              }
+            }}
+          >
+            <label className="flex min-w-0 flex-1 items-center gap-2.5 rounded-[16px] border border-outline-variant bg-white p-[13px] focus-within:border-2 focus-within:border-primary focus-within:p-[14px] [&>svg]:size-[19px] [&>svg]:shrink-0 [&>svg]:text-outline">
+              <Search aria-hidden="true" />
+              <input
+                className="w-full min-w-0 border-0 bg-transparent leading-[1.45] text-on-surface outline-0 placeholder:text-[#928a9e]"
+                aria-label="Cari produk"
+                type="search"
+                placeholder="Nama atau merek produk"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+              />
+            </label>
+            <Button
+              type="submit"
+              variant="secondary"
+              size="pill"
+              className="min-h-[46px] w-auto shrink-0 px-6"
+              disabled={searchTerm.trim().length < 2 || search.isFetching}
             >
-              <label className="flex min-w-0 flex-1 items-center gap-2.5 rounded-[16px] border border-outline-variant bg-white p-[13px] focus-within:border-2 focus-within:border-primary focus-within:p-[14px] [&>svg]:size-[19px] [&>svg]:shrink-0 [&>svg]:text-outline">
-                <Search aria-hidden="true" />
-                <input
-                  className="w-full min-w-0 border-0 bg-transparent leading-[1.45] text-on-surface outline-0 placeholder:text-[#928a9e]"
-                  aria-label="Cari produk di BPOM"
-                  type="search"
-                  placeholder="Nama atau merek produk"
-                  value={searchTerm}
-                  onChange={(event) => setSearchTerm(event.target.value)}
-                />
-              </label>
-              <Button
-                type="submit"
-                variant="secondary"
-                size="pill"
-                className="min-h-[46px] w-auto shrink-0 px-6"
-                disabled={searchTerm.trim().length < 3 || search.isFetching}
-              >
-                {search.isFetching ? <Loader2 aria-hidden="true" className="spin" /> : "Cari"}
-              </Button>
-            </form>
-
-            {search.isError ? (
-              <p className="mt-3 rounded-[16px] border border-danger/20 bg-danger-soft p-3.5 text-[0.78rem] leading-normal text-danger">
-                {search.error.message}
-              </p>
-            ) : null}
-
-            {search.data && search.data.results.length === 0 && !search.isFetching ? (
-              <p className="mt-3 rounded-[16px] border border-outline-variant bg-surface-container p-3.5 text-[0.78rem] leading-normal text-on-surface-variant">
-                {!search.data.configured
-                  ? "Pencarian BPOM belum dikonfigurasi di server. Kamu tetap bisa menempel daftar bahan manual."
-                  : !search.data.reachable
-                    ? "Layanan verifikasi BPOM sedang tidak aktif, jadi produk belum bisa dicari otomatis. Tempel daftar bahan secara manual dulu."
-                    : "Produk tidak ditemukan di registry BPOM. Periksa ejaan atau tempel daftar bahan secara manual."}
-              </p>
-            ) : null}
-
-            {search.data && search.data.results.length > 0 ? (
-              <ul className="mt-3 space-y-2">
-                {search.data.results.map((item, index) => (
-                  <li key={`${item.number ?? item.productName ?? "item"}-${index}`}>
-                    <button
-                      type="button"
-                      className="flex w-full items-center gap-3 rounded-[16px] border border-outline-variant bg-white p-3 text-left hover:border-primary"
-                      onClick={() => selectProduct(item)}
-                    >
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-[0.85rem] font-bold">
-                          {item.productName ?? "Produk BPOM"}
-                        </p>
-                        {item.registrant ? (
-                          <p className="truncate text-[0.72rem] text-on-surface-variant">
-                            {item.registrant}
-                          </p>
-                        ) : null}
-                        {item.number ? (
-                          <p className="mt-0.5 font-mono text-[0.72rem] text-on-surface-variant">
-                            {item.number}
-                          </p>
-                        ) : null}
-                      </div>
-                      <span
-                        className={`shrink-0 rounded-full px-2.5 py-1 text-[0.66rem] font-bold ${
-                          item.active === false
-                            ? "bg-danger-soft text-danger"
-                            : item.active
-                              ? "bg-safe-soft text-safe"
-                              : "bg-surface-container text-on-surface-variant"
-                        }`}
-                      >
-                        {item.active === false
-                          ? "Tidak aktif"
-                          : item.active
-                            ? "Aktif"
-                            : item.status ?? "?"}
-                      </span>
-                      <Check aria-hidden="true" className="size-[18px] shrink-0 text-primary" />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </>
+              {search.isFetching ? <Loader2 aria-hidden="true" className="spin" /> : "Cari"}
+            </Button>
+          </form>
         )}
+
+        {search.isError && !selectedProduct ? (
+          <p className="mt-3 rounded-[16px] border border-danger/20 bg-danger-soft p-3.5 text-[0.78rem] leading-normal text-danger">
+            {search.error.message}
+          </p>
+        ) : null}
+
+        {search.data && search.data.results.length === 0 && !search.isFetching && !selectedProduct ? (
+          <p className="mt-3 rounded-[16px] border border-outline-variant bg-surface-container p-3.5 text-[0.78rem] leading-normal text-on-surface-variant">
+            Produk tidak ditemukan. Periksa ejaan atau tempel daftar bahan secara manual di bawah.
+          </p>
+        ) : null}
       </section>
 
+      {/* --- Product Selection Modal --- */}
+      <dialog
+        ref={dialogRef}
+        className="m-auto w-full max-w-[min(24rem,calc(100vw-2rem))] rounded-[20px] border border-outline-variant bg-surface-lowest p-0 shadow-xl backdrop:bg-black/40"
+      >
+        <div className="p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-[1.05rem] font-bold tracking-[-0.02em]">Pilih produk</h3>
+            <button
+              type="button"
+              aria-label="Tutup"
+              className="rounded-full p-1 text-on-surface-variant hover:bg-black/5 [&_svg]:size-5"
+              onClick={() => dialogRef.current?.close()}
+            >
+              <X aria-hidden="true" />
+            </button>
+          </div>
+          <ul className="space-y-2">
+            {search.data?.results.map((product) => (
+              <li key={product.slug}>
+                <button
+                  type="button"
+                  className="flex w-full items-center gap-3 rounded-[14px] border border-outline-variant bg-white p-3 text-left transition-colors hover:border-primary hover:bg-primary/5"
+                  onClick={() => selectProduct(product)}
+                >
+                  {product.imageUrl ? (
+                    <img
+                      src={product.imageUrl}
+                      alt=""
+                      className="size-10 shrink-0 rounded-[8px] border border-outline-variant object-cover"
+                    />
+                  ) : (
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-[8px] bg-surface-container text-on-surface-variant">
+                      <ScanLine className="size-5" />
+                    </span>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-[0.85rem] font-bold">{product.name}</p>
+                    {product.brand ? (
+                      <p className="truncate text-[0.72rem] text-on-surface-variant">{product.brand}</p>
+                    ) : null}
+                    <p className="mt-0.5 text-[0.68rem] text-on-surface-variant">
+                      {product.ingredients.length} bahan
+                    </p>
+                  </div>
+                  <Check aria-hidden="true" className="size-[18px] shrink-0 text-primary" />
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </dialog>
+
+      {/* --- BPOM Warning Modal --- */}
+      <dialog
+        ref={bpomDialogRef}
+        className="m-auto w-full max-w-[min(22rem,calc(100vw-2rem))] rounded-[20px] border border-danger/20 bg-surface-lowest p-0 shadow-xl backdrop:bg-black/40"
+      >
+        <div className="p-5 text-center">
+          <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-danger-soft">
+            <AlertTriangle className="size-6 text-danger" aria-hidden="true" />
+          </div>
+          <h3 className="text-[1.05rem] font-bold tracking-[-0.02em]">Produk Tidak Terdaftar</h3>
+          <p className="mt-2 text-[0.78rem] leading-normal text-on-surface-variant">
+            Produk ini tidak ditemukan di registry BPOM. Produk tanpa registrasi BPOM berpotensi berbahaya.
+          </p>
+          <Button
+            type="button"
+            variant="secondary"
+            size="pill"
+            className="mt-4 min-h-[42px] w-full"
+            onClick={() => bpomDialogRef.current?.close()}
+          >
+            Mengerti, lanjutkan
+          </Button>
+        </div>
+      </dialog>
+
+      {/* --- Manual Ingredients Input --- */}
       <section aria-labelledby="manual-title">
         <div className="mb-3 flex items-end justify-between gap-4">
           <div>
@@ -407,18 +431,9 @@ export function ScanView() {
         ) : null}
       </section>
 
-      <section className="mt-5" aria-labelledby="supported-title">
-        <MicroLabel id="supported-title">FORMAT YANG DIDUKUNG</MicroLabel>
-        <div className="mt-2.5 grid grid-cols-3 gap-2 [&>div]:flex [&>div]:min-h-[64px] [&>div]:flex-col [&>div]:items-center [&>div]:justify-center [&>div]:gap-[7px] [&>div]:rounded-[14px] [&>div]:bg-surface-container [&>div]:px-1.5 [&>div]:py-2.5 [&>div]:text-center [&>div]:text-[0.68rem] [&>div]:font-[650] [&>div]:text-on-surface-variant [&_svg]:size-5 [&_svg]:text-primary">
-          <div><ShoppingBag aria-hidden="true" /><span>Kemasan</span></div>
-          <div><ImageIcon aria-hidden="true" /><span>Screenshot</span></div>
-          <div><FileText aria-hidden="true" /><span>Daftar bahan</span></div>
-        </div>
-      </section>
-
       <p className="mt-4 flex items-start gap-[7px] text-[0.7rem] leading-normal text-on-surface-variant [&>svg]:mt-px [&>svg]:size-[15px] [&>svg]:shrink-0">
         <LockKeyhole aria-hidden="true" />
-        Foto diproses secara privat dan tidak dipakai untuk melatih model.
+        Data diproses secara privat dan tidak dipakai untuk melatih model.
       </p>
     </PageMain>
   );

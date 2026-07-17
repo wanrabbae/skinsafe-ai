@@ -386,6 +386,12 @@ function parseProductPage(html, sourceUrl, slug) {
     /Uploaded by:\s*([^<]+?)\s+on\s+<time datetime="([^"]+)">([^<]+)<\/time>/,
   );
 
+  const imageMatch = html.match(/id="product-main-image"[\s\S]*?<img[^>]+src=["']([^"']+)["']/);
+  let imageUrl = imageMatch ? imageMatch[1] : null;
+  if (imageUrl && imageUrl.startsWith("/")) {
+    imageUrl = `${BASE_URL}${imageUrl}`;
+  }
+
   let globalConfig = null;
   const globalJson = html.match(
     /<script type="application\/json" id="global">\s*([\s\S]*?)<\/script>/,
@@ -404,6 +410,7 @@ function parseProductPage(html, sourceUrl, slug) {
     brand,
     brandSlug,
     category: null,
+    imageUrl,
     productTitle: productTitleText,
     description,
     uploadedBy: uploadedMatch ? decodeHtml(uploadedMatch[1]) : null,
