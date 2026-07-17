@@ -94,7 +94,7 @@ class ProfileIntakeResult(Schema):
 
 
 class AnalysisInput(Schema):
-    method: Literal["screenshot", "packaging_photo", "ingredient_photo", "manual"]
+    method: Literal["manual", "camera", "screenshot", "packaging_photo", "ingredient_photo"]
     image_urls: list[str] = []
     bpom_number: str | None = None
     claims_text: str | None = None
@@ -197,6 +197,10 @@ class IngredientDetail(Schema):
     compatibility_notes: str | None = None
     caution_notes: str | None = None
     usage_frequency: str | None = None
+    irritancy: int | None = None
+    comedogenicity: int | None = None
+    functions: list[str] = []
+    rating: str | None = None
 
 
 class InteractionWarning(Schema):

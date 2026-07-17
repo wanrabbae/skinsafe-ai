@@ -100,6 +100,23 @@ HTTP 4xx/5xx hanya untuk request/service failure dan memakai envelope:
 }
 ```
 
+### Ingredient detail signals
+
+`report.ingredientDetails[]` menyertakan sinyal INCIDecoder per bahan (nullable, terisi bila bahan ada di signal layer — lihat `Docs/AI/knowledge-and-rules.md`):
+
+```json
+{
+  "name": "Coconut Oil",
+  "riskLevel": "caution",
+  "irritancy": 0,
+  "comedogenicity": 4,
+  "functions": ["emollient", "perfuming"],
+  "rating": "goodie"
+}
+```
+
+`method` menerima superset `manual|camera|screenshot|packaging_photo|ingredient_photo` — Apps saat ini hanya mengirim `manual`/`camera` dari flow scan; nilai foto lain tersedia untuk kebutuhan mendatang tanpa menaikkan versi endpoint.
+
 ## Schema compatibility
 
 Penambahan optional field bersifat backward-compatible. Rename, type change, atau semantic change memerlukan versi endpoint baru. Contract test dijalankan dari kedua repo/module sebelum deployment.
