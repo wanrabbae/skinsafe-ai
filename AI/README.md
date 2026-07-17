@@ -80,6 +80,9 @@ Endpoint rekomendasi mengembalikan `overallScore`, `modelScore`,
 95 karena lima poin menjadi uncertainty reserve untuk data formulasi dan
 respons individual yang tidak tersedia.
 
+Seluruh endpoint rekomendasi hanya meranking face wash/facial cleanser
+rinse-off. Format produk lain difilter sebelum scoring.
+
 Set AI_SERVICE_TOKEN di luar local development. Browser/PWA tidak boleh
 memanggil service ini langsung; Next.js BFF meneruskan request server-side.
 
