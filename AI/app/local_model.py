@@ -237,10 +237,21 @@ class LocalProductRanker:
         conditions: list[str],
         pregnancy_status: str,
         current_ingredients: list[str],
+        avoid_ingredients: list[str],
     ) -> tuple[float, list[str], bool]:
         names = _ingredient_names(product)
         cautions: list[str] = []
         penalty = 0.0
+
+        avoid_terms = {normalize_ingredient_name(item) for item in avoid_ingredients if item.strip()}
+        if "fragrance" in avoid_terms:
+            avoid_terms.update(_FRAGRANCE_TERMS)
+        avoids_fragrance = "fragrance" in avoid_terms
+        if avoid_terms and (
+            any(_contains_term(name, avoid_terms) for name in names)
+            or (avoids_fragrance and _has_function(product, "perfuming"))
+        ):
+            return 1.0, ["Kandidat dikeluarkan oleh avoid list personal user."], True
 
         prohibited = [name for name in names if _contains_term(name, _PROHIBITED_TERMS)]
         if prohibited:
@@ -316,6 +327,8 @@ class LocalProductRanker:
         conditions: list[str] | None = None,
         pregnancy_status: str = "none",
         current_ingredients: list[str] | None = None,
+        avoid_ingredients: list[str] | None = None,
+        excluded_products: list[str] | None = None,
         budget_max: float | None = None,
         limit: int = 10,
     ) -> LocalRecommendationResult:
@@ -330,8 +343,12 @@ class LocalProductRanker:
                 limitations=self.limitations,
             )
 
+        excluded_identities = {item.strip().casefold() for item in excluded_products or [] if item.strip()}
         candidates: list[LocalRecommendation] = []
         for product in self._catalog["products"]:
+            identity = f"{product.get('brand') or ''}::{product.get('name') or ''}".casefold()
+            if identity in excluded_identities:
+                continue
             price = _number(product.get("price"))
             if budget_max is not None and (price is None or price > budget_max):
                 continue
@@ -361,6 +378,7 @@ class LocalProductRanker:
                 conditions=conditions or [],
                 pregnancy_status=pregnancy_status,
                 current_ingredients=current_ingredients or [],
+                avoid_ingredients=avoid_ingredients or [],
             )
             if excluded:
                 continue

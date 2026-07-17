@@ -3,18 +3,39 @@
 ## Alur
 
 ```text
-PWA story / A-D answers
+10 generic A-D answers
   -> Next.js BFF validation
   -> deterministic Indonesian profile resolver
   -> completeness, contradiction, pregnancy, and red-flag gates
+  -> user accepts SCP OR requests 20-question adaptive refinement
   -> local product ranker
   -> deterministic ingredient safety adjustment
+  -> consented product-outcome feedback updates the SCP
   -> evidence, cautions, literacy, and limitations
 ```
 
 Tidak ada API LLM pada alur ini. Parser memakai vocabulary dan negation
 handling lokal. Input seperti `tidak hamil`, `tidak sensitif`, dan `tidak
 sesak napas` diuji agar tidak dibaca sebagai kondisi positif.
+
+## SCP lifecycle
+
+1. Semua user menerima 10 pertanyaan generik yang sama.
+2. `POST /profile-recommendations` membentuk SCP awal dan, bila safety gate
+   lolos, ranked recommendation.
+3. Jika user meminta personalisasi, backend memanggil
+   `POST /profile-personalization/questions`. Endpoint menghasilkan 20
+   pertanyaan kontekstual, menerapkan jawaban akumulatif ke SCP, dan mengurutkan
+   ulang pertanyaan tersisa setelah setiap jawaban.
+4. Recommendation berikutnya menerima `avoidIngredients` dan
+   `excludedProducts` dari SCP yang diperkaya.
+5. Setelah produk dicoba, `POST /profile-feedback` mencatat outcome ke SCP.
+
+"Self-learning" di runtime berarti SCP personal langsung berubah dari jawaban
+dan outcome user. Model global tidak melakukan online weight update dari satu
+feedback karena itu rentan poisoning dan false causal attribution. Bila user
+memberi consent, endpoint menghasilkan learning signal terdeidentifikasi untuk
+review, evaluasi, dan batch retraining terpisah.
 
 ## Recommendation gate
 
