@@ -124,7 +124,10 @@ Penambahan optional field bersifat backward-compatible. Rename, type change, ata
 ## POST /internal/v1/recommendations
 
 Menerima concerns, skinType, optional sensitivityLevel, conditions,
-pregnancyStatus, currentIngredients, budgetMax, dan limit. Response menyertakan
+pregnancyStatus, currentIngredients, `avoidIngredients`, `excludedProducts`,
+budgetMax, dan limit. `avoidIngredients` mengeluarkan kandidat yang mengandung
+bahan pada avoid list personal; `excludedProducts` memakai identitas
+`Brand::Product Name` dari feedback sebelumnya. Response menyertakan
 ranked products, overallScore, relevanceScore, modelVersion, scoringVersion,
 modelScore, scoreBreakdown, confidence, reasons, cautions, limitations, dan
 education. `overallScore` adalah hasil gabungan model relevance, concern
@@ -144,7 +147,10 @@ dari chem_full.csv. Unknown ingredient mengembalikan 404.
 
 ## GET /internal/v1/profile-intake/questions
 
-Mengembalikan questionnaire berversi dengan empat pertanyaan. Setiap
+Mengembalikan questionnaire berversi dengan sepuluh pertanyaan generik yang
+sama untuk semua user. Sepuluh pertanyaan membentuk SCP awal: tipe dan
+reaktivitas kulit, concern utama, durasi/severity concern, barrier, kompleksitas
+routine, penggunaan active, lingkungan, dan status safety. Setiap
 pertanyaan selalu memiliki pilihan `A`, `B`, `C`, dan `D`; PWA tidak boleh
 mengubah semantic pilihan tanpa menaikkan versi questionnaire.
 
@@ -165,3 +171,137 @@ Response memuat `resolution` dengan profile, confidence, field evidence,
 contradictions, clarification questions, red flags, dan `canRecommend`.
 `recommendations` bernilai `null` ketika status hamil/menyusui belum jelas,
 profil belum cukup, input kontradiktif, atau red flag ditemukan.
+
+Branch setelah SCP awal tidak membutuhkan endpoint khusus untuk tombol. Pilihan
+"Sudah sesuai" memakai `resolution.profile` dan recommendation yang sudah ada;
+pilihan "Perlu personalisasi" memulai endpoint berikut.
+
+## POST /internal/v1/profile-personalization/questions
+
+Dipanggil saat user memilih "Perlu personalisasi" setelah menyetujui SCP awal.
+AI service tetap stateless: backend mengirim SCP terakhir dan seluruh jawaban
+personalisasi yang sudah terkumpul. Response menerapkan jawaban ke SCP lalu
+mengurutkan ulang pertanyaan tersisa. Dengan begitu pertanyaan pertama pada
+response berikutnya selalu menjadi pertanyaan terbaik berdasarkan konteks SCP
+terbaru, bukan urutan form statis.
+
+Request pertama:
+
+```json
+{
+  "profile": {
+    "skinType": "sensitive",
+    "sensitivityLevel": "high",
+    "conditions": ["damaged_barrier"],
+    "concerns": ["acne", "redness"],
+    "pregnancyStatus": "none",
+    "currentIngredients": [],
+    "avoidIngredients": [],
+    "excludedProducts": [],
+    "contextSignals": {}
+  },
+  "answers": {}
+}
+```
+
+Response pertama memuat tepat 20 pertanyaan personalisasi:
+
+```json
+{
+  "version": "scp-personalization-2026.07.1",
+  "profile": {},
+  "questions": [
+    {
+      "id": "concern_area",
+      "prompt": "Untuk jerawat, area mana yang paling sering terdampak?",
+      "kind": "personalized",
+      "whyAsked": "Memetakan lokasi concern agar SCP lebih spesifik.",
+      "options": [
+        { "value": "A", "label": "Satu area kecil", "description": "Hanya muncul pada satu area." }
+      ]
+    }
+  ],
+  "answeredCount": 0,
+  "totalQuestions": 20,
+  "completed": false,
+  "profileUpdates": []
+}
+```
+
+Setelah setiap jawaban, backend mengirim ulang SCP awal plus map jawaban
+akumulatif, misalnya:
+
+```json
+{
+  "profile": {},
+  "answers": {
+    "concern_area": "B",
+    "fragrance_tolerance": "C"
+  }
+}
+```
+
+Response berisi SCP yang sudah diperbarui, `answeredCount: 2`, dan 18
+pertanyaan tersisa dalam prioritas baru. Setelah seluruh 20 terjawab,
+`questions` kosong dan `completed` bernilai `true`. Backend utama menyimpan SCP
+hasil response ke user yang signed-in; AI service tidak menyimpan identitas atau
+session user.
+
+## POST /internal/v1/profile-feedback
+
+Menerapkan outcome setelah user mencoba satu produk yang sebelumnya
+direkomendasikan. Request selalu membawa snapshot SCP dan konteks produk agar
+update benar-benar berbasis keduanya:
+
+```json
+{
+  "profile": {
+    "skinType": "oily",
+    "sensitivityLevel": "medium",
+    "concerns": ["acne"],
+    "pregnancyStatus": "none",
+    "feedbackCount": 0
+  },
+  "product": {
+    "name": "Example Serum",
+    "brand": "Example",
+    "matchingChemicals": ["Niacinamide"],
+    "modelVersion": "local-recommender-2026.07.1"
+  },
+  "outcome": "reaction",
+  "usageDays": 10,
+  "reactionSeverity": "moderate",
+  "suspectedIngredients": ["fragrance"],
+  "consentToLearning": true
+}
+```
+
+`outcome` menerima `improved|no_change|worsened|reaction`. Response:
+
+```json
+{
+  "profile": {
+    "sensitivityLevel": "high",
+    "conditions": ["damaged_barrier"],
+    "avoidIngredients": ["fragrance"],
+    "excludedProducts": ["Example::Example Serum"],
+    "feedbackCount": 1
+  },
+  "action": "stop",
+  "profileUpdates": [],
+  "safetyMessage": null,
+  "learningSignal": {
+    "schemaVersion": "product-outcome-2026.07.1",
+    "outcome": "reaction",
+    "eligibleForOfflineTraining": true
+  },
+  "disclaimer": "Feedback memperbarui konteks personal, bukan diagnosis atau training model global secara langsung."
+}
+```
+
+Reaksi severe menghasilkan `action: stop_and_seek_care`. Tanpa
+`consentToLearning`, `learningSignal` selalu `null`. Dengan consent, signal
+terdeidentifikasi diserahkan ke backend/data pipeline sebagai kandidat offline
+training; signal tidak langsung mengubah bobot model production. SCP baru dapat
+dikirim ke `/internal/v1/recommendations` melalui `avoidIngredients` dan
+`excludedProducts`, sehingga produk yang terbukti tidak cocok tidak diulang.

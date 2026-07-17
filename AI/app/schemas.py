@@ -40,11 +40,14 @@ class QuestionnaireQuestion(Schema):
     id: str
     prompt: str
     options: list[QuestionnaireOption]
+    kind: Literal["generic", "personalized"] = "generic"
+    why_asked: str | None = None
 
 
 class QuestionnaireResponse(Schema):
     version: str
     questions: list[QuestionnaireQuestion]
+    mode: Literal["generic", "personalized"] = "generic"
 
 
 class ProfileIntakeRequest(Schema):
@@ -61,7 +64,18 @@ class ProfileIntakeRequest(Schema):
     def validate_intake_source(self) -> "ProfileIntakeRequest":
         if not (self.narrative and self.narrative.strip()) and not self.answers:
             raise ValueError("narrative or questionnaire answers are required")
-        supported_questions = {"skin_feel", "reactivity", "primary_concern", "safety_status"}
+        supported_questions = {
+            "skin_feel",
+            "reactivity",
+            "primary_concern",
+            "concern_duration",
+            "concern_severity",
+            "barrier_status",
+            "routine_complexity",
+            "active_usage",
+            "environment",
+            "safety_status",
+        }
         unknown_questions = sorted(set(self.answers) - supported_questions)
         if unknown_questions:
             raise ValueError(f"unknown questionnaire answers: {', '.join(unknown_questions)}")
@@ -75,6 +89,16 @@ class ResolvedSkinProfile(Schema):
     concerns: list[str] = Field(default_factory=list)
     pregnancy_status: Literal["none", "pregnant", "breastfeeding"] | None = None
     current_ingredients: list[str] = Field(default_factory=list)
+    concern_duration: Literal["recent", "persistent", "long_term"] | None = None
+    concern_severity: Literal["mild", "moderate", "high"] | None = None
+    routine_complexity: Literal["none", "basic", "active", "complex"] | None = None
+    environmental_factors: list[str] = Field(default_factory=list)
+    product_preferences: list[str] = Field(default_factory=list)
+    avoid_ingredients: list[str] = Field(default_factory=list)
+    excluded_products: list[str] = Field(default_factory=list)
+    successful_products: list[str] = Field(default_factory=list)
+    context_signals: dict[str, str] = Field(default_factory=dict)
+    feedback_count: int = Field(default=0, ge=0)
 
 
 class ProfileRedFlag(Schema):
@@ -91,6 +115,52 @@ class ProfileIntakeResult(Schema):
     clarification_questions: list[str] = Field(default_factory=list)
     red_flags: list[ProfileRedFlag] = Field(default_factory=list)
     can_recommend: bool
+
+
+PERSONALIZATION_QUESTION_IDS = (
+    "concern_area",
+    "concern_frequency",
+    "concern_trigger",
+    "reaction_onset",
+    "reaction_symptoms",
+    "recovery_time",
+    "cleanser_afterfeel",
+    "midday_skin",
+    "moisturizer_texture",
+    "fragrance_tolerance",
+    "sunscreen_tolerance",
+    "active_frequency",
+    "exfoliant_use",
+    "retinoid_use",
+    "routine_layers",
+    "routine_consistency",
+    "climate_exposure",
+    "sleep_stress",
+    "desired_pace",
+    "patch_test",
+)
+
+
+class ProfilePersonalizationRequest(Schema):
+    profile: ResolvedSkinProfile
+    answers: dict[str, QuestionChoice] = Field(default_factory=dict, max_length=20)
+
+    @model_validator(mode="after")
+    def validate_answers(self) -> "ProfilePersonalizationRequest":
+        unknown = sorted(set(self.answers) - set(PERSONALIZATION_QUESTION_IDS))
+        if unknown:
+            raise ValueError(f"unknown personalization answers: {', '.join(unknown)}")
+        return self
+
+
+class ProfilePersonalizationResponse(Schema):
+    version: str
+    profile: ResolvedSkinProfile
+    questions: list[QuestionnaireQuestion]
+    answered_count: int = Field(ge=0, le=20)
+    total_questions: int = 20
+    completed: bool
+    profile_updates: list[str] = Field(default_factory=list)
 
 
 class AnalysisInput(Schema):
@@ -226,6 +296,8 @@ class RecommendRequest(Schema):
     conditions: list[str] = Field(default_factory=list)
     pregnancy_status: Literal["none", "pregnant", "breastfeeding"] = "none"
     current_ingredients: list[str] = Field(default_factory=list)
+    avoid_ingredients: list[str] = Field(default_factory=list, max_length=30)
+    excluded_products: list[str] = Field(default_factory=list, max_length=50)
     budget_max: float | None = Field(default=None, ge=0)
     limit: int = Field(default=10, ge=1, le=50)
 
@@ -266,6 +338,53 @@ class RecommendResponse(Schema):
 class ProfileRecommendationResponse(Schema):
     resolution: ProfileIntakeResult
     recommendations: RecommendResponse | None = None
+
+
+class FeedbackProduct(Schema):
+    name: str = Field(min_length=1, max_length=300)
+    brand: str = Field(min_length=1, max_length=200)
+    matching_chemicals: list[str] = Field(default_factory=list, max_length=30)
+    model_version: str | None = None
+
+
+class ProductFeedbackRequest(Schema):
+    profile: ResolvedSkinProfile
+    product: FeedbackProduct
+    outcome: Literal["improved", "no_change", "worsened", "reaction"]
+    usage_days: int = Field(ge=1, le=730)
+    reaction_severity: Literal["none", "mild", "moderate", "severe"] = "none"
+    suspected_ingredients: list[str] = Field(default_factory=list, max_length=12)
+    consent_to_learning: bool = False
+
+    @model_validator(mode="after")
+    def validate_reaction_context(self) -> "ProductFeedbackRequest":
+        if self.reaction_severity != "none" and self.outcome not in {"worsened", "reaction"}:
+            raise ValueError("reactionSeverity requires a worsened or reaction outcome")
+        return self
+
+
+class FeedbackLearningSignal(Schema):
+    schema_version: str
+    outcome: Literal["improved", "no_change", "worsened", "reaction"]
+    usage_days: int
+    reaction_severity: Literal["none", "mild", "moderate", "severe"]
+    product_name: str
+    product_brand: str
+    matching_chemicals: list[str] = Field(default_factory=list)
+    model_version: str | None = None
+    skin_type: str | None = None
+    concerns: list[str] = Field(default_factory=list)
+    conditions: list[str] = Field(default_factory=list)
+    eligible_for_offline_training: bool = False
+
+
+class ProductFeedbackResponse(Schema):
+    profile: ResolvedSkinProfile
+    action: Literal["continue", "monitor", "stop", "stop_and_seek_care"]
+    profile_updates: list[str] = Field(default_factory=list)
+    safety_message: str | None = None
+    learning_signal: FeedbackLearningSignal | None = None
+    disclaimer: str = "Feedback memperbarui konteks personal, bukan diagnosis atau training model global secara langsung."
 
 
 class IngredientKnowledgeResponse(Schema):

@@ -12,7 +12,11 @@ from .schemas import (
     EducationItem,
     IngredientKnowledgeResponse,
     NeedsInputAnalysis,
+    ProductFeedbackRequest,
+    ProductFeedbackResponse,
     ProfileIntakeRequest,
+    ProfilePersonalizationRequest,
+    ProfilePersonalizationResponse,
     ProfileRecommendationResponse,
     QuestionnaireResponse,
     RecommendedProduct,
@@ -21,7 +25,7 @@ from .schemas import (
 )
 from .scoring import analyze
 
-app = FastAPI(title="SkinSafe AI Service", version="0.3.0", docs_url="/docs", redoc_url=None)
+app = FastAPI(title="SkinSafe AI Service", version="0.4.0", docs_url="/docs", redoc_url=None)
 
 
 def require_service_token(authorization: Annotated[str | None, Header()] = None) -> None:
@@ -56,7 +60,7 @@ def ready() -> dict[str, str]:
     return {
         "status": "ready",
         "ruleset": "2026.07.2",
-        "engine": "0.3.0",
+        "engine": "0.4.0",
         "model": ranker.model_version,
         "scoring": ranker.scoring_version,
     }
@@ -94,6 +98,8 @@ def _build_recommendations(request: RecommendRequest) -> RecommendResponse:
         conditions=request.conditions,
         pregnancy_status=request.pregnancy_status,
         current_ingredients=request.current_ingredients,
+        avoid_ingredients=request.avoid_ingredients,
+        excluded_products=request.excluded_products,
         budget_max=request.budget_max,
         limit=request.limit,
     )
@@ -165,6 +171,30 @@ def get_profile_questions() -> QuestionnaireResponse:
 
 
 @app.post(
+    "/internal/v1/profile-personalization/questions",
+    response_model=ProfilePersonalizationResponse,
+    dependencies=[Depends(require_service_token)],
+)
+def create_personalized_questions(request: ProfilePersonalizationRequest) -> ProfilePersonalizationResponse:
+    """Refine an SCP and reorder the remaining questions after every answer."""
+    from .personalization import personalize_profile
+
+    return personalize_profile(request)
+
+
+@app.post(
+    "/internal/v1/profile-feedback",
+    response_model=ProductFeedbackResponse,
+    dependencies=[Depends(require_service_token)],
+)
+def create_profile_feedback(request: ProductFeedbackRequest) -> ProductFeedbackResponse:
+    """Apply product outcome to the SCP and optionally emit a training candidate."""
+    from .personalization import learn_from_product_feedback
+
+    return learn_from_product_feedback(request)
+
+
+@app.post(
     "/internal/v1/profile-recommendations",
     response_model=ProfileRecommendationResponse,
     dependencies=[Depends(require_service_token)],
@@ -187,6 +217,8 @@ def create_profile_recommendations(request: ProfileIntakeRequest) -> ProfileReco
             conditions=profile.conditions,
             pregnancy_status=profile.pregnancy_status,
             current_ingredients=profile.current_ingredients,
+            avoid_ingredients=profile.avoid_ingredients,
+            excluded_products=profile.excluded_products,
             budget_max=request.budget_max,
             limit=request.limit,
         )

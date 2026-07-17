@@ -4,8 +4,9 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
+from app.personalization import personalize_profile
 from app.profile_intake import resolve_profile
-from app.schemas import ProfileIntakeRequest
+from app.schemas import ProfileIntakeRequest, ProfilePersonalizationRequest, ResolvedSkinProfile
 from evaluation.evaluate_profile_intake import evaluate
 
 
@@ -44,6 +45,12 @@ class ProfileIntakeTests(unittest.TestCase):
                     "skin_feel": "D",
                     "reactivity": "D",
                     "primary_concern": "C",
+                    "concern_duration": "D",
+                    "concern_severity": "C",
+                    "barrier_status": "D",
+                    "routine_complexity": "C",
+                    "active_usage": "B",
+                    "environment": "C",
                     "safety_status": "A",
                 }
             )
@@ -52,6 +59,11 @@ class ProfileIntakeTests(unittest.TestCase):
         self.assertEqual(result.profile.sensitivity_level, "high")
         self.assertIn("damaged_barrier", result.profile.conditions)
         self.assertEqual(result.profile.concerns, ["redness", "discomfort"])
+        self.assertEqual(result.profile.concern_duration, "long_term")
+        self.assertEqual(result.profile.concern_severity, "high")
+        self.assertEqual(result.profile.routine_complexity, "active")
+        self.assertEqual(result.profile.environmental_factors, ["sun_pollution"])
+        self.assertEqual(result.profile.context_signals["active_usage"], "retinoid")
         self.assertTrue(result.can_recommend)
 
     def test_unknown_safety_status_requests_clarification(self) -> None:
@@ -102,6 +114,30 @@ class ProfileIntakeTests(unittest.TestCase):
     def test_unknown_question_is_rejected(self) -> None:
         with self.assertRaises(ValidationError):
             ProfileIntakeRequest(answers={"made_up": "A"})
+
+    def test_no_known_reaction_does_not_raise_sensitivity(self) -> None:
+        result = personalize_profile(
+            ProfilePersonalizationRequest(
+                profile=ResolvedSkinProfile(
+                    skin_type="normal",
+                    sensitivity_level="medium",
+                    pregnancy_status="none",
+                    concerns=["acne"],
+                ),
+                answers={"reaction_symptoms": "D"},
+            )
+        )
+        self.assertEqual(result.profile.sensitivity_level, "medium")
+
+        adapted = personalize_profile(
+            ProfilePersonalizationRequest(
+                profile=result.profile,
+                answers={"reaction_onset": "D"},
+            )
+        )
+        prompts = {question.id: question.prompt for question in adapted.questions}
+        self.assertIn("Di luar reaksi produk", prompts["reaction_symptoms"])
+        self.assertIn("faktor apa pun", prompts["recovery_time"])
 
     def test_engineering_golden_set_has_no_regressions(self) -> None:
         path = Path(__file__).resolve().parents[1] / "evaluation" / "profile-intake-golden.json"
