@@ -47,7 +47,7 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         body = response.json()
         self.assertEqual(body["modelVersion"], "local-recommender-2026.07.1")
-        self.assertEqual(body["scoringVersion"], "overall-compatibility-2026.07.2")
+        self.assertEqual(body["scoringVersion"], "overall-compatibility-bpom-2026.07.3")
         self.assertEqual(body["concernsUsed"], ["acne"])
         self.assertGreaterEqual(len(body["products"]), 1)
         self.assertTrue(body["products"][0]["reasons"])

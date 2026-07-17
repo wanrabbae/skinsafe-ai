@@ -3,13 +3,13 @@
     "source": "https://incidecoder.com",
     "mode": "brand",
     "brand": "emina",
-    "scrapedAt": "2026-07-17T03:18:06.162Z",
+    "scrapedAt": "2026-07-17T10:55:42.549Z",
     "total": 111,
     "failed": 0,
     "resumed": false,
     "target": 111,
     "listed": 111,
-    "scrapedNow": 111,
+    "scrapedNow": 0,
     "skippedNow": 0
   },
   "products": [

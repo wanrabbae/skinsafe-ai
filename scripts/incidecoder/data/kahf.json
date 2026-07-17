@@ -3,13 +3,13 @@
     "source": "https://incidecoder.com",
     "mode": "brand",
     "brand": "kahf",
-    "scrapedAt": "2026-07-17T03:43:44.464Z",
+    "scrapedAt": "2026-07-17T10:54:41.687Z",
     "total": 16,
     "failed": 0,
     "resumed": false,
     "target": 16,
     "listed": 16,
-    "scrapedNow": 16,
+    "scrapedNow": 0,
     "skippedNow": 0
   },
   "products": [

@@ -1,0 +1,673 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-07-17T11:30:06.408237+00:00",
+ "source": "https://use.apiindonesia.id/api/v1/bpom?q=",
+ "note": "Missing slug = belum diverifikasi (skor BPOM netral).",
+ "products": {
+  "avoskin-advanced-action-eye-ampoule": {
+   "found": true,
+   "active": true,
+   "number": "NA18202000165"
+  },
+  "azarine-acne-gentle-cleansing-foam": {
+   "found": true,
+   "active": true,
+   "number": "NA18181205539"
+  },
+  "azarine-acne-spot-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA18210111852"
+  },
+  "azarine-acne-spot-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18210111852"
+  },
+  "azarine-acne-spot-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18210111852"
+  },
+  "azarine-aha-bha-pha-peeling-serum-marvel-edition": {
+   "found": true,
+   "active": true,
+   "number": "NA18210109411"
+  },
+  "bioaqua-24k-gold-purifying-eye-cream": {
+   "found": true,
+   "active": true,
+   "number": "NA11210100220"
+  },
+  "bioaqua-24k-micellar-water": {
+   "found": true,
+   "active": true,
+   "number": "NA11210300067"
+  },
+  "bioaqua-6x-gentle-a-retinal-anti-aging-cream": {
+   "found": true,
+   "active": true,
+   "number": "NA11222000034"
+  },
+  "bioaqua-6x-gentle-a-retinal-anti-aging-toner": {
+   "found": true,
+   "active": true,
+   "number": "NA11221200837"
+  },
+  "bioaqua-6x-gentle-a-retinol-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11222000033"
+  },
+  "breylee-24k-gold-collagen-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251201679"
+  },
+  "breylee-acne-clearing-soap": {
+   "found": true,
+   "active": true,
+   "number": "NA11231201503"
+  },
+  "breylee-acne-cream-acne-treatment": {
+   "found": true,
+   "active": true,
+   "number": "NA11251202806"
+  },
+  "breylee-acne-scar-removal-cream-2": {
+   "found": true,
+   "active": true,
+   "number": "NA11251202806"
+  },
+  "breylee-acne-scar-removal-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100306"
+  },
+  "cetaphil-advanced-defence-serum-am": {
+   "found": true,
+   "active": true,
+   "number": "NA26221900066"
+  },
+  "cosrx-5-pdrn-b5-vital-soothing-toner-2": {
+   "found": true,
+   "active": true,
+   "number": "NA26261200067"
+  },
+  "cosrx-5-pdrn-collagen-intense-vitalizing-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA26262000006"
+  },
+  "cosrx-5-pdrn-collagen-intense-vitalizing-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA26262000006"
+  },
+  "cosrx-5-pdrn-collagen-vitalizing-hydrogel-eye-patch": {
+   "found": true,
+   "active": true,
+   "number": "NA26260200173"
+  },
+  "cosrx-ac-blemish-spot-drying-lotion": {
+   "found": true,
+   "active": true,
+   "number": "NA26210100613"
+  },
+  "elsheskin-15-vitamin-c-glow-advance-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18251900022"
+  },
+  "elsheskin-5-in-1-eyessential-night-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18240117030"
+  },
+  "elsheskin-5-in-1-eyessential-night-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18240117030"
+  },
+  "elsheskin-5-in-1-gentle-eyessential-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18240117030"
+  },
+  "elsheskin-acne-care-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18230106968"
+  },
+  "emina-2-in-1-scrub-mask": {
+   "found": true,
+   "active": true,
+   "number": "NA18190205066"
+  },
+  "emina-airy-uv-gel-spf-50-pa": {
+   "found": true,
+   "active": true,
+   "number": "NA18251701008"
+  },
+  "emina-aloe-vera-face-mist": {
+   "found": true,
+   "active": true,
+   "number": "NA18190120937"
+  },
+  "emina-aloe-vera-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA18180120597"
+  },
+  "glad2glow-aha-bha-pha-intensive-peeling-solution": {
+   "found": true,
+   "active": true,
+   "number": "NA11250101060"
+  },
+  "glad2glow-apricot-glycolic-acid-exfo-smooth-peeling-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100343"
+  },
+  "hadalabo-gokujyun-hydrating-lotion": {
+   "found": true,
+   "active": true,
+   "number": "NA18120100843"
+  },
+  "hadalabo-gokujyun-ultimate-moisturizing-milk": {
+   "found": true,
+   "active": true,
+   "number": "NA18120100842"
+  },
+  "implora-1-liporetinol-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18222000034"
+  },
+  "implora-24k-gold-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18211903037"
+  },
+  "implora-acne-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18210104050"
+  },
+  "implora-acne-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18210104050"
+  },
+  "implora-acne-spot-treatment": {
+   "found": true,
+   "active": true,
+   "number": "NA18220107445"
+  },
+  "kahf-acne-and-pore-cleanse-scrub-face-wash": {
+   "found": true,
+   "active": true,
+   "number": "NA18251206004"
+  },
+  "kahf-all-in-one-power-toning-face-spray": {
+   "found": true,
+   "active": true,
+   "number": "NA18241210849"
+  },
+  "kahf-bright-revitalizing-amino-gel-face-wash": {
+   "found": true,
+   "active": true,
+   "number": "NA18251202219"
+  },
+  "kahf-brightening-and-texture-refining-face-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18241904163"
+  },
+  "kahf-extra-dry-antiperspirant-deodorant-roll-on": {
+   "found": true,
+   "active": true,
+   "number": "NA18230900289"
+  },
+  "neutrogena-2-in-1-dandruff-shampoo-plus-conditioner": {
+   "found": false,
+   "active": null,
+   "number": null
+  },
+  "neutrogena-6-hour-protection-lip-balm": {
+   "found": false,
+   "active": null,
+   "number": null
+  },
+  "neutrogena-acne-proofing-gel-facial-cleanser-with-salicylic-acid": {
+   "found": true,
+   "active": true,
+   "number": "NA49191205094"
+  },
+  "neutrogena-adapalene-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA26231200409"
+  },
+  "neutrogena-gel-de-limpeza-acne-proofing": {
+   "found": true,
+   "active": true,
+   "number": "NA49221200068"
+  },
+  "safi-acne-solution-2-in-1-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA18221203964"
+  },
+  "safi-acne-solution-soothing-gel-moisturiser": {
+   "found": true,
+   "active": true,
+   "number": "NA32250100070"
+  },
+  "safi-acne-solution-whipped-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA32251200020"
+  },
+  "safi-acne-solutions-sebum-control-fluid": {
+   "found": true,
+   "active": true,
+   "number": "NA32221200018"
+  },
+  "safi-age-defy-concentrated-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA32202000014"
+  },
+  "sariayu-acne-care-cream-mask": {
+   "found": true,
+   "active": true,
+   "number": "NA18220200311"
+  },
+  "sariayu-acne-care-facial-foam": {
+   "found": true,
+   "active": true,
+   "number": "NA18241205320"
+  },
+  "sariayu-all-one-cleansing-water-oily-skin": {
+   "found": true,
+   "active": true,
+   "number": "NA18221200129"
+  },
+  "sariayu-econature-nutreage-night-cream": {
+   "found": true,
+   "active": true,
+   "number": "NA18260101348"
+  },
+  "skintific-10-niacinamide-brightening-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-10-pure-vitamin-c-brightening-serum": {
+   "found": true,
+   "active": true,
+   "number": "NKIT250001190"
+  },
+  "skintific-10-pure-vitamin-c-brightening-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NKIT250001190"
+  },
+  "skintific-10-vitamin-c-brightening-glow-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11231900044"
+  },
+  "skintific-12-acid-peeling-solution-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100289"
+  },
+  "skintific-12-aha-bha-pha-lha-peeling-solution": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100289"
+  },
+  "skintific-2-salicylic-acid-anti-acne-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100605"
+  },
+  "skintific-3-tranexamic-acid-advanced-bright-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11261900007"
+  },
+  "skintific-360-crystal-massager-lifting-eye-cream": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100856"
+  },
+  "skintific-3x-acid-acne-gel-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-3x-acid-anti-acne-gel-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "skintific-3x-acid-intensive-acne-spot": {
+   "found": true,
+   "active": true,
+   "number": "NA11240100736"
+  },
+  "skintific-4d-hyaluronic-acid-hydrating-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100605"
+  },
+  "skintific-5-aha-bha-pha-exfoliating-toner": {
+   "found": true,
+   "active": true,
+   "number": "NA11240100443"
+  },
+  "skintific-5-b5-ceramide-barrier-relief-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "skintific-5x-ceramide-barrier-moisturizer-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "skintific-5x-ceramide-barrier-moisturizer-gel-2": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "skintific-5x-ceramide-barrier-repair-moisture-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100303"
+  },
+  "skintific-5x-ceramide-barrier-repair-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-5x-ceramide-barrier-repair-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-5x-ceramide-barrier-repair-serum-3": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-5x-ceramide-barrier-rrpair-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-5x-ceramide-low-ph-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-5x-ceramide-low-ph-cleanser-2-discontinued": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-5x-ceramide-low-ph-cleanser-discontinued": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-aha-bha-pha-exfoliating-pads": {
+   "found": true,
+   "active": true,
+   "number": "NA11240100443"
+  },
+  "skintific-amino-acid-ultra-gentle-cleansing-mousse": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-bright-fit": {
+   "found": true,
+   "active": true,
+   "number": "NKIT260001145"
+  },
+  "skintific-ectoin-essence-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200643"
+  },
+  "skintific-glycolic-acid-daily-clarifying-toner": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100605"
+  },
+  "skintific-lactic-acid-skin-renewal-exfoliating-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100605"
+  },
+  "skintific-msh-brightening-sun-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-msh-niacinamide-brightening-moisture-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-niacinamide-bright-boost-clay-stick": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-niacinamide-brightening-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-niacinamide-brightening-cleanser-2": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-niacinamide-brightening-daily-mask": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-niacinamide-brightening-essence-toner": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-panthenol-gentle-gel-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-panthenol-gentle-gel-cleanser-2": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-peptide-brightening-lip-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA11251900076"
+  },
+  "skintific-retinol-skin-renewal-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "skintific-salicylic-acid-anti-acne-spot-treatment": {
+   "found": true,
+   "active": true,
+   "number": "NA11250100605"
+  },
+  "skintific-sensitive-moisture-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100303"
+  },
+  "skintific-sensitive-soothe-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA11251200126"
+  },
+  "skintific-symwhite-377-dark-spot-moisture-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100303"
+  },
+  "skintific-symwhite-377-dark-spot-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18261900887"
+  },
+  "skintific-symwhite377-dark-spot-eraser-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18261900887"
+  },
+  "skintific-truffle-biome-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA11260100010"
+  },
+  "somethinc-1-pure-retinol-squalane": {
+   "found": true,
+   "active": true,
+   "number": "NA18212000282"
+  },
+  "somethinc-10-lactic-glycolic-peeling-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18230107893"
+  },
+  "somethinc-10-lactic-glycolic-peeling-serum-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18230107893"
+  },
+  "somethinc-10-niacinamide-barrier-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18210103336"
+  },
+  "somethinc-10-niacinamide-moisture-sabi-beet-brightening-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18201901839"
+  },
+  "the-originote-24k-symwhite-jelly-booster": {
+   "found": true,
+   "active": true,
+   "number": "NA18230102684"
+  },
+  "the-originote-acne-spot-cream": {
+   "found": true,
+   "active": true,
+   "number": "NA11220100170"
+  },
+  "the-originote-aha-bha-pha-peeling-solution": {
+   "found": true,
+   "active": true,
+   "number": "NA18210202143"
+  },
+  "vaseline-advanced-repair-body-lotion": {
+   "found": true,
+   "active": true,
+   "number": "NA18250103607"
+  },
+  "vaseline-r-intensive-care-tm-cocoa-radiant-tm-lotion": {
+   "found": true,
+   "active": true,
+   "number": "NA18250103773"
+  },
+  "wardah-acnederm": {
+   "found": true,
+   "active": true,
+   "number": "NA18170400329"
+  },
+  "wardah-acnederm-acne-care-micellar-water-new-packaging": {
+   "found": true,
+   "active": true,
+   "number": "NA18231202906"
+  },
+  "wardah-acnederm-acne-care-serum": {
+   "found": true,
+   "active": true,
+   "number": "NA18250114211"
+  },
+  "wardah-acnederm-acne-spot-treatment-gel": {
+   "found": true,
+   "active": true,
+   "number": "NA18170104077"
+  },
+  "wardah-acnederm-day-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA18230106485"
+  },
+  "wardah-acnederm-day-moisturizer-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18230106485"
+  },
+  "wardah-acnederm-face-powder": {
+   "found": true,
+   "active": true,
+   "number": "NA18170400329"
+  },
+  "wardah-acnederm-micellar-water": {
+   "found": true,
+   "active": true,
+   "number": "NA18231202906"
+  },
+  "wardah-acnederm-night-treatment-moisturizer": {
+   "found": true,
+   "active": true,
+   "number": "NA18180101240"
+  },
+  "wardah-acnederm-night-treatment-moisturizer-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18180101240"
+  },
+  "wardah-acnederm-pore-blackhead-balm": {
+   "found": true,
+   "active": true,
+   "number": "NA18230200277"
+  },
+  "wardah-acnederm-pore-refining-toner": {
+   "found": true,
+   "active": true,
+   "number": "NA18171206301"
+  },
+  "wardah-acnederm-pore-refining-toner-2": {
+   "found": true,
+   "active": true,
+   "number": "NA18171206301"
+  },
+  "wardah-acnederm-pure-foaming-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA18171205104"
+  },
+  "wardah-acnederm-salicylic-acid-zinc-acne-clearing-low-ph-foaming-cleanser": {
+   "found": true,
+   "active": true,
+   "number": "NA18241205712"
+  }
+ }
+}

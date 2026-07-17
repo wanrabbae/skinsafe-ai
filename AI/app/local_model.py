@@ -23,8 +23,17 @@ from .ml_features import (
 _AI_ROOT = Path(__file__).resolve().parent.parent
 _DEFAULT_MODEL_PATH = _AI_ROOT / "models" / "recommender-v1.json"
 _DEFAULT_CATALOG_PATH = _AI_ROOT / "data" / "local_product_catalog.json"
-_SCORING_VERSION = "overall-compatibility-2026.07.2"
+_DEFAULT_BPOM_STATUS_PATH = _AI_ROOT / "data" / "bpom_status.json"
+_SCORING_VERSION = "overall-compatibility-bpom-2026.07.3"
 _MAX_OVERALL_SCORE = 0.95
+
+# BPOM registration trust carries 25% of the overall score, mirroring the scan
+# analysis formula; the relevance signals share the remaining 75%. Products whose
+# BPOM status cannot be verified fall back to a neutral trust so they are neither
+# rewarded nor punished for missing registry data.
+_RELEVANCE_SHARE = 0.75
+_BPOM_SHARE = 0.25
+_BPOM_TRUST_NEUTRAL = 0.6
 
 _PROHIBITED_TERMS = {
     "mercury",
@@ -124,15 +133,17 @@ def _overall_score(
     evidence_coverage: float,
     evidence_strength: float,
     has_explicit_intent: bool,
+    bpom_trust: float,
     intent_penalty: float,
     safety_penalty: float,
 ) -> tuple[float, dict[str, float]]:
-    """Combine relevance evidence and safety without implying certainty."""
+    """Combine relevance evidence, BPOM trust, and safety without implying certainty."""
     contributions = {
-        "modelRelevance": model_score * 0.65,
-        "concernCoverage": evidence_coverage * 0.15,
-        "ingredientEvidence": evidence_strength * 0.10,
-        "explicitProductIntent": 0.05 if has_explicit_intent else 0.0,
+        "modelRelevance": model_score * 0.65 * _RELEVANCE_SHARE,
+        "concernCoverage": evidence_coverage * 0.15 * _RELEVANCE_SHARE,
+        "ingredientEvidence": evidence_strength * 0.10 * _RELEVANCE_SHARE,
+        "explicitProductIntent": (0.05 * _RELEVANCE_SHARE) if has_explicit_intent else 0.0,
+        "bpomTrust": bpom_trust * _BPOM_SHARE,
     }
     score = min(
         _MAX_OVERALL_SCORE,
@@ -156,10 +167,15 @@ class LocalProductRanker:
         model_path: Path = _DEFAULT_MODEL_PATH,
         catalog_path: Path = _DEFAULT_CATALOG_PATH,
         store: DataStore | None = None,
+        bpom_status_path: Path = _DEFAULT_BPOM_STATUS_PATH,
     ) -> None:
         self._store = store or get_store()
         self._model = json.loads(model_path.read_text(encoding="utf-8"))
         self._catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        # BPOM status is an optional sidecar keyed by product slug, deliberately
+        # kept out of the catalog fingerprint so registry refreshes never force a
+        # model retrain. A missing file (or slug) simply yields neutral trust.
+        self._bpom_status = self._load_bpom_status(bpom_status_path)
         if self._model.get("schemaVersion") != 1 or self._catalog.get("schemaVersion") != 1:
             raise ValueError("Unsupported local recommendation artifact schema")
         if not self._model.get("concerns") or not self._catalog.get("products"):
@@ -187,6 +203,30 @@ class LocalProductRanker:
     @property
     def product_count(self) -> int:
         return len(self._catalog["products"])
+
+    @staticmethod
+    def _load_bpom_status(path: Path) -> dict[str, dict[str, Any]]:
+        try:
+            raw = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            return {}
+        products = raw.get("products") if isinstance(raw, dict) else None
+        return products if isinstance(products, dict) else {}
+
+    def _bpom_trust(self, product: dict[str, Any]) -> tuple[float, str | None, bool]:
+        """Map a product's BPOM registry status to a 0..1 trust score.
+
+        Returns ``(trust, caution, verified)``. An unknown status (no sidecar
+        entry) stays neutral so unverifiable products are not penalized.
+        """
+        entry = self._bpom_status.get(str(product.get("slug") or ""))
+        if not isinstance(entry, dict):
+            return _BPOM_TRUST_NEUTRAL, None, False
+        if not entry.get("found"):
+            return 0.3, "Produk belum ditemukan pada registry BPOM; verifikasi keasliannya.", True
+        if entry.get("active") is False:
+            return 0.1, "Notifikasi BPOM ditemukan tetapi statusnya tidak lagi aktif.", True
+        return 1.0, None, True
 
     def _probabilities(self, product: dict[str, Any], concerns: list[str]) -> dict[str, float]:
         features = product_features(product, self._dimension)
@@ -383,6 +423,10 @@ class LocalProductRanker:
             if excluded:
                 continue
 
+            bpom_trust, bpom_caution, bpom_verified = self._bpom_trust(product)
+            if bpom_caution:
+                cautions.append(bpom_caution)
+
             evidence_coverage = len(matching_concerns) / len(supported)
             product_intents = concerns_from_product_name(str(product.get("name") or ""))
             intent_overlap = product_intents.intersection(supported)
@@ -397,6 +441,7 @@ class LocalProductRanker:
                 evidence_coverage=evidence_coverage,
                 evidence_strength=evidence_strength,
                 has_explicit_intent=bool(intent_overlap),
+                bpom_trust=bpom_trust,
                 intent_penalty=intent_penalty,
                 safety_penalty=penalty,
             )
@@ -411,6 +456,8 @@ class LocalProductRanker:
             ]
             if intent_overlap:
                 reasons.append(f"Nama produk secara eksplisit menargetkan: {', '.join(sorted(intent_overlap))}.")
+            if bpom_verified and bpom_trust >= 1.0:
+                reasons.append("Terverifikasi aktif pada registry BPOM.")
             candidates.append(
                 LocalRecommendation(
                     product=product,
@@ -455,13 +502,21 @@ class LocalProductRanker:
                 selected_identities.add(identity)
                 if len(selected) >= limit:
                     break
+        limitations = list(self.limitations)
+        if any(
+            not isinstance(self._bpom_status.get(str(item.product.get("slug") or "")), dict)
+            for item in selected
+        ):
+            limitations.append(
+                "Sebagian produk belum diverifikasi ke registry BPOM; komponen skor BPOM memakai nilai netral."
+            )
         return LocalRecommendationResult(
             products=selected,
             supported_concerns=supported,
             unsupported_concerns=unsupported,
             model_version=self.model_version,
             scoring_version=self.scoring_version,
-            limitations=self.limitations,
+            limitations=limitations,
         )
 
 

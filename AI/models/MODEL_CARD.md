@@ -61,13 +61,19 @@ Ini bukan clinical accuracy.
 
 ## Overall compatibility score
 
-Scoring policy `overall-compatibility-2026.07.2` mengubah probabilitas model
-menjadi overall score yang dapat dibandingkan antarproduk:
+Scoring policy `overall-compatibility-bpom-2026.07.3` mengubah probabilitas model
+menjadi overall score yang dapat dibandingkan antarproduk. Sinyal relevance
+berbagi 75% bobot dan validasi registrasi BPOM mengisi 25% sisanya:
 
-- 65 poin dari probabilitas relevance model;
-- 15 poin dari coverage concern pengguna;
-- maksimal 10 poin dari evidence ingredient, dibobot berdasarkan posisi INCI;
-- 5 poin dari intent produk yang eksplisit;
+- 65% × 75% dari probabilitas relevance model;
+- 15% × 75% dari coverage concern pengguna;
+- 10% × 75% dari evidence ingredient, dibobot berdasarkan posisi INCI;
+- 5% × 75% dari intent produk yang eksplisit;
+- 25% dari BPOM trust: terverifikasi aktif = penuh, non-aktif/tidak ditemukan =
+  rendah, dan belum terverifikasi = netral (0.6) agar produk tanpa data registry
+  tidak dihukum. Status BPOM per produk berasal dari sidecar
+  `data/bpom_status.json` (di luar catalog fingerprint, diisi
+  `training/enrich_bpom_status.py`);
 - dikurangi safety penalty dan intent-mismatch penalty.
 
 Lima poin terakhir sengaja menjadi uncertainty reserve. Karena data tidak

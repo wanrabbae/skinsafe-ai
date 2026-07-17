@@ -168,6 +168,42 @@ class LocalModelTests(unittest.TestCase):
         self.assertGreater(report["uniqueProductIngredientNames"], report["knownUniqueIngredientNames"])
         self.assertTrue(report["releaseWarnings"])
 
+    def test_bpom_trust_weighs_25_percent_of_overall(self) -> None:
+        from app.local_model import _overall_score
+
+        kwargs = dict(
+            model_score=0.8,
+            evidence_coverage=1.0,
+            evidence_strength=1.0,
+            has_explicit_intent=True,
+            intent_penalty=0.0,
+            safety_penalty=0.0,
+        )
+        verified, verified_breakdown = _overall_score(bpom_trust=1.0, **kwargs)
+        neutral, neutral_breakdown = _overall_score(bpom_trust=0.6, **kwargs)
+        self.assertEqual(verified_breakdown["bpomTrust"], 25.0)
+        self.assertEqual(neutral_breakdown["bpomTrust"], 15.0)
+        self.assertGreater(verified, neutral)
+
+    def test_bpom_trust_mapping_from_sidecar(self) -> None:
+        original = self.ranker._bpom_status
+        try:
+            self.ranker._bpom_status = {"p": {"found": True, "active": True}}
+            self.assertEqual(self.ranker._bpom_trust({"slug": "p"})[0], 1.0)
+            self.ranker._bpom_status = {"p": {"found": True, "active": False}}
+            self.assertEqual(self.ranker._bpom_trust({"slug": "p"})[0], 0.1)
+            self.ranker._bpom_status = {"p": {"found": False}}
+            self.assertEqual(self.ranker._bpom_trust({"slug": "p"})[0], 0.3)
+            self.assertEqual(self.ranker._bpom_trust({"slug": "unknown"})[0], 0.6)
+        finally:
+            self.ranker._bpom_status = original
+
+    def test_unverified_products_use_neutral_bpom_trust(self) -> None:
+        result = self.ranker.recommend(concerns=["acne"], skin_type="oily", limit=5)
+        self.assertTrue(result.products)
+        for item in result.products:
+            self.assertEqual(item.score_breakdown["bpomTrust"], 15.0)
+
     def test_conservative_inci_aliases_share_a_canonical_name(self) -> None:
         self.assertEqual(normalize_ingredient_name("Vitamin B3 (Niacinamide)"), "niacinamide")
         self.assertEqual(normalize_ingredient_name("Ascorbic Acid"), "vitamin c")
