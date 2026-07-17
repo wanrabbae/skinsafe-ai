@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: skinsafe-ai-service
-Version: 0.3.0
-Summary: Evidence-backed local ML and safety analysis service for SkinSafe AI
-Requires-Python: <3.15,>=3.12
-Requires-Dist: fastapi[standard-no-fastapi-cloud-cli]==0.139.0
-Requires-Dist: Pillow<13,>=12
-Provides-Extra: dev
-Requires-Dist: pytest<10,>=8.3; extra == "dev"
