@@ -15,6 +15,7 @@ keputusan safety final memakai normalisasi dan rules yang deterministic.
 - [data-and-model-governance.md](./data-and-model-governance.md): dataset, prompt/model version, privacy, reproducibility.
 - [evaluation-and-operations.md](./evaluation-and-operations.md): test sets, metrics, monitoring, incident handling.
 - [profile-intake.md](./profile-intake.md): narasi/questionnaire, safety gate, PWA wiring, dan evaluation.
+- [personalization-random-simulation.md](./personalization-random-simulation.md): dua seeded random run, perubahan SCP, feedback learning, dan inspeksi epoch/loss.
 
 ## Non-goals
 

@@ -51,6 +51,33 @@ class EndpointContractTests(unittest.TestCase):
                 {"concerns": ["acne"], "skinType": "oily"},
             ),
             ("get", "/internal/v1/ingredients/Niacinamide", None),
+            (
+                "post",
+                "/internal/v1/profile-personalization/questions",
+                {
+                    "profile": {
+                        "skinType": "oily",
+                        "sensitivityLevel": "medium",
+                        "pregnancyStatus": "none",
+                        "concerns": ["acne"],
+                    }
+                },
+            ),
+            (
+                "post",
+                "/internal/v1/profile-feedback",
+                {
+                    "profile": {
+                        "skinType": "oily",
+                        "sensitivityLevel": "medium",
+                        "pregnancyStatus": "none",
+                        "concerns": ["acne"],
+                    },
+                    "product": {"name": "Example Serum", "brand": "Example"},
+                    "outcome": "no_change",
+                    "usageDays": 7,
+                },
+            ),
         ]
         with patch.dict(os.environ, {"AI_SERVICE_TOKEN": "expected-token"}):
             for method, url, payload in calls:
@@ -182,13 +209,71 @@ class EndpointContractTests(unittest.TestCase):
         self.assertLessEqual(len(body["products"]), 5)
         self.assertTrue(all(product["reasons"] and product["matchingChemicals"] for product in body["products"]))
 
-    def test_profile_questionnaire_contract_has_four_ad_options(self) -> None:
+    def test_profile_questionnaire_contract_has_ten_generic_ad_options(self) -> None:
         response = self.client.get("/internal/v1/profile-intake/questions")
         self.assertEqual(response.status_code, 200)
-        questions = response.json()["questions"]
-        self.assertEqual(len(questions), 4)
+        body = response.json()
+        questions = body["questions"]
+        self.assertEqual(body["mode"], "generic")
+        self.assertEqual(len(questions), 10)
         for question in questions:
             self.assertEqual([option["value"] for option in question["options"]], ["A", "B", "C", "D"])
+
+    def test_personalization_contract_refines_scp_and_returns_remaining_questions(self) -> None:
+        profile = {
+            "skinType": "sensitive",
+            "sensitivityLevel": "high",
+            "pregnancyStatus": "none",
+            "concerns": ["acne"],
+        }
+        initial = self.client.post(
+            "/internal/v1/profile-personalization/questions",
+            json={"profile": profile},
+        )
+        self.assertEqual(initial.status_code, 200)
+        self.assertEqual(initial.json()["totalQuestions"], 20)
+        self.assertEqual(len(initial.json()["questions"]), 20)
+        self.assertTrue(all(question["kind"] == "personalized" for question in initial.json()["questions"]))
+
+        learned = self.client.post(
+            "/internal/v1/profile-personalization/questions",
+            json={"profile": profile, "answers": {"fragrance_tolerance": "C"}},
+        )
+        self.assertEqual(learned.status_code, 200)
+        body = learned.json()
+        self.assertEqual(body["answeredCount"], 1)
+        self.assertEqual(len(body["questions"]), 19)
+        self.assertIn("fragrance", body["profile"]["avoidIngredients"])
+
+    def test_product_feedback_updates_scp_and_emits_consented_learning_signal(self) -> None:
+        response = self.client.post(
+            "/internal/v1/profile-feedback",
+            json={
+                "profile": {
+                    "skinType": "oily",
+                    "sensitivityLevel": "medium",
+                    "pregnancyStatus": "none",
+                    "concerns": ["acne"],
+                },
+                "product": {
+                    "name": "Example Serum",
+                    "brand": "Example",
+                    "matchingChemicals": ["Niacinamide"],
+                    "modelVersion": "local-recommender-2026.07.1",
+                },
+                "outcome": "reaction",
+                "usageDays": 10,
+                "reactionSeverity": "severe",
+                "suspectedIngredients": ["fragrance"],
+                "consentToLearning": True,
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        body = response.json()
+        self.assertEqual(body["action"], "stop_and_seek_care")
+        self.assertIn("Example::Example Serum", body["profile"]["excludedProducts"])
+        self.assertEqual(body["profile"]["feedbackCount"], 1)
+        self.assertTrue(body["learningSignal"]["eligibleForOfflineTraining"])
 
     def test_narrative_profile_returns_recommendations_and_evidence(self) -> None:
         response = self.client.post(
@@ -265,6 +350,20 @@ class EndpointContractTests(unittest.TestCase):
         self.assertEqual(unsupported["unsupportedConcerns"], ["teleportasi"])
         self.assertEqual(mixed["concernsUsed"], ["acne"])
         self.assertEqual(mixed["unsupportedConcerns"], ["teleportasi"])
+
+    def test_recommendation_respects_products_learned_as_excluded(self) -> None:
+        payload = {"concerns": ["acne"], "skinType": "oily", "limit": 3}
+        baseline = self.client.post("/internal/v1/recommendations", json=payload).json()
+        self.assertTrue(baseline["products"])
+        first = baseline["products"][0]
+        excluded = f"{first['brand']}::{first['name']}"
+
+        filtered = self.client.post(
+            "/internal/v1/recommendations",
+            json={**payload, "excludedProducts": [excluded]},
+        ).json()
+        identities = {f"{product['brand']}::{product['name']}" for product in filtered["products"]}
+        self.assertNotIn(excluded, identities)
 
     def test_recommendation_rejects_invalid_inputs(self) -> None:
         invalid_payloads = [

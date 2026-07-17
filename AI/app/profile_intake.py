@@ -18,7 +18,7 @@ from .schemas import (
 )
 
 
-QUESTIONNAIRE_VERSION = "2026.07.1"
+QUESTIONNAIRE_VERSION = "2026.07.2"
 QUESTIONNAIRE = QuestionnaireResponse(
     version=QUESTIONNAIRE_VERSION,
     questions=[
@@ -50,6 +50,66 @@ QUESTIONNAIRE = QuestionnaireResponse(
                 QuestionnaireOption(value="B", label="Kering/dehidrasi", description="Kurang lembap, kasar, atau terasa tertarik."),
                 QuestionnaireOption(value="C", label="Kemerahan", description="Mudah merah, tidak nyaman, atau iritasi."),
                 QuestionnaireOption(value="D", label="Kusam/noda", description="Kusam, noda hitam, atau warna tidak merata."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="concern_duration",
+            prompt="Sudah berapa lama masalah kulit utama ini terasa?",
+            options=[
+                QuestionnaireOption(value="A", label="Kurang dari 1 bulan", description="Masalah baru muncul atau masih sesekali."),
+                QuestionnaireOption(value="B", label="1-3 bulan", description="Masalah menetap selama beberapa minggu."),
+                QuestionnaireOption(value="C", label="3-12 bulan", description="Masalah sudah cukup lama dan berulang."),
+                QuestionnaireOption(value="D", label="Lebih dari 1 tahun", description="Masalah berlangsung lama atau kronis."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="concern_severity",
+            prompt="Seberapa besar masalah itu mengganggu kondisi kulitmu saat ini?",
+            options=[
+                QuestionnaireOption(value="A", label="Ringan", description="Terlihat sedikit dan jarang terasa tidak nyaman."),
+                QuestionnaireOption(value="B", label="Sedang", description="Cukup terlihat atau kadang terasa tidak nyaman."),
+                QuestionnaireOption(value="C", label="Berat", description="Sering terasa tidak nyaman atau mengganggu aktivitas."),
+                QuestionnaireOption(value="D", label="Naik turun", description="Kadang ringan tetapi dapat memburuk dengan cepat."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="barrier_status",
+            prompt="Bagaimana kondisi skin barrier-mu dalam dua minggu terakhir?",
+            options=[
+                QuestionnaireOption(value="A", label="Nyaman", description="Tidak ada rasa perih, tertarik, atau mengelupas."),
+                QuestionnaireOption(value="B", label="Kadang kering", description="Sesekali terasa tertarik tetapi cepat pulih."),
+                QuestionnaireOption(value="C", label="Sering reaktif", description="Sering perih, merah, atau mengelupas."),
+                QuestionnaireOption(value="D", label="Sedang terganggu", description="Saat ini sangat perih, merah, pecah, atau mengelupas."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="routine_complexity",
+            prompt="Rutinitas skincare harianmu paling mendekati yang mana?",
+            options=[
+                QuestionnaireOption(value="A", label="Belum rutin", description="Belum memakai skincare secara konsisten."),
+                QuestionnaireOption(value="B", label="Basic", description="Cleanser, moisturizer, dan/atau sunscreen."),
+                QuestionnaireOption(value="C", label="Dengan active", description="Basic routine ditambah satu active treatment."),
+                QuestionnaireOption(value="D", label="Kompleks", description="Banyak layer, beberapa active, atau sering berganti produk."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="active_usage",
+            prompt="Active kuat apa yang paling menggambarkan rutinitasmu sekarang?",
+            options=[
+                QuestionnaireOption(value="A", label="Tidak ada", description="Belum memakai retinoid atau exfoliating acid."),
+                QuestionnaireOption(value="B", label="Retinoid", description="Memakai retinol, retinal, adapalene, atau tretinoin."),
+                QuestionnaireOption(value="C", label="Exfoliating acid", description="Memakai AHA, BHA, PHA, atau acid exfoliant lain."),
+                QuestionnaireOption(value="D", label="Lebih dari satu/tidak yakin", description="Menggabungkan beberapa active atau belum memahami jenisnya."),
+            ],
+        ),
+        QuestionnaireQuestion(
+            id="environment",
+            prompt="Lingkungan yang paling sering memengaruhi kulitmu sehari-hari?",
+            options=[
+                QuestionnaireOption(value="A", label="Ruangan ber-AC", description="Banyak waktu di udara dingin atau kering."),
+                QuestionnaireOption(value="B", label="Panas dan lembap", description="Sering berkeringat atau berada di cuaca lembap."),
+                QuestionnaireOption(value="C", label="Matahari/polusi", description="Sering beraktivitas di luar ruangan atau terpapar polusi."),
+                QuestionnaireOption(value="D", label="Campuran", description="Kondisi lingkungan sering berubah."),
             ],
         ),
         QuestionnaireQuestion(
@@ -175,6 +235,13 @@ def resolve_profile(request: ProfileIntakeRequest) -> ProfileIntakeResult:
     if reactivity == "D":
         _append_unique(conditions, ["damaged_barrier"])
         evidence.setdefault("conditions", []).append("questionnaire reactivity=D")
+    barrier_status = request.answers.get("barrier_status")
+    if barrier_status == "D":
+        _append_unique(conditions, ["damaged_barrier"])
+        evidence.setdefault("conditions", []).append("questionnaire barrier_status=D")
+    if barrier_status == "C":
+        sensitivity_level = "high"
+        evidence.setdefault("sensitivityLevel", []).append("questionnaire barrier_status=C")
 
     concerns, _ = canonicalize_concerns(request.selected_concerns)
     primary = request.answers.get("primary_concern")
@@ -192,6 +259,33 @@ def resolve_profile(request: ProfileIntakeRequest) -> ProfileIntakeResult:
         if matches:
             _append_unique(concerns, [concern])
             evidence.setdefault("concerns", []).extend(f'narasi: "{item}"' for item in matches)
+
+    concern_duration = {"A": "recent", "B": "persistent", "C": "persistent", "D": "long_term"}.get(
+        request.answers.get("concern_duration", "")
+    )
+    concern_severity = {"A": "mild", "B": "moderate", "C": "high", "D": "moderate"}.get(
+        request.answers.get("concern_severity", "")
+    )
+    routine_complexity = {"A": "none", "B": "basic", "C": "active", "D": "complex"}.get(
+        request.answers.get("routine_complexity", "")
+    )
+    environment = {
+        "A": "air_conditioned",
+        "B": "hot_humid",
+        "C": "sun_pollution",
+        "D": "mixed_environment",
+    }.get(request.answers.get("environment", ""))
+    environmental_factors = [environment] if environment else []
+    context_signals = {
+        key: value
+        for key, value in {
+            "barrier_status": {"A": "comfortable", "B": "occasionally_dry", "C": "reactive", "D": "impaired"}.get(barrier_status or ""),
+            "active_usage": {"A": "none", "B": "retinoid", "C": "exfoliating_acid", "D": "multiple_or_unknown"}.get(
+                request.answers.get("active_usage", "")
+            ),
+        }.items()
+        if value
+    }
 
     current_ingredients = [item.strip() for item in request.current_ingredients if item.strip()]
     for active, phrases in _ACTIVE_PHRASES.items():
@@ -262,6 +356,11 @@ def resolve_profile(request: ProfileIntakeRequest) -> ProfileIntakeResult:
             concerns=concerns,
             pregnancy_status=pregnancy_status,
             current_ingredients=current_ingredients,
+            concern_duration=concern_duration,
+            concern_severity=concern_severity,
+            routine_complexity=routine_complexity,
+            environmental_factors=environmental_factors,
+            context_signals=context_signals,
         ),
         confidence=Confidence(
             level=level,

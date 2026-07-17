@@ -14,7 +14,8 @@ di training maupun inference.
 - alasan rekomendasi, evidence ingredient, caution, confidence, dan literasi;
 - overall compatibility score terkalibrasi dengan breakdown dan uncertainty reserve;
 - ingredient knowledge endpoint dari chem_full.csv;
-- intake profil dari narasi Bahasa Indonesia atau empat pertanyaan A-D;
+- intake profil dari narasi Bahasa Indonesia atau sepuluh pertanyaan generik A-D;
+- refinement SCP melalui 20 pertanyaan adaptif dan outcome feedback produk;
 - red-flag, contradiction, missing safety status, dan routine-active gates;
 - artifact model JSON yang reproducible dan dapat dipakai tanpa GPU.
 
@@ -69,6 +70,8 @@ product intent. Lihat models/MODEL_CARD.md sebelum menafsirkan metrik.
 - POST /internal/v1/analyses
 - POST /internal/v1/recommendations
 - GET /internal/v1/profile-intake/questions
+- POST /internal/v1/profile-personalization/questions
+- POST /internal/v1/profile-feedback
 - POST /internal/v1/profile-recommendations
 - GET /internal/v1/ingredients/{ingredient_name}
 
