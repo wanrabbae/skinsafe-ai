@@ -212,6 +212,8 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
         resolved_list,
         user_skin_type=request.profile.skin_type,
         user_concerns=request.profile.concerns,
+        conditions=request.profile.conditions,
+        sensitivity_level=request.profile.sensitivity_level,
     )
 
     # --- Original deterministic checks (preserved) ---
@@ -347,10 +349,12 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
             evidence=conflict.involved_ingredients,
         ))
 
-    # Confidence — enriched with resolution coverage
-    resolved_count = sum(1 for r in resolved_list if r.canonical_name is not None)
-    total_count = len(resolved_list)
-    resolution_ratio = resolved_count / total_count if total_count > 0 else 0
+    # Confidence — coverage counts ingredients known via the CSV *or* an
+    # INCIDecoder signal, so real products are no longer dominated by
+    # `unresolved` (the hidden G1 interaction that capped status).
+    total_count = len(reports)
+    known_count = sum(1 for r in reports if r.risk_level != "unresolved")
+    resolution_ratio = known_count / total_count if total_count > 0 else 0
     method_quality = 100 if request.input.method == "manual" else 60
     if not request.input.bpom_number:
         bpom_reliability = 40
@@ -423,6 +427,10 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
             compatibility_notes=report.compatibility_notes or None,
             caution_notes=report.caution_notes or None,
             usage_frequency=report.usage_frequency or None,
+            irritancy=report.irritancy,
+            comedogenicity=report.comedogenicity,
+            functions=list(report.functions),
+            rating=report.rating,
         )
         for report in reports
     ]
@@ -452,7 +460,7 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
             message="Gunakan satu active baru pada satu waktu dan perhatikan tanda iritasi.",
             evidence=strong,
         ))
-    unresolved = [item.raw_name for item in resolved_list if item.canonical_name is None]
+    unresolved = [report.name for report in reports if report.risk_level == "unresolved"]
     if unresolved:
         education.append(EducationItem(
             code="UNKNOWN_INGREDIENT_LIMITATION",
@@ -479,7 +487,7 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
         confidence_limitations.append("Nomor BPOM tidak ditemukan pada registry live cekbpom.")
     if unresolved:
         confidence_limitations.append(
-            f"{len(unresolved)} dari {len(resolved_list)} ingredient belum dikenali dataset."
+            f"{len(unresolved)} dari {len(reports)} ingredient belum dikenali dataset."
         )
     if request.input.method != "manual":
         confidence_limitations.append(

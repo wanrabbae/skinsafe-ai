@@ -31,6 +31,8 @@ API → application orchestrator → domain rules
 
 AI service tidak menjadi system of record. Ia boleh memuat read-only dataset ke memory saat startup, tetapi tidak menyimpan user profile, scan history, atau report. Next.js menyimpan snapshot response beserta versi engine.
 
+Selain `chem_full.csv`, `AI/app/inci_signals.py` memuat sinyal INCIDecoder (`scripts/incidecoder/data/*.json`) sebagai lapisan dataset read-only kedua yang independen dari CSV — dipakai `ingredient safety engine` dan `skin compatibility engine` untuk memperluas coverage bahan tanpa mengubah kontrak API (lihat `Docs/AI/knowledge-and-rules.md`).
+
 Local model artifact memakai JSON portable dan dimuat read-only saat startup.
 Inference tidak melakukan network call. Model score diterapkan sebelum
 deterministic profile dan safety reranking.
