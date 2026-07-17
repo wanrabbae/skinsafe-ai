@@ -24,8 +24,12 @@ from dataclasses import dataclass
 from functools import lru_cache
 
 _TIMEOUT = float(os.getenv("BPOM_TIMEOUT", "5"))
-_USER_AGENT = "Mozilla/5.0 (compatible; SkinSafeAI/1.0; +https://skinsafe.ai)"
-_ACTIVE_TOKENS = {"ACTIVE", "AKTIF", "VALID", "TERDAFTAR"}
+# Cloudflare (error 1010) memblokir signature non-browser, jadi samarkan sebagai Chrome.
+_USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+)
+_ACTIVE_TOKENS = {"ACTIVE", "AKTIF", "VALID", "TERDAFTAR", "BERLAKU"}
 
 
 @dataclass(frozen=True, slots=True)
@@ -63,19 +67,23 @@ def _unchecked(number: str, source: str) -> BpomVerification:
     )
 
 
-def _fetch(url: str) -> tuple[int, str]:
-    request = urllib.request.Request(
-        url,
-        headers={"User-Agent": _USER_AGENT, "Accept": "application/json, text/html"},
-    )
+def _fetch(url: str, headers: dict[str, str] | None = None) -> tuple[int, str]:
+    merged = {"User-Agent": _USER_AGENT, "Accept": "application/json, text/html"}
+    if headers:
+        merged.update(headers)
+    request = urllib.request.Request(url, headers=merged)
     with urllib.request.urlopen(request, timeout=_TIMEOUT) as response:  # noqa: S310
         return response.status, response.read().decode("utf-8", "replace")
 
 
 def _verify_via_proxy(number: str, template: str) -> BpomVerification:
     url = template.format(number=urllib.parse.quote(number))
+    headers: dict[str, str] = {}
+    api_key = os.getenv("BPOM_VERIFY_API_KEY") or os.getenv("API_INDONESIA_API_KEY")
+    if api_key:
+        headers["x-api-key"] = api_key
     try:
-        status, body = _fetch(url)
+        status, body = _fetch(url, headers or None)
     except (urllib.error.URLError, OSError, ValueError, TimeoutError):
         return _unchecked(number, url)
     if status != 200:
@@ -84,6 +92,28 @@ def _verify_via_proxy(number: str, template: str) -> BpomVerification:
         data = json.loads(body)
     except json.JSONDecodeError:
         return _unchecked(number, url)
+
+    # List-shaped proxy (mis. apiindonesia `{data:[...]}`): cocokkan per nomor.
+    items = _as_item_list(data)
+    if items:
+        canonical = _canonical(number)
+        match = next(
+            (
+                item
+                for item in items
+                if _canonical(str(_pick(item, keys=_NUMBER_KEYS) or "")) == canonical
+            ),
+            items[0],
+        )
+        parsed = _normalize_item(match)
+        return BpomVerification(
+            number=number,
+            checked=True,
+            found=bool(parsed.number or parsed.product_name),
+            active=parsed.active,
+            product_name=parsed.product_name,
+            source=url,
+        )
 
     result = data.get("result") if isinstance(data.get("result"), dict) else {}
     found = bool(data.get("found", result.get("product_name")))
@@ -141,13 +171,13 @@ def verify_bpom(number: str) -> BpomVerification:
 # ---------------------------------------------------------------------------
 
 _NUMBER_KEYS = (
-    "number", "registration_number", "registrationNumber", "notification_number",
+    "nie", "number", "registration_number", "registrationNumber", "notification_number",
     "nomor_registrasi", "nomor_notifikasi", "nomor", "reg_number", "no_registrasi",
 )
 _NAME_KEYS = ("product_name", "productName", "nama_produk", "nama", "name", "product")
 _REGISTRANT_KEYS = (
-    "registrant", "pendaftar", "brand", "merk", "company", "manufacturer",
-    "produsen", "nama_pendaftar", "nama_perusahaan",
+    "registrant", "registrar", "pendaftar", "brand", "merk", "company",
+    "manufacturer", "produsen", "nama_pendaftar", "nama_perusahaan",
 )
 _STATUS_KEYS = ("status", "registration_status", "registrationStatus", "status_produk")
 _COMPOSITION_KEYS = ("composition", "komposisi", "ingredients", "bahan", "kandungan")

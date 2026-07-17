@@ -78,6 +78,15 @@ function scoreBand(score: number): string {
   return "Rendah";
 }
 
+// BPOM trust dari AI memakai skala kecil (maks 30: found+active), bukan 0–100,
+// jadi butuh banding tersendiri agar produk terverifikasi tidak selalu "Rendah".
+function bpomBand(trust: number): { value: string; tone: Tone } {
+  if (trust >= 30) return { value: "Tinggi", tone: "safe" };
+  if (trust >= 25) return { value: "Sedang", tone: "caution" };
+  if (trust >= 20) return { value: "Perlu Nomor BPOM", tone: "caution" };
+  return { value: "Rendah", tone: "danger" };
+}
+
 function riskMeta(risk: string): { label: string; cls: string } {
   switch (risk) {
     case "beneficial":
@@ -166,12 +175,13 @@ export function ScanResultView() {
     content: string;
   }> = [];
   if (typeof sub.bpomTrust === "number") {
+    const band = bpomBand(sub.bpomTrust);
     details.push({
       id: "bpom",
       icon: ShieldCheck,
       label: "Skor Kepercayaan BPOM",
-      value: scoreBand(sub.bpomTrust),
-      tone: scoreTone(sub.bpomTrust),
+      value: band.value,
+      tone: band.tone,
       content:
         "Menilai keandalan status notifikasi BPOM produk berdasarkan data yang tersedia.",
     });

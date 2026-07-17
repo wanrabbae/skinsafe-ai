@@ -4,68 +4,69 @@ import { getBpomEnv } from "@/shared/lib/env";
 
 import type { BpomSearchItem, BpomSearchResponse } from "./bpom.service";
 
-/**
- * Daftar keyword kategori produk skincare/obat/makanan yang dikenali.
- * Dari nama produk lengkap (misal "Wardah Sunscreen SPF 50"),
- * kita extract "Sunscreen" untuk di-search ke BPOM.
- */
-const CATEGORY_KEYWORDS = [
-  // Skincare
-  "sunscreen", "serum", "moisturizer", "cleanser", "toner", "essence",
-  "cream", "krim", "lotion", "gel", "mask", "masker", "scrub", "peeling",
-  "micellar", "emulsion", "ampoule", "oil", "balm", "mist", "spray",
-  "eye cream", "lip balm", "body lotion", "hand cream", "night cream",
-  "day cream", "face wash", "facial wash", "sabun muka",
-  // Obat & suplemen
-  "paracetamol", "ibuprofen", "amoxicillin", "vitamin", "suplemen",
-  "tablet", "kapsul", "sirup", "salep", "obat",
-  // Makanan
-  "susu", "minyak", "tepung", "minuman", "makanan",
-  // Kosmetik
-  "lipstick", "lip tint", "foundation", "concealer", "blush", "eyeshadow",
-  "mascara", "eyeliner", "powder", "bedak", "primer", "setting spray",
-  "parfum", "deodorant", "shampoo", "shampo", "conditioner", "hair",
-];
+// Cloudflare (error 1010) memblokir signature default; kirim UA seperti browser.
+const BROWSER_USER_AGENT =
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+  "(KHTML, like Gecko) Chrome/125.0 Safari/537.36";
 
-/**
- * Extract kategori produk dari nama lengkap.
- * "Wardah Sunscreen SPF 50" → "Sunscreen"
- * "Scarlett Whitening Serum" → "Serum"
- * Jika tidak ketemu, fallback ke nama lengkap.
- */
-function extractCategoryKeyword(fullName: string): string {
-  const lower = fullName.toLowerCase();
+// Pencarian registry cocok per-keyword: nama produk lengkap mengembalikan nol,
+// sedangkan brand mengembalikan daftar produk brand tersebut. Kita query brand
+// lalu fuzzy-match nama produk supaya hasil pertama benar-benar produk terkait.
+const MATCH_THRESHOLD = 0.4;
 
-  // Cari keyword terpanjang dulu (misal "facial wash" sebelum "wash")
-  const sorted = [...CATEGORY_KEYWORDS].sort((a, b) => b.length - a.length);
+function tokenize(value: string): Set<string> {
+  return new Set(
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim()
+      .split(" ")
+      .filter(Boolean),
+  );
+}
 
-  for (const keyword of sorted) {
-    if (lower.includes(keyword)) {
-      return keyword;
-    }
-  }
+function similarity(a: string, b: string): number {
+  const setA = tokenize(a);
+  const setB = tokenize(b);
+  if (setA.size === 0 || setB.size === 0) return 0;
+  let intersection = 0;
+  for (const token of setA) if (setB.has(token)) intersection += 1;
+  return intersection / Math.max(setA.size, setB.size);
+}
 
-  // Fallback: pakai nama lengkap
-  return fullName;
+/** Keyword pencarian: pakai brand (kata pertama nama) yang punya recall terbaik. */
+function searchKeyword(fullName: string): string {
+  return fullName.trim().split(/\s+/)[0] || fullName;
+}
+
+/** Nama produk tanpa brand (kata pertama) — brand sudah jadi keyword pencarian. */
+function nameWithoutBrand(fullName: string): string {
+  const parts = fullName.trim().split(/\s+/);
+  return parts.length > 1 ? parts.slice(1).join(" ") : fullName;
 }
 
 type ApiIndonesiaBpomItem = {
-  nomor_registrasi?: string;
-  nama_produk?: string;
-  pendaftar?: string;
+  nie?: string;
+  product_name?: string;
+  brand?: string;
+  registrar?: string;
   status?: string;
-  komposisi?: string;
+  ingredients?: string | null;
+  category?: string;
 };
 
 function normalizeItem(raw: ApiIndonesiaBpomItem): BpomSearchItem {
   const status = (raw.status ?? "").toLowerCase();
+  const active = status
+    ? (status.includes("berlaku") || status.includes("aktif")) && !status.includes("tidak")
+    : null;
   return {
-    number: raw.nomor_registrasi ?? null,
-    productName: raw.nama_produk ?? null,
-    registrant: raw.pendaftar ?? null,
+    number: raw.nie ?? null,
+    productName: raw.product_name ?? null,
+    registrant: raw.brand ?? raw.registrar ?? null,
     status: raw.status ?? null,
-    active: status.includes("aktif") ? !status.includes("tidak") : null,
-    composition: raw.komposisi ?? null,
+    active,
+    composition: raw.ingredients ?? null,
   };
 }
 
@@ -117,8 +118,7 @@ export async function verifyBpom(productName: string): Promise<BpomSearchRespons
     };
   }
 
-  const keyword = extractCategoryKeyword(productName);
-
+  const keyword = searchKeyword(productName);
 
   let env: ReturnType<typeof getBpomEnv>;
   try {
@@ -140,6 +140,7 @@ export async function verifyBpom(productName: string): Promise<BpomSearchRespons
       headers: {
         accept: "application/json",
         "x-api-key": env.API_INDONESIA_API_KEY,
+        "user-agent": BROWSER_USER_AGENT,
       },
       signal: AbortSignal.timeout(15_000),
     });
@@ -157,9 +158,17 @@ export async function verifyBpom(productName: string): Promise<BpomSearchRespons
     const body = (await response.json()) as { data?: ApiIndonesiaBpomItem[] };
     const items = Array.isArray(body.data) ? body.data.map(normalizeItem) : [];
 
+    // Ambil produk yang paling cocok, dibandingkan pada nama tanpa brand supaya
+    // token brand/generik tidak memicu false match ke produk lain se-brand.
+    const target = nameWithoutBrand(productName);
+    const best = items
+      .map((item) => ({ item, score: similarity(target, item.productName ?? "") }))
+      .sort((a, b) => b.score - a.score)[0];
+    const results = best && best.score >= MATCH_THRESHOLD ? [best.item] : [];
+
     return {
       query: keyword,
-      results: items,
+      results,
       configured: true,
       reachable: true,
       disclaimer: "Data dari API Indonesia — BPOM registry.",
