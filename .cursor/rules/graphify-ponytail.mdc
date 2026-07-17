@@ -1,0 +1,23 @@
+---
+description: Always apply graphify (codebase graph) and ponytail (minimal solutions)
+alwaysApply: true
+---
+
+# Always: graphify + ponytail
+
+Apply both on every task in this repo. Do not wait for `/graphify` or the word `ponytail`.
+
+## graphify
+
+- For codebase questions: run `graphify query "<question>"` when `graphify-out/graph.json` exists.
+- Use `graphify path` / `graphify explain` when useful.
+- After code changes: run `graphify update .`
+- Skip only if the task is about broken graph output, or the user says not to use it.
+- Skill: `.codex/skills/graphify/SKILL.md`
+
+## ponytail
+
+- On every coding task, default intensity **full**.
+- YAGNI → reuse existing code → stdlib/native → already-installed deps → shortest working solution.
+- Off only on: `stop ponytail` / `normal mode`. Levels: `/ponytail lite|full|ultra`.
+- Skill: `.codex/skills/ponytail/SKILL.md`

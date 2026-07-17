@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "engineering-audit-not-clinical-validation",
+  "products": 501,
+  "brands": 34,
+  "reviewedIngredientNames": 97,
+  "uniqueProductIngredientNames": 1548,
+  "knownUniqueIngredientNames": 45,
+  "uniqueIngredientCoverage": 0.0291,
+  "ingredientOccurrences": 15583,
+  "knownIngredientOccurrences": 2837,
+  "ingredientOccurrenceCoverage": 0.1821,
+  "dominantBrand": {
+    "name": "Pond's",
+    "products": 240,
+    "share": 0.479
+  },
+  "topBrands": [
+    {
+      "name": "Pond's",
+      "products": 240
+    },
+    {
+      "name": "Skintific",
+      "products": 99
+    },
+    {
+      "name": "Wardah",
+      "products": 20
+    },
+    {
+      "name": "Avoskin",
+      "products": 5
+    },
+    {
+      "name": "Azarine",
+      "products": 5
+    },
+    {
+      "name": "BioAqua",
+      "products": 5
+    },
+    {
+      "name": "Biore",
+      "products": 5
+    },
+    {
+      "name": "Breylee",
+      "products": 5
+    },
+    {
+      "name": "Citra",
+      "products": 5
+    },
+    {
+      "name": "COSRX",
+      "products": 5
+    }
+  ],
+  "topUnresolvedIngredients": [
+    {
+      "name": "disodium edta",
+      "occurrences": 298
+    },
+    {
+      "name": "water",
+      "occurrences": 261
+    },
+    {
+      "name": "stearic acid",
+      "occurrences": 197
+    },
+    {
+      "name": "aqua",
+      "occurrences": 189
+    },
+    {
+      "name": "ethylhexylglycerin",
+      "occurrences": 161
+    },
+    {
+      "name": "tocopheryl acetate",
+      "occurrences": 161
+    },
+    {
+      "name": "fragrance",
+      "occurrences": 160
+    },
+    {
+      "name": "1 2 hexanediol",
+      "occurrences": 135
+    },
+    {
+      "name": "bht",
+      "occurrences": 130
+    },
+    {
+      "name": "sodium benzoate",
+      "occurrences": 126
+    },
+    {
+      "name": "citric acid",
+      "occurrences": 122
+    },
+    {
+      "name": "xanthan gum",
+      "occurrences": 118
+    },
+    {
+      "name": "glyceryl stearate",
+      "occurrences": 117
+    },
+    {
+      "name": "sodium hydroxide",
+      "occurrences": 112
+    },
+    {
+      "name": "pentylene glycol",
+      "occurrences": 111
+    },
+    {
+      "name": "sodium chloride",
+      "occurrences": 110
+    },
+    {
+      "name": "carbomer",
+      "occurrences": 108
+    },
+    {
+      "name": "cetyl alcohol",
+      "occurrences": 105
+    },
+    {
+      "name": "potassium hydroxide",
+      "occurrences": 104
+    },
+    {
+      "name": "linalool",
+      "occurrences": 103
+    },
+    {
+      "name": "iodopropynyl butylcarbamate",
+      "occurrences": 102
+    },
+    {
+      "name": "centella asiatica extract",
+      "occurrences": 98
+    },
+    {
+      "name": "titanium dioxide",
+      "occurrences": 96
+    },
+    {
+      "name": "palmitic acid",
+      "occurrences": 95
+    },
+    {
+      "name": "ceramide np",
+      "occurrences": 92
+    },
+    {
+      "name": "perfume",
+      "occurrences": 92
+    },
+    {
+      "name": "limonene",
+      "occurrences": 90
+    },
+    {
+      "name": "ceramide ap",
+      "occurrences": 87
+    },
+    {
+      "name": "hydroxyacetophenone",
+      "occurrences": 86
+    },
+    {
+      "name": "salicylic acid",
+      "occurrences": 84
+    },
+    {
+      "name": "hexyl cinnamal",
+      "occurrences": 84
+    },
+    {
+      "name": "ethylhexyl methoxycinnamate",
+      "occurrences": 83
+    },
+    {
+      "name": "ceramide eop",
+      "occurrences": 82
+    },
+    {
+      "name": "tocopherol",
+      "occurrences": 81
+    },
+    {
+      "name": "caprylic capric triglyceride",
+      "occurrences": 81
+    },
+    {
+      "name": "sodium pca",
+      "occurrences": 79
+    },
+    {
+      "name": "citronellol",
+      "occurrences": 77
+    },
+    {
+      "name": "ceramide ns",
+      "occurrences": 71
+    },
+    {
+      "name": "potassium sorbate",
+      "occurrences": 69
+    },
+    {
+      "name": "peg 40 hydrogenated castor oil",
+      "occurrences": 68
+    },
+    {
+      "name": "ceramide as",
+      "occurrences": 68
+    },
+    {
+      "name": "decyl glucoside",
+      "occurrences": 68
+    },
+    {
+      "name": "sodium acetylated hyaluronate",
+      "occurrences": 67
+    },
+    {
+      "name": "propylparaben",
+      "occurrences": 65
+    },
+    {
+      "name": "dipropylene glycol",
+      "occurrences": 65
+    },
+    {
+      "name": "ammonium acryloyldimethyltaurate vp copolymer",
+      "occurrences": 65
+    },
+    {
+      "name": "myristic acid",
+      "occurrences": 65
+    },
+    {
+      "name": "silica",
+      "occurrences": 61
+    },
+    {
+      "name": "hydroxystearic acid",
+      "occurrences": 61
+    },
+    {
+      "name": "acrylates c10 30 alkyl acrylate crosspolymer",
+      "occurrences": 60
+    }
+  ],
+  "releaseWarnings": [
+    "Ingredient coverage below 50%; unknown ingredients must reduce confidence.",
+    "A single brand exceeds 35% of the catalog; use brand-grouped evaluation and diversity limits."
+  ]
+}

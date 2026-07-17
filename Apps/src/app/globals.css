@@ -1,0 +1,424 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+:root {
+  --font-poppins: Poppins, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --background: #fbf9fd;
+  --foreground: #1d1a24;
+  --card: #ffffff;
+  --card-foreground: #1d1a24;
+  --popover: #ffffff;
+  --popover-foreground: #1d1a24;
+  --primary: #6d28d9;
+  --primary-foreground: #ffffff;
+  --secondary: #f3ebf9;
+  --secondary-foreground: #5300b7;
+  --muted: #f3ebf9;
+  --muted-foreground: #625b6c;
+  --accent: #ebddff;
+  --accent-foreground: #5300b7;
+  --destructive: #ba1a1a;
+  --border: #ded5e8;
+  --input: #ccc3d7;
+  --ring: #7331df;
+  --radius: 1rem;
+
+  --surface: #fbf9fd;
+  --surface-lowest: #ffffff;
+  --surface-low: #f7f3fb;
+  --surface-container: #f1ecf6;
+  --surface-high: #ebe4f2;
+  --surface-highest: #e4dcec;
+  --on-surface: #1d1a24;
+  --on-surface-variant: #4a4455;
+  --outline: #7b7486;
+  --outline-variant: #ccc3d7;
+  --primary-strong: #5300b7;
+  --primary-soft: #ebddff;
+  --primary-softest: #f7f3ff;
+  --safe: #087f3f;
+  --safe-bright: #13a653;
+  --safe-soft: #e8f8ef;
+  --caution: #8a5a00;
+  --caution-bright: #e5a800;
+  --caution-soft: #fff6d8;
+  --danger: #b42318;
+  --danger-bright: #e5484d;
+  --danger-soft: #ffebe9;
+  --card-shadow: 0 8px 24px rgb(50 24 88 / 6%);
+  --floating-shadow: 0 12px 32px rgb(37 0 89 / 15%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-poppins);
+  --font-heading: var(--font-poppins);
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+
+  --color-surface: var(--surface);
+  --color-surface-lowest: var(--surface-lowest);
+  --color-surface-low: var(--surface-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-high: var(--surface-high);
+  --color-surface-highest: var(--surface-highest);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-softest: var(--primary-softest);
+  --color-safe: var(--safe);
+  --color-safe-bright: var(--safe-bright);
+  --color-safe-soft: var(--safe-soft);
+  --color-caution: var(--caution);
+  --color-caution-bright: var(--caution-bright);
+  --color-caution-soft: var(--caution-soft);
+  --color-danger: var(--danger);
+  --color-danger-bright: var(--danger-bright);
+  --color-danger-soft: var(--danger-soft);
+
+  --shadow-card: var(--card-shadow);
+  --shadow-floating: var(--floating-shadow);
+}
+
+/* Base reset — global element defaults, placed in Tailwind's `base` layer so
+   utility classes (e.g. text-white, text-primary-strong) always override them.
+   Component styling lives as utilities in JSX; only genuinely complex/decorative
+   bits remain below (unlayered, so they intentionally win over utilities). */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--surface-container);
+    font-family: var(--font-poppins);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--surface-container);
+    color: var(--on-surface);
+    margin: 0;
+    min-width: 320px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p {
+    margin: 0;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+
+  button,
+  label,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    color: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  label:has(input:focus-visible) {
+    outline: 3px solid rgb(115 49 223 / 30%);
+    outline-offset: 3px;
+  }
+}
+
+/* Decorative product bottle illustration (pseudo-element cap) — kept as CSS. */
+.product-mark,
+.product-thumbnail {
+  background: var(--surface-container);
+  border-radius: 18px;
+  height: 54px;
+  overflow: hidden;
+  position: relative;
+  width: 54px;
+}
+
+.product-mark > span,
+.product-thumbnail > span {
+  background: white;
+  border: 1px solid var(--outline-variant);
+  border-radius: 9px 9px 12px 12px;
+  bottom: 8px;
+  height: 32px;
+  left: 17px;
+  position: absolute;
+  width: 21px;
+}
+
+.product-mark > span::before,
+.product-thumbnail > span::before {
+  background: var(--primary-soft);
+  border-radius: 3px 3px 0 0;
+  content: "";
+  height: 8px;
+  left: 5px;
+  position: absolute;
+  top: -7px;
+  width: 12px;
+}
+
+.product-mark svg {
+  bottom: 5px;
+  color: var(--primary);
+  height: 18px;
+  position: absolute;
+  right: 4px;
+  width: 18px;
+}
+
+.product-thumbnail-safe {
+  background: var(--safe-soft);
+}
+
+.product-thumbnail-caution {
+  background: var(--caution-soft);
+}
+
+.product-thumbnail-danger {
+  background: var(--danger-soft);
+}
+
+/* Scan viewfinder frame + corners + beam — decorative overlay. */
+.viewfinder {
+  align-items: center;
+  background: var(--primary-softest);
+  border-radius: 18px;
+  display: flex;
+  height: 138px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.corner {
+  border-color: var(--primary);
+  border-style: solid;
+  height: 26px;
+  position: absolute;
+  width: 26px;
+}
+
+.corner-tl {
+  border-width: 3px 0 0 3px;
+  left: 14px;
+  top: 14px;
+}
+
+.corner-tr {
+  border-width: 3px 3px 0 0;
+  right: 14px;
+  top: 14px;
+}
+
+.corner-bl {
+  border-width: 0 0 3px 3px;
+  bottom: 14px;
+  left: 14px;
+}
+
+.corner-br {
+  border-width: 0 3px 3px 0;
+  bottom: 14px;
+  right: 14px;
+}
+
+.scan-beam {
+  background: var(--primary);
+  box-shadow: 0 0 18px rgb(109 40 217 / 35%);
+  height: 2px;
+  left: 22px;
+  opacity: 0.7;
+  position: absolute;
+  right: 22px;
+  top: 50%;
+}
+
+.viewfinder-icon {
+  align-items: center;
+  background: white;
+  border: 1px solid var(--primary-soft);
+  border-radius: 999px;
+  box-shadow: var(--card-shadow);
+  color: var(--primary);
+  display: flex;
+  height: 46px;
+  justify-content: center;
+  position: relative;
+  width: 46px;
+}
+
+.viewfinder-icon svg {
+  height: 22px;
+  width: 22px;
+}
+
+/* Divider with flanking rules (pseudo-elements). */
+.divider {
+  align-items: center;
+  color: var(--outline);
+  display: flex;
+  font-size: 0.68rem;
+  font-weight: 700;
+  gap: 12px;
+  letter-spacing: 0.08em;
+  margin: 22px 0;
+}
+
+.divider::before,
+.divider::after {
+  background: var(--outline-variant);
+  content: "";
+  height: 1px;
+  width: 100%;
+}
+
+/* Offline illustration (clouds, dots, badge). */
+.offline-visual {
+  background: var(--primary-softest);
+  border-radius: 32px;
+  height: 188px;
+  margin: 0 auto 22px;
+  max-width: 270px;
+  overflow: hidden;
+  position: relative;
+  width: 76%;
+}
+
+.offline-visual .cloud {
+  color: #d8c4ff;
+  position: absolute;
+}
+
+.cloud-one {
+  height: 96px;
+  left: 34px;
+  top: 48px;
+  width: 96px;
+}
+
+.cloud-two {
+  height: 112px;
+  right: 30px;
+  top: 34px;
+  width: 112px;
+}
+
+.offline-visual > span {
+  align-items: center;
+  background: white;
+  border-radius: 999px;
+  box-shadow: var(--card-shadow);
+  color: var(--primary);
+  display: flex;
+  height: 66px;
+  justify-content: center;
+  left: 50%;
+  position: absolute;
+  top: 90px;
+  transform: translateX(-50%);
+  width: 66px;
+}
+
+.offline-visual > span svg {
+  height: 30px;
+  width: 30px;
+}
+
+.connection-dot {
+  background: var(--primary);
+  border-radius: 50%;
+  height: 6px;
+  position: absolute;
+  width: 6px;
+}
+
+.dot-one {
+  left: 50px;
+  top: 45px;
+}
+
+.dot-two {
+  right: 48px;
+  top: 70px;
+}
+
+.dot-three {
+  bottom: 42px;
+  left: 73px;
+}
+
+/* Intake submit spinner. */
+.spin {
+  animation: intake-spin 900ms linear infinite;
+}
+
+@keyframes intake-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 360px) {
+  .product-mark {
+    height: 56px;
+    width: 56px;
+  }
+
+  .product-thumbnail {
+    height: 54px;
+    width: 54px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

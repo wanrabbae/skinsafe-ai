@@ -1,0 +1,13 @@
+{
+  "name": "incidecoder-scraper",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "scrape": "node scrape.mjs",
+    "scrape:20": "node scrape.mjs --limit 20",
+    "scrape:all": "node scrape.mjs --all"
+  }
+}
