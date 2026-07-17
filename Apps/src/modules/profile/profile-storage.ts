@@ -2,10 +2,53 @@
 
 import { useSyncExternalStore } from "react";
 
-import type { ProfileRecommendationResult } from "./profile.types";
+import type {
+  ProfileRecommendationResult,
+  QuestionChoice,
+  ResolvedSkinProfile,
+} from "./profile.types";
 
 const PROFILE_RESULT_KEY = "skinsafe.profile.result";
+const PROFILE_DRAFT_KEY = "skinsafe.profile.draft";
 const PROFILE_EVENT = "skinsafe:profile-result";
+
+export function getCurrentProfile(): ResolvedSkinProfile | null {
+  return loadProfileResult()?.resolution.profile ?? null;
+}
+
+export type ProfileDraft = {
+  mode: "story" | "questions";
+  narrative: string;
+  pregnancyStatus: "none" | "pregnant" | "breastfeeding";
+  activeText: string;
+  answers: Record<string, QuestionChoice>;
+  step: number;
+};
+
+export function saveProfileDraft(draft: ProfileDraft): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(PROFILE_DRAFT_KEY, JSON.stringify(draft));
+  } catch {
+    // Ignore quota/serialization errors — draft persistence is best-effort.
+  }
+}
+
+export function loadProfileDraft(): ProfileDraft | null {
+  if (typeof window === "undefined") return null;
+  const raw = window.localStorage.getItem(PROFILE_DRAFT_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as ProfileDraft;
+  } catch {
+    return null;
+  }
+}
+
+export function clearProfileDraft(): void {
+  if (typeof window === "undefined") return;
+  window.localStorage.removeItem(PROFILE_DRAFT_KEY);
+}
 
 function notify() {
   if (typeof window === "undefined") return;

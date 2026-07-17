@@ -3,19 +3,16 @@
 import {
   AlertTriangle,
   Check,
-  CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  House,
   ListChecks,
   LoaderCircle,
   MessageSquareText,
   Sparkles,
 } from "lucide-react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
-import { MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/shared/lib/utils";
 
@@ -24,17 +21,22 @@ import type {
   ProfileRecommendationResult,
   QuestionChoice,
 } from "../profile.types";
-import { saveProfileResult } from "../profile-storage";
+import {
+  clearProfileDraft,
+  loadProfileDraft,
+  saveProfileDraft,
+  saveProfileResult,
+} from "../profile-storage";
 
 type IntakeMode = "story" | "questions";
 
 const fieldControl =
   "w-full rounded-[14px] border border-outline-variant bg-surface-low px-3 py-[11px] text-on-surface outline-0 focus:border-primary focus:shadow-[0_0_0_3px_rgb(115_49_223/12%)]";
-const heading2 = "text-[1.08rem] font-bold leading-[1.35] tracking-[-0.02em]";
 const inlineError =
   "mt-2.5 flex items-center gap-[7px] rounded-[14px] bg-danger-soft px-3 py-2.5 text-[0.72rem] leading-[1.45] text-danger [&_svg]:size-[17px] [&_svg]:shrink-0";
 
 export function SkinProfileIntake() {
+  const router = useRouter();
   const [mode, setMode] = useState<IntakeMode>("story");
   const [questions, setQuestions] = useState<ProfileQuestionnaire | null>(null);
   const [questionsError, setQuestionsError] = useState("");
@@ -45,7 +47,30 @@ export function SkinProfileIntake() {
   const [step, setStep] = useState(0);
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [restored, setRestored] = useState(false);
+
+  // Restore an in-progress draft after mount (reading localStorage during render
+  // would diverge from SSR and trigger a hydration mismatch, so it must be an effect).
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    const draft = loadProfileDraft();
+    if (draft) {
+      setMode(draft.mode);
+      setNarrative(draft.narrative);
+      setPregnancyStatus(draft.pregnancyStatus);
+      setActiveText(draft.activeText);
+      setAnswers(draft.answers);
+      setStep(draft.step);
+    }
+    setRestored(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
+  // Persist progress so it survives a browser close/refresh.
+  useEffect(() => {
+    if (!restored || pending) return;
+    saveProfileDraft({ mode, narrative, pregnancyStatus, activeText, answers, step });
+  }, [restored, pending, mode, narrative, pregnancyStatus, activeText, answers, step]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -64,13 +89,12 @@ export function SkinProfileIntake() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
-    setSubmitted(false);
     if (mode === "story" && narrative.trim().length < 15) {
       setError("Ceritakan kondisi kulitmu sedikit lebih lengkap (minimal 15 karakter). ");
       return;
     }
     if (mode === "questions" && (!questions || Object.keys(answers).length !== questions.questions.length)) {
-      setError("Jawab semua empat pertanyaan sebelum melihat rekomendasi.");
+      setError("Jawab semua pertanyaan sebelum melanjutkan.");
       return;
     }
 
@@ -97,25 +121,22 @@ export function SkinProfileIntake() {
         error?: { message?: string };
       };
       if (!response.ok) throw new Error(body.error?.message || "Profil belum dapat dianalisis.");
-      saveProfileResult(body);
-      setSubmitted(true);
+      // First pass shows only the skin context; products come after "Apakah sudah sesuai?".
+      saveProfileResult({
+        resolution: body.resolution,
+        flow: { stage: "review", personalizationAnswers: {}, pendingPersonalization: false },
+        recommendations: null,
+      });
+      clearProfileDraft();
+      router.push("/test/hasil");
     } catch (submitError) {
       setError(submitError instanceof Error ? submitError.message : "Profil belum dapat dianalisis.");
-    } finally {
       setPending(false);
     }
   }
 
   return (
     <section className="mt-5" aria-labelledby="intake-title">
-      {/* <div>
-        <MicroLabel>REKOMENDASI PERSONAL</MicroLabel>
-        <h2 id="intake-title" className={heading2}>Kenali kebutuhan kulitmu</h2>
-        <p className="mt-[5px] text-[0.78rem] leading-normal text-on-surface-variant">
-          Ceritakan dengan bahasamu sendiri atau jawab empat pertanyaan singkat.
-        </p>
-      </div> */}
-
       <div
         className="mt-3.5 grid grid-cols-2 gap-1 rounded-[18px] bg-surface-high p-1"
         role="tablist"
@@ -194,7 +215,7 @@ export function SkinProfileIntake() {
               disabled={pending}
             >
               {pending ? <LoaderCircle className="spin" aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
-              {pending ? "Menganalisis profil…" : "Dapatkan rekomendasi"}
+              {pending ? "Menganalisis profil…" : "Lihat profil kulitku"}
             </Button>
           </>
         ) : (
@@ -274,7 +295,7 @@ export function SkinProfileIntake() {
                         disabled={pending || !answered}
                       >
                         {pending ? <LoaderCircle className="spin" aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
-                        {pending ? "Menganalisis profil…" : "Dapatkan rekomendasi"}
+                        {pending ? "Menganalisis profil…" : "Lihat profil kulitku"}
                       </Button>
                     ) : (
                       <Button
@@ -296,24 +317,6 @@ export function SkinProfileIntake() {
           </div>
         )}
       </form>
-
-      {submitted ? (
-        <div className="mt-[18px] grid gap-3" aria-live="polite">
-          <div className="flex items-start gap-[9px] rounded-[18px] bg-safe-soft p-3 text-[0.72rem] leading-normal text-safe [&>svg]:size-[19px] [&>svg]:shrink-0">
-            <CheckCircle2 aria-hidden="true" />
-            <div>
-              <strong>Profil kulitmu tersimpan.</strong>
-              <p className="mt-1">Hasil dan rekomendasi bisa kamu lihat kapan saja dari beranda.</p>
-            </div>
-          </div>
-          <Button asChild variant="primary" size="pill">
-            <Link href="/">
-              <House aria-hidden="true" />
-              Kembali ke beranda
-            </Link>
-          </Button>
-        </div>
-      ) : null}
     </section>
   );
 }

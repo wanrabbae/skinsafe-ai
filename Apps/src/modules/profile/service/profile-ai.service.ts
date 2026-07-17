@@ -3,9 +3,15 @@ import "server-only";
 import { getAiServerEnv } from "@/shared/lib/env";
 
 import type {
+  PersonalizationResponse,
+  ProductFeedbackPayload,
+  ProductFeedbackResponse,
   ProfileIntakePayload,
   ProfileQuestionnaire,
   ProfileRecommendationResult,
+  QuestionChoice,
+  RecommendRequestPayload,
+  ResolvedSkinProfile,
 } from "../profile.types";
 
 export class ProfileAIError extends Error {
@@ -45,6 +51,34 @@ export function getProfileRecommendations(
   payload: ProfileIntakePayload,
 ): Promise<ProfileRecommendationResult> {
   return requestAI("/internal/v1/profile-recommendations", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function getPersonalizationQuestions(payload: {
+  profile: ResolvedSkinProfile;
+  answers: Record<string, QuestionChoice>;
+}): Promise<PersonalizationResponse> {
+  return requestAI("/internal/v1/profile-personalization/questions", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function submitProductFeedback(
+  payload: ProductFeedbackPayload,
+): Promise<ProductFeedbackResponse> {
+  return requestAI("/internal/v1/profile-feedback", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function getRecommendations(
+  payload: RecommendRequestPayload,
+): Promise<NonNullable<ProfileRecommendationResult["recommendations"]>> {
+  return requestAI("/internal/v1/recommendations", {
     method: "POST",
     body: JSON.stringify(payload),
   });
