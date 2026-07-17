@@ -8,16 +8,15 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
 import { CardIcon, MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
 
-import { HomeHeader } from "./home-header";
-
 export function HomeOnboardingView() {
   return (
     <PageMain>
-      <HomeHeader />
+      <AppHeader />
 
       <section
         className="rounded-3xl bg-[linear-gradient(150deg,var(--primary)_0%,var(--primary-strong)_100%)] px-5 py-[22px] text-white shadow-card"
@@ -42,7 +41,7 @@ export function HomeOnboardingView() {
           size="pill"
           className="mt-4 bg-white text-primary-strong hover:bg-white/90 hover:shadow-none"
         >
-          <Link href="/profile">
+          <Link href="/test">
             <Play aria-hidden="true" />
             Mulai Tes Profil Kulit
           </Link>
@@ -59,9 +58,6 @@ export function HomeOnboardingView() {
               Trending Populer
             </h2>
           </div>
-          <Link className="py-2 text-[0.8rem] font-bold text-primary-strong" href="/history">
-            Lihat semua
-          </Link>
         </div>
 
         <article

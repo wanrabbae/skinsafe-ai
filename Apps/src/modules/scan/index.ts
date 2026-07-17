@@ -1,6 +1,3 @@
-export { getScanHistory } from "./service/scan.service";
-export type { ScanHistoryItem, ScanHistoryTone } from "./service/scan.service";
-
 export { analyzeProduct } from "./service/scan-ai.service";
 export type {
   AnalysisReport,

@@ -81,18 +81,18 @@ Saat membuat domain baru, buat empat folder layer dan barrel `index.ts`, walaupu
 
 ### Page/client split & data fetching
 
-- Setiap `page.tsx` di folder route hanya berisi wiring: metadata, `prefetchQuery` (jika ada data) via module service langsung + `<HydrationBoundary>`, dan import komponen tampilannya dari `src/app/components/`. Folder route (misal `history/`, `scan/`) hanya boleh berisi `page.tsx` dan file spesial Next.js lain (`layout.tsx`, `route.ts`).
-- Semua komponen presentational/client untuk halaman (view, switcher, header) disimpan di `src/app/components/<halaman>/` (satu subfolder per halaman: `home/`, `scan/`, `history/`, `profile/`, `offline/`) — **bukan** co-located di folder route masing-masing. Folder ini aman dari routing Next.js karena tidak berisi `page.tsx`/`route.ts`/`layout.tsx`. Import dari `page.tsx` memakai alias `@/app/components/<halaman>/<nama>` (contoh: `@/app/components/history/history-view`, `@/app/components/home/home-mode-switcher`). Komponen yang dipakai beberapa view di halaman yang sama (mis. `home/home-header.tsx` dipakai oleh with-profile & onboarding) tetap di subfolder halaman tersebut.
+- Setiap `page.tsx` di folder route hanya berisi wiring: metadata, `prefetchQuery` (jika ada data) via module service langsung + `<HydrationBoundary>`, dan import komponen tampilannya dari `src/app/components/`. Folder route (misal `scan/`, `test/`, `test/hasil/`, `recommendation/`) hanya boleh berisi `page.tsx` dan file spesial Next.js lain (`layout.tsx`, `route.ts`).
+- Semua komponen presentational/client untuk halaman (view, switcher, header) disimpan di `src/app/components/<halaman>/` (satu subfolder per halaman: `home/`, `scan/`, `test/`, `recommendation/`, `offline/`) — **bukan** co-located di folder route masing-masing. Folder ini aman dari routing Next.js karena tidak berisi `page.tsx`/`route.ts`/`layout.tsx`. Import dari `page.tsx` memakai alias `@/app/components/<halaman>/<nama>` (contoh: `@/app/components/test/test-view`, `@/app/components/home/home-mode-switcher`). Komponen yang dipakai beberapa view di halaman yang sama (mis. `home/home-header.tsx` dipakai oleh with-profile & onboarding) tetap di subfolder halaman tersebut.
 - Komponen di `src/app/components/` hanya diberi `"use client"` bila memang butuh hook, browser API, atau `useQuery`; komponen tanpa data dinamis tetap Server Component.
 - Kalau halaman punya data yang bisa berubah: `page.tsx` prefetch via module service (import langsung, bukan HTTP) lalu dehydrate; komponen client di `src/app/components/` memanggil `useQuery` ke endpoint BFF `/api/v1/<module>/...` milik module yang sama — client tidak pernah memanggil service/Prisma langsung.
 - Satu-satunya sumber `QueryClient`: `src/shared/lib/query-client.ts` (`getQueryClient()`), di-provide oleh `src/shared/components/query-provider.tsx` yang dipasang sekali di `layout.tsx`.
+- Hasil profil kulit dipersistensi client-side di `localStorage` via `src/modules/profile/profile-storage.ts` (`saveProfileResult`, `clearProfileResult`, `useProfileResult`) — bukan lewat React Query/server. Komponen membaca reaktif dengan `useProfileResult` (berbasis `useSyncExternalStore`, aman hydration) sehingga perubahan (mis. hapus profil) langsung tercermin di UI lain.
 - `src/app/components/` berbeda dari `src/shared/components/`: yang pertama khusus komponen tampilan tiap halaman (page-specific), yang kedua untuk UI benar-benar reusable lintas halaman (nav, provider, dsb).
 
 ## API, environment, and security
 
-- Endpoint publik memakai prefix `/api/v1` dan response JSON yang konsisten.
-- Health endpoint: `GET /api/v1/health`; HTTP `200` berarti dependency sehat, `503` berarti degraded.
-- Database connection harus divalidasi melalui `src/shared/lib/env.ts` dan Prisma singleton di `src/shared/prisma/client.ts`.
+- Endpoint publik memakai prefix `/api/v1` dan response JSON yang konsisten (mis. `profile-intake/questions`, `profile-intake/recommendations`, `scans/analyze`).
+- Konfigurasi AI service divalidasi server-only via `src/shared/lib/env.ts` (`getAiServerEnv` → `AI_SERVICE_URL`, `AI_SERVICE_TOKEN`). Akses database lewat Prisma singleton di `src/shared/prisma/client.ts`.
 - Salin `.env.example` menjadi `.env` untuk development dan isi kredensial PostgreSQL lokal yang valid.
 - Jangan commit `.env`, secret, token AI, atau kredensial database.
 - Hanya variabel berprefix `NEXT_PUBLIC_` yang boleh dibaca client-side.

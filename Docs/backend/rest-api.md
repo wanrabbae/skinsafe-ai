@@ -2,6 +2,16 @@
 
 Base path: `/api/v1`. Media type: `application/json`, kecuali endpoint upload yang menerima `multipart/form-data`. Timestamp menggunakan ISO 8601 UTC. ID adalah UUID opaque.
 
+## Status implementasi
+
+Dokumen ini adalah kontrak target. Yang **sudah diimplementasi** di kode saat ini hanya:
+
+- `GET /api/v1/profile-intake/questions`
+- `POST /api/v1/profile-intake/recommendations`
+- `POST /api/v1/scans/analyze` (analisis **sinkron**, bukan alur queue di bawah)
+
+Endpoint lain (profiles CRUD, alur `/scans` berbasis queue + status polling, ingredients, comparisons) belum dibuat. Endpoint `/api/v1/health` sudah dihapus.
+
 ## Conventions
 
 - Collection berupa plural nouns: `/scans`, `/profiles`, `/ingredients`.
@@ -9,12 +19,6 @@ Base path: `/api/v1`. Media type: `application/json`, kecuali endpoint upload ya
 - List menggunakan cursor: `?limit=20&cursor=...`; response `{ data, page: { nextCursor } }`.
 - `PUT` mengganti resource penuh, `PATCH` mengubah sebagian, `POST` membuat command/resource.
 - API tidak mengembalikan internal stack trace atau provider raw response.
-
-## Health
-
-### `GET /api/v1/health`
-
-`200`: `{ "status": "ok", "service": "skinsafe-web", "version": "..." }`. Endpoint liveness tidak memeriksa dependency mahal.
 
 ## Profiles
 
@@ -60,7 +64,39 @@ Mengubah field yang dikirim dan memperbarui `updatedAt`.
 
 ## Scans
 
-### `POST /api/v1/scans`
+### `POST /api/v1/scans/analyze` (implemented)
+
+Analisis **sinkron** JSON (bukan multipart). BFF memvalidasi dengan Zod lalu meneruskan ke FastAPI `POST /internal/v1/analyses`; token service tetap server-only.
+
+Request:
+
+```json
+{
+  "scanId": "uuid",
+  "input": {
+    "method": "manual",
+    "imageUrls": ["https://..."],
+    "bpomNumber": null,
+    "claimsText": null,
+    "ingredientsText": "Aqua, Glycerin, Niacinamide"
+  },
+  "profile": {
+    "skinType": "oily",
+    "sensitivityLevel": "high",
+    "conditions": ["active_acne"],
+    "concerns": ["acne", "redness"],
+    "pregnancyStatus": "none",
+    "currentRoutine": [
+      { "productName": "Example cleanser", "activeIngredients": ["salicylic_acid"] }
+    ]
+  },
+  "options": { "locale": "id", "includeDebug": false }
+}
+```
+
+`imageUrls`, `bpomNumber`, `claimsText`, dan `ingredientsText` semuanya optional; `method` `manual` memakai teks bahan, `camera` memakai `imageUrls` (URL gambar yang sudah terunggah — belum ada endpoint upload). Response berupa discriminated union: `status: "completed"` (report lengkap) atau `status: "needs_input"` (`missingFields` + `extractedDraft`). Error: `422 INVALID_ANALYSIS_INPUT`, `503 AI_ANALYSIS_UNAVAILABLE`, atau status upstream diteruskan apa adanya.
+
+### `POST /api/v1/scans` (planned)
 
 Mode image: multipart dengan `inputMethod`, `profileId`, dan `images[]`. Mode manual: JSON dengan `inputMethod: "manual"`, `bpomNumber`, `claimsText`, dan `ingredientsText`.
 

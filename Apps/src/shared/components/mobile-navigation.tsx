@@ -1,17 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Bookmark, History, House, ScanLine, UserRound } from "lucide-react";
+import { House, ScanLine, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
 
 const navItems = [
   { href: "/", label: "Beranda", icon: House },
-  { href: "/history", label: "Riwayat", icon: History },
   { href: "/scan", label: "Scan", icon: ScanLine, primary: true },
-  { href: "/history#saved", label: "Tersimpan", icon: Bookmark },
-  { href: "/profile", label: "Profil", icon: UserRound },
+  { href: "/recommendation", label: "Recommendation", icon: Sparkles },
 ];
 
 export function MobileNavigation() {
@@ -19,7 +17,7 @@ export function MobileNavigation() {
 
   return (
     <nav
-      className="fixed left-1/2 bottom-[max(12px,env(safe-area-inset-bottom))] z-50 grid h-[68px] w-[calc(100%-24px)] max-w-[416px] -translate-x-1/2 grid-cols-5 items-end gap-0.5 rounded-3xl border border-[rgb(109_40_217/9%)] bg-white/96 px-[7px] pt-[7px] pb-[6px] shadow-floating data-[offline=true]:opacity-[0.68]"
+      className="fixed left-1/2 bottom-[max(12px,env(safe-area-inset-bottom))] z-50 grid h-[68px] w-[calc(100%-24px)] max-w-[416px] -translate-x-1/2 grid-cols-3 items-end gap-0.5 rounded-3xl border border-[rgb(109_40_217/9%)] bg-white/96 px-[7px] pt-[7px] pb-[6px] shadow-floating data-[offline=true]:opacity-[0.68]"
       data-offline={pathname === "/offline"}
       aria-label="Navigasi utama"
     >

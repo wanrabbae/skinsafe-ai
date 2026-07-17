@@ -70,7 +70,7 @@ export function CurrentProfileCard() {
       >
         <span style={{ width: `${confidence}%` }} />
       </div>
-      <Link className="primary-button" href={ready ? "/scan" : "/profile"}>
+      <Link className="primary-button" href={ready ? "/scan" : "/test"}>
         {ready ? <ScanLine aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
         {ready ? "Scan produk" : resolution ? "Lengkapi profil" : "Isi profil kulit"}
       </Link>

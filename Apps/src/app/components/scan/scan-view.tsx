@@ -8,15 +8,17 @@ import {
   ShoppingBag,
 } from "lucide-react";
 
+import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
-import { BrandLockup, MicroLabel } from "@/shared/components/primitives";
+import { MicroLabel } from "@/shared/components/primitives";
 import { Button } from "@/shared/components/ui/button";
 
 export function ScanView() {
   return (
     <PageMain>
+      <AppHeader />
+
       <header className="mb-[18px]">
-        <BrandLockup className="mb-5" />
         <MicroLabel>ANALISIS PRODUK</MicroLabel>
         <h1 className="mt-1.5 text-[1.72rem] font-bold leading-[1.22] tracking-[-0.03em]">
           Scan produk
