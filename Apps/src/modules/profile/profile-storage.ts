@@ -6,6 +6,31 @@ import type { ProfileRecommendationResult } from "./profile.types";
 
 const PROFILE_RESULT_KEY = "skinsafe.profile.result";
 const PROFILE_EVENT = "skinsafe:profile-result";
+const RETEST_CONTEXT_KEY = "skinsafe.profile.retest-context";
+
+export type RetestContext = {
+  productName: string;
+  brand: string | null;
+  slug: string;
+  at: number;
+};
+
+export function saveRetestContext(ctx: Omit<RetestContext, "at">): void {
+  if (typeof window === "undefined") return;
+  const record: RetestContext = { ...ctx, at: Date.now() };
+  window.localStorage.setItem(RETEST_CONTEXT_KEY, JSON.stringify(record));
+}
+
+export function loadRetestContext(): RetestContext | null {
+  if (typeof window === "undefined") return null;
+  const raw = window.localStorage.getItem(RETEST_CONTEXT_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as RetestContext;
+  } catch {
+    return null;
+  }
+}
 
 function notify() {
   if (typeof window === "undefined") return;

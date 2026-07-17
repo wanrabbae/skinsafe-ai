@@ -1,9 +1,8 @@
 "use client";
 
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import {
   AlertTriangle,
-  Check,
   Loader2,
   LockKeyhole,
   ScanLine,
@@ -13,7 +12,7 @@ import {
   X,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import type { BpomSearchResponse } from "@/modules/bpom";
 import { saveScanResult } from "@/modules/scan";
@@ -22,18 +21,15 @@ import { useProfileResult } from "@/modules/profile";
 import { AppHeader } from "@/shared/components/app-header";
 import { PageMain } from "@/shared/components/page-main";
 import { MicroLabel } from "@/shared/components/primitives";
+import {
+  ProductSearchModal,
+  type ProductSearchResult,
+} from "@/shared/components/product-search-modal";
 import { Button } from "@/shared/components/ui/button";
 
 type ProfileShape = ReturnType<typeof useProfileResult>["result"];
 
-type InciProduct = {
-  slug: string;
-  name: string;
-  brand: string | null;
-  imageUrl: string | null;
-  ingredients: string[];
-  sourceUrl: string;
-};
+type InciProduct = ProductSearchResult;
 
 function buildScanProfile(result: ProfileShape): ScanProfile {
   const profile = result?.resolution.profile;
@@ -58,47 +54,17 @@ function buildScanProfile(result: ProfileShape): ScanProfile {
 export function ScanView() {
   const router = useRouter();
   const { result } = useProfileResult();
-  const dialogRef = useRef<HTMLDialogElement>(null);
   const bpomDialogRef = useRef<HTMLDialogElement>(null);
 
   const [ingredientsText, setIngredientsText] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [submittedQuery, setSubmittedQuery] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<InciProduct | null>(null);
   const [bpomResult, setBpomResult] = useState<BpomSearchResponse | null>(null);
-
-  // --- Product search (INCIDecoder) ---
-  const search = useQuery({
-    queryKey: ["product-search", submittedQuery],
-    enabled: submittedQuery.length >= 2,
-    staleTime: 5 * 60_000,
-    queryFn: async (): Promise<{ results: InciProduct[] }> => {
-      const response = await fetch(
-        `/api/v1/products/search?q=${encodeURIComponent(submittedQuery)}`,
-      );
-      const body: unknown = await response.json().catch(() => null);
-      if (!response.ok) {
-        const message =
-          (body as { error?: { message?: string } } | null)?.error?.message ??
-          "Pencarian produk sedang tidak tersedia.";
-        throw new Error(message);
-      }
-      return body as { results: InciProduct[] };
-    },
-  });
-
-  // Show modal when search results arrive
-  useEffect(() => {
-    if (search.data && search.data.results.length > 0 && !selectedProduct) {
-      dialogRef.current?.showModal();
-    }
-  }, [search.data, selectedProduct]);
 
   // --- Select product → save to DB → verify BPOM ---
   const selectProduct = useCallback(
     async (product: InciProduct) => {
       setSelectedProduct(product);
-      dialogRef.current?.close();
 
       // Auto-fill ingredients
       if (product.ingredients.length > 0) {
@@ -242,110 +208,33 @@ export function ScanView() {
                 setSelectedProduct(null);
                 setBpomResult(null);
                 setIngredientsText("");
-                setSubmittedQuery("");
               }}
             >
               <X aria-hidden="true" />
             </button>
           </div>
         ) : (
-          <form
-            className="flex items-stretch gap-2"
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (searchTerm.trim().length >= 2) {
-                setSubmittedQuery(searchTerm.trim());
-              }
-            }}
+          <Button
+            type="button"
+            variant="secondary"
+            size="pill"
+            className="min-h-[46px] w-full"
+            onClick={() => setPickerOpen(true)}
           >
-            <label className="flex min-w-0 flex-1 items-center gap-2.5 rounded-[16px] border border-outline-variant bg-white p-[13px] focus-within:border-2 focus-within:border-primary focus-within:p-[14px] [&>svg]:size-[19px] [&>svg]:shrink-0 [&>svg]:text-outline">
-              <Search aria-hidden="true" />
-              <input
-                className="w-full min-w-0 border-0 bg-transparent leading-[1.45] text-on-surface outline-0 placeholder:text-[#928a9e]"
-                aria-label="Cari produk"
-                type="search"
-                placeholder="Nama atau merek produk"
-                value={searchTerm}
-                onChange={(event) => setSearchTerm(event.target.value)}
-              />
-            </label>
-            <Button
-              type="submit"
-              variant="secondary"
-              size="pill"
-              className="min-h-[46px] w-auto shrink-0 px-6"
-              disabled={searchTerm.trim().length < 2 || search.isFetching}
-            >
-              {search.isFetching ? <Loader2 aria-hidden="true" className="spin" /> : "Cari"}
-            </Button>
-          </form>
+            <Search aria-hidden="true" />
+            Cari produk
+          </Button>
         )}
-
-        {search.isError && !selectedProduct ? (
-          <p className="mt-3 rounded-[16px] border border-danger/20 bg-danger-soft p-3.5 text-[0.78rem] leading-normal text-danger">
-            {search.error.message}
-          </p>
-        ) : null}
-
-        {search.data && search.data.results.length === 0 && !search.isFetching && !selectedProduct ? (
-          <p className="mt-3 rounded-[16px] border border-outline-variant bg-surface-container p-3.5 text-[0.78rem] leading-normal text-on-surface-variant">
-            Produk tidak ditemukan. Periksa ejaan atau tempel daftar bahan secara manual di bawah.
-          </p>
-        ) : null}
       </section>
 
-      {/* --- Product Selection Modal --- */}
-      <dialog
-        ref={dialogRef}
-        className="m-auto w-full max-w-[min(24rem,calc(100vw-2rem))] rounded-[20px] border border-outline-variant bg-surface-lowest p-0 shadow-xl backdrop:bg-black/40"
-      >
-        <div className="p-5">
-          <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-[1.05rem] font-bold tracking-[-0.02em]">Pilih produk</h3>
-            <button
-              type="button"
-              aria-label="Tutup"
-              className="rounded-full p-1 text-on-surface-variant hover:bg-black/5 [&_svg]:size-5"
-              onClick={() => dialogRef.current?.close()}
-            >
-              <X aria-hidden="true" />
-            </button>
-          </div>
-          <ul className="space-y-2">
-            {search.data?.results.map((product) => (
-              <li key={product.slug}>
-                <button
-                  type="button"
-                  className="flex w-full items-center gap-3 rounded-[14px] border border-outline-variant bg-white p-3 text-left transition-colors hover:border-primary hover:bg-primary/5"
-                  onClick={() => selectProduct(product)}
-                >
-                  {product.imageUrl ? (
-                    <img
-                      src={product.imageUrl}
-                      alt=""
-                      className="size-10 shrink-0 rounded-[8px] border border-outline-variant object-cover"
-                    />
-                  ) : (
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-[8px] bg-surface-container text-on-surface-variant">
-                      <ScanLine className="size-5" />
-                    </span>
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-[0.85rem] font-bold">{product.name}</p>
-                    {product.brand ? (
-                      <p className="truncate text-[0.72rem] text-on-surface-variant">{product.brand}</p>
-                    ) : null}
-                    <p className="mt-0.5 text-[0.68rem] text-on-surface-variant">
-                      {product.ingredients.length} bahan
-                    </p>
-                  </div>
-                  <Check aria-hidden="true" className="size-[18px] shrink-0 text-primary" />
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </dialog>
+      {/* --- Product Search Modal (shared) --- */}
+      <ProductSearchModal
+        open={pickerOpen}
+        onOpenChange={setPickerOpen}
+        onSelect={selectProduct}
+        title="Cari produk"
+        description="Cari nama produk skincare untuk mengambil komposisi dan verifikasi BPOM."
+      />
 
       {/* --- BPOM Warning Modal --- */}
       <dialog
