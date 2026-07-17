@@ -350,7 +350,11 @@ export function ScanResultView() {
                 ingredient.cautionNotes ||
                 ingredient.compatibilityNotes ||
                 ingredient.usageFrequency ||
-                ingredient.relevantSymptoms.length > 0;
+                ingredient.relevantSymptoms.length > 0 ||
+                (ingredient.functions?.length ?? 0) > 0 ||
+                ingredient.rating ||
+                typeof ingredient.irritancy === "number" ||
+                typeof ingredient.comedogenicity === "number";
               return (
                 <AccordionItem key={`${ingredient.name}-${index}`} value={`ingredient-${index}`}>
                   <AccordionTrigger>
@@ -380,6 +384,21 @@ export function ScanResultView() {
                           <strong className="font-semibold normal-case">Relevan untuk:</strong>{" "}
                           {ingredient.relevantSymptoms.join(", ")}
                         </p>
+                      ) : null}
+                      {ingredient.functions?.length ? (
+                        <p className="capitalize">
+                          <strong className="font-semibold normal-case">Fungsi:</strong>{" "}
+                          {ingredient.functions.join(", ")}
+                        </p>
+                      ) : null}
+                      {typeof ingredient.comedogenicity === "number" ? (
+                        <p><strong className="font-semibold">Komedogenik:</strong> {ingredient.comedogenicity}/5</p>
+                      ) : null}
+                      {typeof ingredient.irritancy === "number" ? (
+                        <p><strong className="font-semibold">Iritasi:</strong> {ingredient.irritancy}/5</p>
+                      ) : null}
+                      {ingredient.rating ? (
+                        <p className="capitalize"><strong className="font-semibold normal-case">Rating INCIDecoder:</strong> {ingredient.rating}</p>
                       ) : null}
                       {ingredient.chemicalType ? (
                         <p className="text-on-surface-variant">Tipe: {ingredient.chemicalType}</p>

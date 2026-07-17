@@ -18,6 +18,7 @@ import re
 from dataclasses import dataclass, field
 
 from .data_loader import Chemical, DataStore, Product, get_store
+from .inci_signals import IngredientSignal, SignalStore, get_signals
 from .normalizer import IngredientNormalizer, ResolvedIngredient
 
 # ---------------------------------------------------------------------------
@@ -52,6 +53,40 @@ _SKIN_TYPE_MAP = {
     "normal": ["normal", "all skin", "all types", "regardless of skin type"],
 }
 
+# Concern → INCIDecoder function tags (minimal map used for the "beneficial"
+# boost when a well-rated ingredient targets a user concern). Full concern
+# canonicalization is tracked separately as G6.
+_CONCERN_FUNCTION_MAP: dict[str, set[str]] = {
+    "acne": {"anti-acne", "exfoliant"},
+    "jerawat": {"anti-acne", "exfoliant"},
+    "pores": {"anti-acne", "exfoliant"},
+    "oiliness": {"anti-acne", "exfoliant"},
+    "dryness": {"moisturizer/humectant", "emollient", "occlusive", "skin-identical ingredient"},
+    "dry": {"moisturizer/humectant", "emollient", "occlusive", "skin-identical ingredient"},
+    "dehydration": {"moisturizer/humectant", "skin-identical ingredient"},
+    "aging": {"antioxidant", "cell-communicating ingredient"},
+    "wrinkles": {"antioxidant", "cell-communicating ingredient"},
+    "dullness": {"exfoliant", "skin brightening", "antioxidant"},
+    "brightening": {"skin brightening", "antioxidant"},
+    "hyperpigmentation": {"skin brightening"},
+    "dark spots": {"skin brightening"},
+    "redness": {"soothing", "antioxidant"},
+    "sensitivity": {"soothing"},
+    "irritation": {"soothing"},
+}
+
+
+def _functions_match_concern(functions: tuple[str, ...] | list[str], concerns_norm: set[str]) -> bool:
+    """True if any ingredient function serves any of the user's concerns."""
+    fset = set(functions)
+    if not fset:
+        return False
+    for concern in concerns_norm:
+        for key, tags in _CONCERN_FUNCTION_MAP.items():
+            if key in concern and fset & tags:
+                return True
+    return False
+
 
 # ---------------------------------------------------------------------------
 # Result dataclasses
@@ -72,6 +107,11 @@ class IngredientReport:
     compatibility_notes: str = ""
     caution_notes: str = ""
     usage_frequency: str = ""
+    # INCIDecoder signals (independent of chem_full.csv)
+    irritancy: int | None = None
+    comedogenicity: int | None = None
+    functions: tuple[str, ...] = ()
+    rating: str | None = None
 
 
 @dataclass(slots=True)
@@ -149,6 +189,38 @@ def _classify_type(chem_type: str, chem_name: str) -> str:
     return chem_type.lower() if chem_type else "unknown"
 
 
+_MOISTURIZER_FUNCTIONS = {
+    "moisturizer/humectant", "emollient", "occlusive", "skin-identical ingredient",
+}
+
+
+def _classify(name: str, functions: tuple[str, ...], chem: Chemical | None) -> str:
+    """Classify an ingredient category, preferring INCIDecoder ``functions``
+    (clean tags) over free-text CSV ``type`` (G4). Retinoids have no dedicated
+    function tag on INCIDecoder, so they stay keyword-driven.
+    """
+    lname = name.lower()
+    fset = set(functions)
+
+    if any(kw in lname for kw in _RETINOID_KEYWORDS):
+        return "retinoid"
+    if "exfoliant" in fset:
+        return "exfoliant"
+    if chem is not None:
+        csv_cat = _classify_type(chem.type, chem.name)
+        if csv_cat != "unknown":
+            return csv_cat
+    if any(kw in lname for kw in _EXFOLIANT_KEYWORDS):
+        return "exfoliant"
+    if "antioxidant" in fset:
+        return "antioxidant"
+    if fset & _MOISTURIZER_FUNCTIONS:
+        return "moisturizer"
+    if fset:
+        return "other"
+    return "unknown"
+
+
 def _skin_type_compatible(target_text: str, user_skin_type: str) -> str:
     """Check if target text mentions the user's skin type.
 
@@ -192,17 +264,33 @@ class IngredientAnalyzer:
     risk level, benefits, symptoms addressed, and compatibility notes.
     """
 
-    def __init__(self, store: DataStore | None = None) -> None:
+    def __init__(
+        self,
+        store: DataStore | None = None,
+        signals: SignalStore | None = None,
+    ) -> None:
         self._store = store or get_store()
+        self._signals = signals or get_signals()
 
     def analyze(
         self,
         resolved: ResolvedIngredient,
         user_skin_type: str = "",
         user_concerns: list[str] | None = None,
+        conditions: list[str] | None = None,
+        sensitivity_level: str = "medium",
     ) -> IngredientReport:
-        """Analyze a single resolved ingredient."""
-        if resolved.canonical_name is None:
+        """Analyze a single resolved ingredient using the CSV knowledge base
+        and, as an independent second layer, INCIDecoder signals (G1/G2)."""
+        chem = (
+            self._store.get_chemical(resolved.canonical_name)
+            if resolved.canonical_name is not None
+            else None
+        )
+        signal = self._signals.get(resolved.canonical_name) or self._signals.get(resolved.raw_name)
+
+        # Unresolved only when neither the CSV nor a usable signal knows it.
+        if chem is None and (signal is None or not signal.has_data):
             return IngredientReport(
                 name=resolved.raw_name,
                 resolved=resolved,
@@ -212,25 +300,18 @@ class IngredientAnalyzer:
                 benefits_summary="",
             )
 
-        chem = self._store.get_chemical(resolved.canonical_name)
-        if chem is None:
-            return IngredientReport(
-                name=resolved.raw_name,
-                resolved=resolved,
-                chemical=None,
-                risk_level="unresolved",
-                type_category="unknown",
-                benefits_summary="",
-            )
-
-        # Determine risk level
-        risk_level = self._assess_risk(chem, user_skin_type, user_concerns or [])
-
-        # Find relevant symptoms
-        symptoms = list(chem.symptoms)
-
-        # Type classification
-        type_cat = _classify_type(chem.type, chem.name)
+        functions = signal.functions if signal else ()
+        type_cat = _classify(resolved.canonical_name or resolved.raw_name, functions, chem)
+        risk_level = self._assess_risk(
+            resolved.canonical_name or resolved.raw_name,
+            chem,
+            signal,
+            type_cat,
+            user_skin_type,
+            user_concerns or [],
+            conditions or [],
+            sensitivity_level,
+        )
 
         return IngredientReport(
             name=resolved.raw_name,
@@ -238,11 +319,15 @@ class IngredientAnalyzer:
             chemical=chem,
             risk_level=risk_level,
             type_category=type_cat,
-            benefits_summary=_first_sentence(chem.benefits),
-            relevant_symptoms=symptoms,
-            compatibility_notes=_first_sentence(chem.compatible),
-            caution_notes=_first_sentence(chem.incompatible),
-            usage_frequency=_first_sentence(chem.frequency),
+            benefits_summary=_first_sentence(chem.benefits) if chem else "",
+            relevant_symptoms=list(chem.symptoms) if chem else [],
+            compatibility_notes=_first_sentence(chem.compatible) if chem else "",
+            caution_notes=_first_sentence(chem.incompatible) if chem else "",
+            usage_frequency=_first_sentence(chem.frequency) if chem else "",
+            irritancy=signal.irritancy if signal else None,
+            comedogenicity=signal.comedogenicity if signal else None,
+            functions=functions,
+            rating=signal.rating if signal else None,
         )
 
     def analyze_list(
@@ -250,53 +335,75 @@ class IngredientAnalyzer:
         resolved_list: list[ResolvedIngredient],
         user_skin_type: str = "",
         user_concerns: list[str] | None = None,
+        conditions: list[str] | None = None,
+        sensitivity_level: str = "medium",
     ) -> list[IngredientReport]:
         """Analyze a list of resolved ingredients."""
         return [
-            self.analyze(r, user_skin_type, user_concerns)
+            self.analyze(r, user_skin_type, user_concerns, conditions, sensitivity_level)
             for r in resolved_list
         ]
 
     def _assess_risk(
         self,
-        chem: Chemical,
+        name: str,
+        chem: Chemical | None,
+        signal: IngredientSignal | None,
+        type_cat: str,
         user_skin_type: str,
         user_concerns: list[str],
+        conditions: list[str],
+        sensitivity_level: str,
     ) -> str:
-        """Assess risk level for a chemical given the user's profile."""
-        name_lower = chem.name.lower()
-        type_lower = chem.type.lower()
-        incompatible_lower = chem.incompatible.lower()
+        """Assess risk level from CSV data + INCIDecoder signals (G2)."""
+        name_lower = name.lower()
+        skin = user_skin_type.lower()
+        concerns_norm = {c.lower().replace("-", " ").replace("_", " ") for c in user_concerns}
+        has_acne_concern = any("acne" in c or "jerawat" in c for c in concerns_norm)
+        sensitive_ctx = sensitivity_level == "high" or "damaged_barrier" in conditions
 
         # High risk: ingredients that are widely cautioned
         if any(kw in name_lower for kw in ("hydroquinone", "mercury", "merkuri")):
             return "high_risk"
 
-        # Caution: strong actives for sensitive skin
-        is_strong = any(kw in f"{name_lower} {type_lower}" for kw in _STRONG_ACTIVE_KEYWORDS)
-        if is_strong and user_skin_type.lower() in ("sensitive",):
+        # Signal-driven caution (G2)
+        if signal is not None:
+            if (
+                signal.comedogenicity is not None
+                and signal.comedogenicity >= 2
+                and (skin in ("oily", "combination") or has_acne_concern)
+            ):
+                return "caution"
+            if signal.irritancy is not None and signal.irritancy >= 2 and (skin == "sensitive" or sensitive_ctx):
+                return "caution"
+
+        # Strong actives on sensitive skin
+        is_strong = type_cat in ("exfoliant", "retinoid")
+        if not is_strong and chem is not None:
+            is_strong = any(kw in f"{name_lower} {chem.type.lower()}" for kw in _STRONG_ACTIVE_KEYWORDS)
+        if is_strong and skin == "sensitive":
             return "caution"
 
-        # Check if target text suggests this is NOT for user's skin type
-        target_compat = _skin_type_compatible(chem.target, user_skin_type)
-        if target_compat == "caution":
+        # Free-text target indicating unsuitability (kept as a weak signal — G5)
+        if chem is not None and _skin_type_compatible(chem.target, user_skin_type) == "caution":
             return "caution"
 
-        # Check concerns overlap — beneficial if the chemical addresses user concerns
-        if user_concerns:
-            chem_symptoms = set(chem.symptoms)
-            concern_match = any(
-                concern.lower().replace("-", " ").replace("_", " ") in chem_symptoms
-                for concern in user_concerns
-            )
-            if concern_match:
-                return "beneficial"
-
-        # Check if broadly beneficial based on target text
-        if target_compat == "beneficial":
+        # Beneficial: CSV symptom addresses a user concern
+        if chem is not None and concerns_norm and set(chem.symptoms) & concerns_norm:
             return "beneficial"
 
-        # Default
+        # Beneficial: well-rated ingredient whose function serves a concern (G2)
+        if (
+            signal is not None
+            and signal.rating in ("superstar", "goodie")
+            and _functions_match_concern(signal.functions, concerns_norm)
+        ):
+            return "beneficial"
+
+        # Beneficial: broadly suitable per free-text target (weak — G5)
+        if chem is not None and _skin_type_compatible(chem.target, user_skin_type) == "beneficial":
+            return "beneficial"
+
         return "neutral"
 
 
@@ -319,23 +426,35 @@ class SkinCompatibilityEngine:
         if not reports:
             return CompatibilityResult(score=85)
 
+        conditions = conditions or []
+        skin = (skin_type or "").lower()
         score = 85  # baseline
         beneficial: list[str] = []
         caution: list[str] = []
         notes: list[str] = []
 
-        resolved_count = 0
         for report in reports:
-            if report.chemical is None:
+            if report.risk_level == "unresolved":
                 continue
-            resolved_count += 1
 
-            chem = report.chemical
-            compat = _skin_type_compatible(chem.target, skin_type)
-
-            if compat == "beneficial":
+            if report.risk_level == "beneficial":
                 beneficial.append(report.name)
                 score += 2  # small boost per beneficial ingredient
+
+            # Comedogenic penalty for oily/combination skin (G2)
+            if (
+                report.comedogenicity is not None
+                and report.comedogenicity >= 2
+                and skin in ("oily", "combination")
+            ):
+                score -= 4
+                notes.append(
+                    f"{report.name}: komedogenik (skala {report.comedogenicity}) untuk kulit {skin_type}."
+                )
+
+            # Poorly-rated ingredient: light penalty (G2)
+            if report.rating == "icky":
+                score -= 3
 
             if report.risk_level == "caution":
                 caution.append(report.name)
@@ -350,25 +469,23 @@ class SkinCompatibilityEngine:
                     f"{report.name}: bahan berisiko tinggi, disarankan menghindari."
                 )
 
+        # Strong actives now detected via functions too (works for signal-only
+        # ingredients, not just CSV ones) — G4.
+        def _is_strong(r: IngredientReport) -> bool:
+            return r.type_category in ("exfoliant", "retinoid") and r.risk_level != "unresolved"
+
         # Sensitivity modifier
         if sensitivity_level == "high":
-            strong_count = sum(
-                1 for r in reports
-                if r.type_category in ("exfoliant", "retinoid") and r.chemical
-            )
+            strong_count = sum(1 for r in reports if _is_strong(r))
             if strong_count > 0:
-                penalty = strong_count * 10
-                score -= penalty
+                score -= strong_count * 10
                 notes.append(
                     f"Kulit sensitif tinggi: {strong_count} active ingredient kuat terdeteksi."
                 )
 
         # Damaged barrier modifier
-        if conditions and "damaged_barrier" in conditions:
-            strong_actives = [
-                r.name for r in reports
-                if r.type_category in ("exfoliant", "retinoid") and r.chemical
-            ]
+        if "damaged_barrier" in conditions:
+            strong_actives = [r.name for r in reports if _is_strong(r)]
             if strong_actives:
                 score -= 15
                 notes.append(

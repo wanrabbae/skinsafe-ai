@@ -70,6 +70,10 @@ export type IngredientDetail = {
   compatibilityNotes?: string | null;
   cautionNotes?: string | null;
   usageFrequency?: string | null;
+  irritancy?: number | null;
+  comedogenicity?: number | null;
+  functions?: string[];
+  rating?: string | null;
 };
 
 export type InteractionWarning = {

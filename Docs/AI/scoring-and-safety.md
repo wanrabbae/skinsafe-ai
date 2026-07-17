@@ -58,6 +58,8 @@ Confidence menilai kualitas input, bukan safety. Candidate factors:
 
 Band awal: high ≥85, medium 60–84, low <60. Threshold wajib dikalibrasi dengan evaluation set.
 
+**Implementasi coverage (2026-07-17):** `resolution_ratio` (`AI/app/scoring.py`) menghitung bahan yang dikenali via `chem_full.csv` **atau** signal layer INCIDecoder (`AI/app/inci_signals.py`) — bukan hanya CSV. Sebelum perubahan ini, KB CSV yang sempit (~101 bahan) membuat coverage produk nyata rendah, `confidence_score` jatuh di bawah 60, dan gate low-confidence di bawah mengunci status maksimum `use_with_caution` untuk hampir semua produk. Dengan signal layer (~4.100 bahan ter-index), contoh produk nyata (45 bahan) mencapai 40/45 dikenali dan confidence 86 — gate longgar sesuai kualitas data yang sebenarnya, bukan lagi karena keterbatasan dataset.
+
 ## Recommendation policy
 
 Recommendation berisi summary, strongest positive evidence, top cautions, profile-specific notes, action, safer criteria, limitations, dan medical disclaimer. Hindari kata “pasti”, “menyembuhkan”, atau “aman untuk semua”. Untuk severe reaction symptom, arahkan berhenti menggunakan produk dan mencari bantuan profesional tanpa mendiagnosis.
