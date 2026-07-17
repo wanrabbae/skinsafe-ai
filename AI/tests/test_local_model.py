@@ -199,10 +199,15 @@ class LocalModelTests(unittest.TestCase):
             self.ranker._bpom_status = original
 
     def test_unverified_products_use_neutral_bpom_trust(self) -> None:
-        result = self.ranker.recommend(concerns=["acne"], skin_type="oily", limit=5)
-        self.assertTrue(result.products)
-        for item in result.products:
-            self.assertEqual(item.score_breakdown["bpomTrust"], 15.0)
+        original = self.ranker._bpom_status
+        try:
+            self.ranker._bpom_status = {}
+            result = self.ranker.recommend(concerns=["acne"], skin_type="oily", limit=5)
+            self.assertTrue(result.products)
+            for item in result.products:
+                self.assertEqual(item.score_breakdown["bpomTrust"], 15.0)
+        finally:
+            self.ranker._bpom_status = original
 
     def test_conservative_inci_aliases_share_a_canonical_name(self) -> None:
         self.assertEqual(normalize_ingredient_name("Vitamin B3 (Niacinamide)"), "niacinamide")
