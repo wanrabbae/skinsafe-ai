@@ -1,4 +1,4 @@
-import { AlertTriangle, ExternalLink, ShieldAlert } from "lucide-react";
+import { AlertTriangle, BookOpen, ExternalLink, ShieldAlert } from "lucide-react";
 
 import { Chip, MicroLabel } from "@/shared/components/primitives";
 import { cn } from "@/shared/lib/utils";
@@ -44,6 +44,23 @@ export function ProfileResult({ result }: { result: ProfileRecommendationResult 
             ))}
           </div>
           <p className="mt-2.5 text-center text-[0.65rem] leading-normal text-on-surface-variant">Relevansi bukan diagnosis atau jaminan bebas iritasi. Lakukan patch test dan hentikan pemakaian bila muncul reaksi.</p>
+        </section>
+      ) : null}
+
+      {recommendations?.education?.length ? (
+        <section className="mt-2" aria-labelledby="profile-education-title">
+          <h2 id="profile-education-title" className={cn("mb-3", heading2)}>Edukasi</h2>
+          <div className="grid gap-[9px]">
+            {recommendations.education.map((item) => (
+              <article className="rounded-[22px] border border-[rgb(109_40_217/9%)] bg-white p-[13px] shadow-card" key={item.code}>
+                <div className="flex items-center gap-2 [&>svg]:size-[17px] [&>svg]:shrink-0 [&>svg]:text-primary">
+                  <BookOpen aria-hidden="true" /><h3 className="text-[0.85rem] font-bold">{item.title}</h3>
+                </div>
+                <p className="mt-1.5 text-[0.72rem] leading-normal text-on-surface-variant">{item.message}</p>
+                {item.evidence?.length ? <p className="mt-1 text-[0.66rem] capitalize text-on-surface-variant">{item.evidence.join(", ")}</p> : null}
+              </article>
+            ))}
+          </div>
         </section>
       ) : null}
     </div>

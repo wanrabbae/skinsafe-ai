@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { DomMutationGuard } from "@/shared/components/dom-mutation-guard";
 import { MobileNavigation } from "@/shared/components/mobile-navigation";
 import { QueryProvider } from "@/shared/components/query-provider";
 import { ServiceWorkerRegister } from "@/shared/components/service-worker-register";
@@ -29,8 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" translate="no">
       <body>
+        <DomMutationGuard />
         <QueryProvider>
           <div className="relative mx-auto min-h-[100svh] max-w-[440px] overflow-hidden bg-surface min-[700px]:shadow-[0_0_0_1px_rgb(109_40_217/6%),0_24px_70px_rgb(37_0_89/12%)]">
             {children}

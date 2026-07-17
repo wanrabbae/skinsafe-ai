@@ -281,3 +281,25 @@ class IngredientKnowledgeResponse(Schema):
     education: list[EducationItem] = Field(default_factory=list)
     dataset_version: str
     disclaimer: str = "Informasi edukatif, bukan diagnosis medis."
+
+
+# ---------------------------------------------------------------------------
+# BPOM search schemas
+# ---------------------------------------------------------------------------
+
+
+class BpomSearchItem(Schema):
+    number: str | None = None
+    product_name: str | None = None
+    registrant: str | None = None
+    status: str | None = None
+    active: bool | None = None
+    composition: str | None = None
+
+
+class BpomSearchResponse(Schema):
+    query: str
+    results: list[BpomSearchItem] = Field(default_factory=list)
+    configured: bool = True
+    reachable: bool = True
+    disclaimer: str = "Status registrasi bersumber dari registry BPOM (cekbpom)."

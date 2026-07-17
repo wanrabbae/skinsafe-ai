@@ -16,6 +16,7 @@ from __future__ import annotations
 import difflib
 import re
 
+from .bpom import BpomVerification, verify_bpom
 from .data_loader import get_store
 from .engine import (
     IngredientAnalyzer,
@@ -104,7 +105,7 @@ def versions() -> Versions:
         engine="0.3.0",
         ruleset="2026.07.2",
         ingredient_dataset="chem-full-2026.07.2",
-        bpom_dataset="mock-2026.07.1",
+        bpom_dataset="cekbpom-live-2026.07",
         models={"productRanker": "local-recommender-2026.07.1"},
     )
 
@@ -148,12 +149,28 @@ def _matched_terms(
     return sorted(matches)
 
 
-def _bpom_score(value: str | None) -> tuple[int, bool]:
+def _bpom_score(value: str | None) -> tuple[int, bool, BpomVerification | None]:
+    """Score BPOM trust using live registry verification when possible.
+
+    Returns ``(score, format_valid, verification)``. A malformed or absent
+    number never triggers a network call; a well-formed number is verified
+    live and only earns full trust when found and active. When the live
+    lookup cannot be reached, the number keeps partial (format-only) trust.
+    """
     if not value:
-        return 20, True
+        return 20, True, None
     canonical = re.sub(r"[\s-]+", "", value).upper()
     valid_format = bool(re.fullmatch(r"N[A-E]\d{10,13}", canonical))
-    return (30, True) if valid_format else (10, False)
+    if not valid_format:
+        return 10, False, None
+    verification = verify_bpom(canonical)
+    if not verification.checked:
+        return 25, True, verification
+    if verification.found and verification.active is not False:
+        return 30, True, verification
+    if verification.found and verification.active is False:
+        return 8, True, verification
+    return 10, True, verification
 
 
 def band(score: int) -> str:
@@ -264,8 +281,8 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
 
     # --- Sub-score computation (enriched) ---
 
-    # BPOM trust (preserved — still mock-based)
-    bpom, bpom_format_valid = _bpom_score(request.input.bpom_number)
+    # BPOM trust — verified live against the cekbpom registry when reachable
+    bpom, bpom_format_valid, bpom_verification = _bpom_score(request.input.bpom_number)
     if not bpom_format_valid:
         findings.append(Finding(
             code="INVALID_BPOM_FORMAT",
@@ -273,6 +290,21 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
             message="Format nomor BPOM tidak dikenali; periksa kembali angka pada kemasan.",
             evidence=[request.input.bpom_number or ""],
         ))
+    elif bpom_verification is not None and bpom_verification.checked:
+        if not bpom_verification.found:
+            findings.append(Finding(
+                code="BPOM_NOT_REGISTERED",
+                severity="high",
+                message="Nomor BPOM tidak ditemukan pada registry cekbpom; verifikasi keaslian produk.",
+                evidence=[request.input.bpom_number or ""],
+            ))
+        elif bpom_verification.active is False:
+            findings.append(Finding(
+                code="BPOM_NOT_ACTIVE",
+                severity="high",
+                message="Notifikasi BPOM ditemukan tetapi statusnya tidak lagi aktif.",
+                evidence=[request.input.bpom_number or ""],
+            ))
 
     # Ingredient safety — now data-driven
     high_risk_count = sum(1 for r in reports if r.risk_level == "high_risk")
@@ -320,7 +352,19 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
     total_count = len(resolved_list)
     resolution_ratio = resolved_count / total_count if total_count > 0 else 0
     method_quality = 100 if request.input.method == "manual" else 60
-    bpom_reliability = 70 if request.input.bpom_number and bpom_format_valid else 40 if not request.input.bpom_number else 20
+    if not request.input.bpom_number:
+        bpom_reliability = 40
+    elif not bpom_format_valid:
+        bpom_reliability = 20
+    elif bpom_verification is not None and bpom_verification.checked:
+        if bpom_verification.found and bpom_verification.active is not False:
+            bpom_reliability = 90
+        elif not bpom_verification.found:
+            bpom_reliability = 25
+        else:
+            bpom_reliability = 30
+    else:
+        bpom_reliability = 60
     cross_input_agreement = 100 if request.input.method == "manual" else 50
     confidence_score = round(
         0.25 * method_quality
@@ -424,7 +468,15 @@ def analyze(request: AnalysisRequest) -> CompletedAnalysis | NeedsInputAnalysis:
             evidence=pregnancy_avoid,
         ))
 
-    confidence_limitations = ["BPOM memakai mock dataset dan belum diverifikasi live."]
+    confidence_limitations: list[str] = []
+    if not request.input.bpom_number:
+        confidence_limitations.append("Nomor BPOM tidak disertakan sehingga status registrasi tidak diverifikasi.")
+    elif bpom_verification is not None and not bpom_verification.checked:
+        confidence_limitations.append("Verifikasi BPOM live tidak dapat dijangkau; skor memakai validasi format saja.")
+    elif bpom_verification is not None and bpom_verification.found:
+        confidence_limitations.append("Status registrasi BPOM diverifikasi live dari cekbpom.")
+    elif bpom_verification is not None:
+        confidence_limitations.append("Nomor BPOM tidak ditemukan pada registry live cekbpom.")
     if unresolved:
         confidence_limitations.append(
             f"{len(unresolved)} dari {len(resolved_list)} ingredient belum dikenali dataset."

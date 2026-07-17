@@ -6,6 +6,8 @@ from fastapi import Depends, FastAPI, Header, HTTPException, status
 
 from .schemas import (
     AnalysisRequest,
+    BpomSearchItem,
+    BpomSearchResponse,
     CompletedAnalysis,
     EducationItem,
     IngredientKnowledgeResponse,
@@ -192,6 +194,34 @@ def create_profile_recommendations(request: ProfileIntakeRequest) -> ProfileReco
     return ProfileRecommendationResponse(
         resolution=resolution,
         recommendations=recommendations,
+    )
+
+
+@app.get(
+    "/internal/v1/bpom/search",
+    response_model=BpomSearchResponse,
+    dependencies=[Depends(require_service_token)],
+)
+def search_bpom_products(q: str, limit: int = 10) -> BpomSearchResponse:
+    """Search the BPOM registry by product name/brand via the configured proxy."""
+    from .bpom import search_bpom_status
+
+    reachable, items = search_bpom_status(q, limit)
+    return BpomSearchResponse(
+        query=q,
+        results=[
+            BpomSearchItem(
+                number=item.number,
+                product_name=item.product_name,
+                registrant=item.registrant,
+                status=item.status,
+                active=item.active,
+                composition=item.composition,
+            )
+            for item in items
+        ],
+        configured=bool(os.getenv("BPOM_SEARCH_URL")),
+        reachable=reachable,
     )
 
 
