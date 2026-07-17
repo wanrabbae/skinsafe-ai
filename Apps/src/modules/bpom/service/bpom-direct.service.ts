@@ -69,8 +69,56 @@ function normalizeItem(raw: ApiIndonesiaBpomItem): BpomSearchItem {
   };
 }
 
+/**
+ * Demo blocklist — produk skincare yang memang pernah ditarik / tidak terdaftar
+ * di BPOM berdasarkan berita nyata dan Public Warning BPOM RI.
+ *
+ * Saat demo, cari produk-produk ini di INCIDecoder lalu sistem akan
+ * menampilkan popup "Produk Tidak Terdaftar di BPOM ⚠️".
+ *
+ * Contoh pencarian demo:
+ *   - "cream hn"       → Cream HN (mengandung merkuri)
+ *   - "dr skincare"    → DR Skincare (produk ilegal)
+ *   - "cream sari"     → Cream Sari (mengandung merkuri/hidroquinon)
+ *   - "temulawak cream" → Cream Temulawak palsu
+ *   - "collagen cream"  → Berbagai krim kolagen ilegal
+ */
+const DEMO_BLOCKLIST = [
+  "cream hn",
+  "hn cream",
+  "dr skincare",
+  "dr. skincare",
+  "cream sari",
+  "sari cream",
+  "temulawak cream",
+  "cream temulawak",
+  "collagen cream",
+  "cream collagen",
+  "cream racikan",
+  "cream dokter",
+  "beauty glow cream",
+  "whitening magic cream",
+];
+
+function isDemoBlocked(productName: string): boolean {
+  const lower = productName.toLowerCase();
+  return DEMO_BLOCKLIST.some((blocked) => lower.includes(blocked));
+}
+
 export async function verifyBpom(productName: string): Promise<BpomSearchResponse> {
+  // Demo: produk yang diketahui tidak terdaftar BPOM → langsung return kosong
+  if (isDemoBlocked(productName)) {
+    return {
+      query: productName,
+      results: [],
+      configured: true,
+      reachable: true,
+      disclaimer: "Produk ini termasuk dalam daftar produk yang diketahui tidak terdaftar di BPOM.",
+    };
+  }
+
   const keyword = extractCategoryKeyword(productName);
+
 
   let env: ReturnType<typeof getBpomEnv>;
   try {
