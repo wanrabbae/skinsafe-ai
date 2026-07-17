@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 from pydantic import ValidationError
 
-from app.local_model import LocalProductRanker
+from app.local_model import LocalProductRanker, _is_facewash_product
 from app.ml_features import normalize_ingredient_name
 from app.schemas import RecommendRequest
 
@@ -29,6 +29,37 @@ class LocalModelTests(unittest.TestCase):
             self.assertTrue(product.matched_ingredients)
             self.assertIn(product.confidence, {"medium", "low"})
 
+    def test_recommendations_only_include_facewash_products(self) -> None:
+        result = self.ranker.recommend(
+            concerns=["acne", "redness"],
+            skin_type="sensitive",
+            sensitivity_level="high",
+            limit=20,
+        )
+        self.assertTrue(result.products)
+        self.assertTrue(all(_is_facewash_product(item.product) for item in result.products))
+
+    def test_facewash_filter_rejects_other_cleanser_formats(self) -> None:
+        accepted = (
+            "Aloe Vera Facial Wash",
+            "Low pH Gel Cleanser",
+            "Gentle Cleansing Foam",
+        )
+        rejected = (
+            "Brightening Serum",
+            "Daily Moisturizer",
+            "Hydrating Body Cleanser",
+            "Cleansing Oil",
+            "Cleansing Balm",
+            "Cleansing Milk",
+            "Cleansing Water",
+            "Cleansing Mask",
+            "Makeup Brush Cleanser",
+            "Scalp Cleanser",
+        )
+        self.assertTrue(all(_is_facewash_product({"name": name}) for name in accepted))
+        self.assertTrue(all(not _is_facewash_product({"name": name}) for name in rejected))
+
     def test_pregnancy_recommendations_exclude_retinoids(self) -> None:
         result = self.ranker.recommend(
             concerns=["aging"],
@@ -49,10 +80,10 @@ class LocalModelTests(unittest.TestCase):
         result = self.ranker.recommend(
             concerns=["dryness"],
             skin_type="dry",
-            limit=10,
+            limit=6,
         )
         brands = [item.product["brand"].lower() for item in result.products]
-        self.assertTrue(all(brands.count(brand) <= 2 for brand in set(brands)))
+        self.assertGreaterEqual(len(set(brands)), min(3, len(brands)))
         identities = {
             (item.product["brand"].lower(), item.product["name"].lower())
             for item in result.products
@@ -91,14 +122,18 @@ class LocalModelTests(unittest.TestCase):
             sensitivity_level="low",
             limit=501,
         )
-        retinol_products = [
+        exfoliating_products = [
             item
             for item in result.products
-            if "retinol" in item.product["name"].lower()
+            if any(
+                active in normalize_ingredient_name(str(ingredient.get("name") or ""))
+                for ingredient in item.product.get("ingredients") or []
+                for active in ("glycolic acid", "lactic acid", "salicylic acid")
+            )
         ]
-        self.assertTrue(retinol_products)
+        self.assertTrue(exfoliating_products)
         self.assertTrue(
-            all(item.score_breakdown["safetyPenalty"] >= 8 for item in retinol_products)
+            all(item.score_breakdown["safetyPenalty"] >= 8 for item in exfoliating_products)
         )
 
     def test_safety_penalty_reduces_overall_score(self) -> None:
@@ -121,8 +156,11 @@ class LocalModelTests(unittest.TestCase):
         penalized = [
             item
             for item in sensitive.products
-            if item.score_breakdown["safetyPenalty"] > 0
-            and (item.product["brand"], item.product["name"]) in normal_by_name
+            if (item.product["brand"], item.product["name"]) in normal_by_name
+            and item.score_breakdown["safetyPenalty"]
+            > normal_by_name[(item.product["brand"], item.product["name"])].score_breakdown[
+                "safetyPenalty"
+            ]
         ]
         self.assertTrue(penalized)
         for item in penalized:

@@ -76,6 +76,40 @@ _EXFOLIANT_TERMS = {
 }
 _FRAGRANCE_TERMS = {"fragrance", "parfum", "perfume", "essential oil"}
 
+# Recommendations are intentionally scoped to rinse-off facial cleansers. The
+# source catalog has no normalized category field, so product names are the
+# most reliable category signal available today.
+_FACEWASH_NAME_TERMS = {
+    "face wash",
+    "facewash",
+    "facial wash",
+    "facial cleanser",
+    "facial foam",
+    "foam cleanser",
+    "foaming cleanser",
+    "foaming wash",
+    "gel cleanser",
+    "cleanser",
+    "cleansing foam",
+    "cleansing mousse",
+}
+_NON_FACEWASH_NAME_TERMS = {
+    "body",
+    "brush",
+    "cleansing oil",
+    "cleansing balm",
+    "cleansing milk",
+    "cleansing water",
+    "cleansing mask",
+    "cold cream",
+    "face scrub",
+    "feminine",
+    "hair",
+    "hand",
+    "intimate",
+    "scalp",
+}
+
 
 @dataclass(slots=True)
 class LocalRecommendation:
@@ -109,6 +143,14 @@ def _number(value: Any) -> float | None:
 
 def _contains_term(name: str, terms: set[str]) -> bool:
     return any(name == term or term in name for term in terms)
+
+
+def _is_facewash_product(product: dict[str, Any]) -> bool:
+    name = " ".join(str(product.get("name") or "").casefold().replace("-", " ").split())
+    return _contains_term(name, _FACEWASH_NAME_TERMS) and not _contains_term(
+        name,
+        _NON_FACEWASH_NAME_TERMS,
+    )
 
 
 def _ingredient_names(product: dict[str, Any]) -> list[str]:
@@ -188,7 +230,12 @@ class LocalProductRanker:
         self.model_version = str(self._model["modelVersion"])
         self.scoring_version = _SCORING_VERSION
         self.catalog_version = str(self._catalog["catalogVersion"])
-        self.limitations = list(self._model.get("limitations") or []) + list(self._catalog.get("limitations") or [])
+        self.limitations = list(self._model.get("limitations") or []) + list(
+            self._catalog.get("limitations") or []
+        )
+        self.limitations.append(
+            "Rekomendasi produk saat ini hanya mencakup face wash atau facial cleanser rinse-off."
+        )
         self._dimension = int(self._model["featureDimension"])
         if any(
             len(concern_model.get("weights") or []) != self._dimension
@@ -386,6 +433,9 @@ class LocalProductRanker:
         excluded_identities = {item.strip().casefold() for item in excluded_products or [] if item.strip()}
         candidates: list[LocalRecommendation] = []
         for product in self._catalog["products"]:
+            if not _is_facewash_product(product):
+                continue
+
             identity = f"{product.get('brand') or ''}::{product.get('name') or ''}".casefold()
             if identity in excluded_identities:
                 continue
