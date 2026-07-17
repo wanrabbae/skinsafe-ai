@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description: "Cek keamanan skincare sebelum dibeli atau dipakai.",
   applicationName: "SkinSafe AI",
   manifest: "/manifest.webmanifest",
+  other: { google: "notranslate" },
   appleWebApp: {
     capable: true,
     title: "SkinSafe AI",

@@ -48,47 +48,6 @@ export function HomeOnboardingView() {
         </Button>
       </section>
 
-      <section className="mt-6" aria-labelledby="trending-title">
-        <div className="mb-[11px] flex items-end justify-between gap-4">
-          <div>
-            <h2
-              id="trending-title"
-              className="mt-1 text-[1.08rem] font-bold leading-[1.35] tracking-[-0.02em]"
-            >
-              Trending Populer
-            </h2>
-          </div>
-        </div>
-
-        <article
-          className="overflow-hidden rounded-[20px] border border-[rgb(109_40_217/8%)] bg-surface-lowest shadow-card"
-          aria-label="Kunci rekomendasi personalisasi"
-        >
-          <div
-            className="relative flex aspect-[16/9] items-center justify-center bg-surface-container blur-[6px]"
-            aria-hidden="true"
-          >
-            <div className="absolute inset-0 flex h-full flex-col items-center justify-center gap-1.5 bg-[rgb(29_26_36/55%)] text-center text-white filter-none [&_svg]:size-[22px]">
-              <Lock aria-hidden="true" />
-              <span className="px-3 text-[0.62rem] font-bold uppercase tracking-[0.06em]">
-                Personalize to see matches
-              </span>
-            </div>
-          </div>
-          <div className="pointer-events-none p-[14px] opacity-60 blur-[2px]">
-            <MicroLabel>DERMA-GLOW</MicroLabel>
-            <h3 className="text-[0.9rem] font-bold leading-[1.4]">Advanced Hydrating Serum</h3>
-            <div className="mt-4 flex items-center justify-between text-[0.75rem] text-on-surface-variant">
-              <span>Kecocokan</span>
-              <strong className="text-[0.75rem] text-on-surface-variant">??% Match</strong>
-            </div>
-            <div className="mt-[7px] h-1.5 overflow-hidden rounded-full bg-surface-highest" role="presentation">
-              <span className="block h-full rounded-[inherit] bg-primary" style={{ width: "60%" }} />
-            </div>
-          </div>
-        </article>
-      </section>
-
       <section className="mt-6" aria-labelledby="why-profile-title">
         <div className="mb-[11px] flex items-end justify-between gap-4">
           <div>
