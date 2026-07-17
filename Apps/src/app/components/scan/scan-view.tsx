@@ -60,11 +60,15 @@ export function ScanView() {
   const [pickerOpen, setPickerOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<InciProduct | null>(null);
   const [bpomResult, setBpomResult] = useState<BpomSearchResponse | null>(null);
+  const [bpomLoading, setBpomLoading] = useState(false);
 
   // --- Select product → save to DB → verify BPOM ---
   const selectProduct = useCallback(
     async (product: InciProduct) => {
       setSelectedProduct(product);
+      setPickerOpen(false);
+      setBpomLoading(true);
+      setBpomResult(null);
 
       // Auto-fill ingredients
       if (product.ingredients.length > 0) {
@@ -103,6 +107,8 @@ export function ScanView() {
       } catch {
         setBpomResult(null);
         bpomDialogRef.current?.showModal();
+      } finally {
+        setBpomLoading(false);
       }
     },
     [],
@@ -188,7 +194,12 @@ export function ScanView() {
               {selectedProduct.brand ? (
                 <p className="truncate text-[0.75rem] text-on-surface-variant">{selectedProduct.brand}</p>
               ) : null}
-              {bpomResult && bpomResult.results.length > 0 ? (
+              {bpomLoading ? (
+                <p className="mt-1 flex items-center gap-1 text-[0.72rem] font-bold text-on-surface-variant">
+                  <Loader2 className="size-3.5 spin" aria-hidden="true" />
+                  Memverifikasi BPOM...
+                </p>
+              ) : bpomResult && bpomResult.results.length > 0 ? (
                 <p className="mt-1 flex items-center gap-1 text-[0.72rem] font-bold text-safe">
                   <ShieldCheck className="size-3.5" aria-hidden="true" />
                   Terdaftar BPOM
