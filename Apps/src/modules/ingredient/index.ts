@@ -1,2 +1,1 @@
-// Public read-only API. Isi saat module ingredient diimplementasikan.
-export {};
+export type { IngredientKnowledge } from "./service/ingredient-ai.service";

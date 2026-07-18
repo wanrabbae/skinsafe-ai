@@ -1,9 +1,7 @@
 import {
   AlertTriangle,
-  CircleCheck,
   Droplet,
   Droplets,
-  Leaf,
   ChevronRight,
   Target,
   type LucideIcon,
@@ -11,6 +9,7 @@ import {
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { RecommendedChemicalsAccordion } from "@/app/components/home/recommended-chemicals-accordion";
 import { formatProfileLabel } from "@/modules/profile";
 import type { ProfileRecommendationResult } from "@/modules/profile";
 import { AppHeader } from "@/shared/components/app-header";
@@ -161,21 +160,10 @@ export function HomeWithProfileView({
       </section>
 
       {recommendedChems.length ? (
-        <section className={cn(cardShell, "mt-4")} aria-labelledby="recommended-title">
-          <CardHeading icon={CircleCheck} iconClass="text-safe" id="recommended-title">
-            Kandungan yang Dianjurkan
-          </CardHeading>
-          <div className="mt-3 space-y-2">
-            {recommendedChems.map((name) => (
-              <div className="rounded-[14px] bg-safe-soft p-3" key={name}>
-                <div className="flex items-center gap-2 [&_svg]:size-[15px]">
-                  <Leaf aria-hidden="true" className="text-safe" />
-                  <h3 className="text-[0.8rem] font-bold capitalize text-safe">{name}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <RecommendedChemicalsAccordion
+          chemicals={recommendedChems}
+          profileCodes={problemCodes}
+        />
       ) : null}
 
       {attentionNotes.length ? (

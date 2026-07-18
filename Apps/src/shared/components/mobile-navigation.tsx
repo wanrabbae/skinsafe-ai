@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { House, ScanLine, Sparkles } from "lucide-react";
+import { House, Search, Sparkles } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/shared/lib/utils";
 
 const navItems = [
   { href: "/", label: "Beranda", icon: House },
-  { href: "/scan", label: "Scan", icon: ScanLine, primary: true },
+  { href: "/scan", label: "Search", icon: Search, primary: true },
   { href: "/recommendation", label: "Recommendation", icon: Sparkles },
 ];
 
